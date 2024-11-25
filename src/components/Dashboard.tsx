@@ -8,6 +8,7 @@ import Performance from './Performance'
 import UpcomingClass from './UpcomingClass'
 import { FC } from 'react'
 import MainWrapper from './MainWarpper'
+import Workspace from '@/app/workspace/page'
 
 const Dashboard: FC = () => {
   return (
