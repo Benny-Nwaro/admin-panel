@@ -23,7 +23,6 @@ const Payment: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center py-6 px-4">
-      {/* Header: Dropdown, Search Bar */}
       <div className="flex flex-col sm:flex-row items-center justify-between w-full max-w-lg mb-6 space-y-4 sm:space-y-0 sm:space-x-4">
         {/* Role Filter */}
         <select
@@ -33,6 +32,8 @@ const Payment: React.FC = () => {
         >
           <option value="All Roles">All Roles</option>
           <option value="Piano Tutor">Piano Tutor</option>
+          <option value="Piano Tutor">Coding Tutor</option>
+
           {/* Add more roles here if needed */}
         </select>
 
@@ -46,7 +47,6 @@ const Payment: React.FC = () => {
         />
       </div>
 
-      {/* Chat List */}
       <div className="w-full max-w-lg space-y-4">
         {filteredItems.map((item, index) => (
           <div
@@ -56,7 +56,6 @@ const Payment: React.FC = () => {
             } hover:shadow-md cursor-pointer`}
             onClick={() => setSelectedItem(selectedItem === index ? null : index)}
           >
-            {/* Avatar and Details */}
             <div className="flex items-center space-x-4">
               <img
                 src={item.avatar}
@@ -71,7 +70,6 @@ const Payment: React.FC = () => {
               </div>
             </div>
 
-            {/* Price and Action */}
             <div className="flex items-center space-x-4">
               <p className="text-sm font-semibold text-gray-800 whitespace-nowrap">
                 {item.price}

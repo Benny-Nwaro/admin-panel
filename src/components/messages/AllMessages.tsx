@@ -64,7 +64,7 @@ const conversations: Conversation[] = [
   {
     id: 3,
     messages: [
-      { text: "I think there's a mistake on my billing statement.", sender: "other", time: "2:15 PM" },
+      { text: "Hey, I think there's a mistake on my billing statement. Can you take a look at it?", sender: "other", time: "2:15 PM" },
       { text: "Let me check that for you.", sender: "me", time: "2:20 PM" },
     ],
   },
@@ -171,8 +171,8 @@ const MessageList: React.FC = () => {
       </div>
 
       {/* Chat Component */}
-      {activeConversation && (
-        <div className="lg:w-2/3 bg-gray-100 shadow-lg p-4 rounded-lg overflow-y-auto">
+      {activeConversation ? (
+        <div className="lg:w-2/3  shadow-lg p-4 rounded-lg overflow-y-auto">
           <ChatComponent
             user={{
               name: messages.find((msg) => msg.id === activeConversationId)?.name || "User",
@@ -184,7 +184,7 @@ const MessageList: React.FC = () => {
               sender: msg.sender === "me" ? "You" : "Other",
               avatar:
                 msg.sender === "me"
-                  ? "https://via.placeholder.com/30"
+                  ? "SA"
                   : messages.find((msgData) => msgData.id === activeConversationId)?.avatar || "",
               content: msg.text,
               timestamp: msg.time,
@@ -193,9 +193,14 @@ const MessageList: React.FC = () => {
             onSendMessage={handleSendMessage}
           />
         </div>
-      )}
+      ): <div className=" p-72"> 
+        <button className="flex items-center justify-center px-6 py-3 bg-white text-gray-800 font-medium text-sm rounded-full  shadow-md hover:shadow-lg transition-all">
+     Select a contacct to start chat
+    </button>
+    </div>}
+
     </div>
-  );
+  )
 };
 
 export default MessageList;
