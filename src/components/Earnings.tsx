@@ -1,14 +1,125 @@
 import React, { useState } from 'react';
+import PaymentMethods from './PaymentMethods';
+import SavedPaymentMethod from './SavedPaymentMethod';
+import Receipts from './Receipts';
 
-const Earnings = () => {
-    const [activeTab, setActiveTab] = useState('Earnings');
+
+
+
+interface PaymentMethodProps {
+    methods: {
+      id: number;
+      icon: React.ReactNode;
+      name: string;
+      isSelected: boolean;
+    }[];
+  }
+
+const Earnings: React.FC<PaymentMethodProps> = ({methods}) => {
+    const [activeTab, setActiveTab] = useState('My wallet');
+
+    interface Transaction {
+        id: number;
+        referenceNumber: string;
+        amount: number;
+      }
+
+      const paymentMethods = [
+        {
+          id: 1,
+          icon: (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 text-gray-800"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 7h14M5 11h14M5 15h14M5 19h14"
+              />
+            </svg>
+          ),
+          name: "Credit/Debit Card",
+          isSelected: true,
+        },
+        {
+          id: 2,
+          icon: (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 text-gray-800"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M9.3 16.1h6.8v.8H9.3zM11.9 3.6a9.3 9.3 0 11-9.3 9.3 9.3 9.3 0 019.3-9.3zm3.2 7.5h-2v1.6h2v1.6h-2v.8h2v1.6h-2v.8h-1.6v-.8h-2v.8H10v-1.6h2v-.8H9.3V12H10V7.5h1.6zm-1.6-.8h1.6V9H10v.8h2z" />
+            </svg>
+          ),
+          name: "PayPal",
+          isSelected: false,
+        },
+        {
+          id: 3,
+          icon: (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 text-gray-800"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 12h14M5 16h14M5 20h14M5 8h14M5 4h14"
+              />
+            </svg>
+          ),
+          name: "Bank Transfer",
+          isSelected: false,
+        },
+        {
+          id: 4,
+          icon: (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 text-gray-800"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 12h14M5 16h14M5 20h14M5 8h14M5 4h14"
+              />
+            </svg>
+          ),
+          name: "Gift Card",
+          isSelected: false,
+        },
+      ];
+      
+      
+      const transactions: Transaction[] = [
+        { id: 1, referenceNumber: "1234567hufhfjnkdiiidjsurkf,vmkjjjfb", amount: 100 },
+        { id: 2, referenceNumber: "stgdyguhijjwehewg62383u83y73", amount: 20 },
+        { id: 3, referenceNumber: "1234567hufhfjnkdiiidjsurkf,vmkjjjfb", amount: 100 },
+        { id: 4, referenceNumber: "stgdyguhijjwehewg62383u83y73", amount: 20 },
+      ];
+      
 
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Header Navigation */}
             <header className="bg-white shadow">
                 <nav className="container mx-auto flex justify-start items-center space-x-10 py-4 px-4">
-                    {['Earnings', 'Receiving Payments', 'Cancellation Policy', 'Taxes'].map((tab) => (
+                    {['My wallet', 'Fund wallet', 'Saved payment method', 'Receipts'].map((tab) => (
                         <button
                             key={tab}
                             className={`text-lg font-medium ${activeTab === tab ? 'text-blue-600' : 'text-gray-600'
@@ -22,234 +133,68 @@ const Earnings = () => {
             </header>
 
             {/* Content based on selected tab */}
-            {activeTab === 'Earnings' && (
+            {activeTab === 'My wallet' && (
                 <div className="container mx-auto py-10">
                     <div className="flex flex-col lg:flex-row lg:space-x-10">
                         {/* Earnings Summary */}
-                        <div className="bg-white shadow-lg p-6 rounded-lg w-full lg:w-1/3">
-                            <h2 className="text-xl font-semibold mb-4">Earnings Summary</h2>
-                            <div className="mb-2">
-                                <p className="text-gray-500">Total Earnings to Date</p>
-                                <p className="text-2xl font-bold">$120,392.39</p>
-                            </div>
-                            <div className="mb-2">
-                                <p className="text-gray-500">Earnings this Month</p>
-                                <p className="text-2xl font-bold">$1,028.32</p>
-                            </div>
-                            <div className="mb-6">
-                                <p className="text-gray-500">Pending Payments</p>
-                                <p className="text-2xl font-bold">$300.00</p>
-                            </div>
-                            <button className="w-full bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600">
-                                Export earning report
+                        <div className="w-full max-w-xs mx-auto mt-8 p-6 justify-items-center  text-white rounded-3xl shadow-lg">
+                            <h2 className="text-xl font-semibold text-black mb-4">Total Balance</h2>
+                            <div className=" text-6xl text-black font-bold mb-4">$ 0.00</div>
+                            <button className="bg-blue-700 hover:bg-blue-600 text-white py-2 mx-10 px-2 mt-10 rounded-full" onClick={() => setActiveTab('Fund wallet')}>
+                                Fund wallet
                             </button>
-                            <p className="text-gray-400 text-sm mt-2">Supported formats: .csv, .pdf, .xlsx</p>
                         </div>
-
                         {/* Earnings Breakdown */}
-                        <div className="bg-white shadow-lg p-6 rounded-lg w-full lg:w-2/3">
-                            <h2 className="text-xl font-semibold mb-4">Earnings Breakdown</h2>
-                            <div className="mb-4">
-                                <p className="text-gray-500">Completed Classes</p>
-                                <p className="text-2xl font-bold">320</p>
+                        <div className="w-full max-w-4xl mx-auto mt-8 p-6 bg-white shadow-lg rounded-3xl">
+                            <h2 className="text-xl font-semibold mb-4">Transaction History</h2>
+                            <table className="w-full table-auto">
+                                <thead>
+                                <tr>
+                                    <th className="text-left text-sm font-medium text-gray-600 p-3">Reference Number</th>
+                                    <th className="text-left text-sm font-medium text-gray-600 p-3">Amount</th>
+                                    <th className="text-left text-sm font-medium text-gray-600 p-3">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {transactions.map((transaction) => (
+                                    <tr key={transaction.id} className="bg-blue-50 hover:bg-blue-100 transition-colors">
+                                    <td className="text-sm text-gray-700 p-3">{transaction.referenceNumber}</td>
+                                    <td className="text-sm text-gray-700 p-3">${transaction.amount}</td>
+                                    <td className="text-sm p-3">
+                                        <button className="text-gray-500 hover:text-gray-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 9L18 9M6 15L18 15" />
+                                        </svg>
+                                        </button>
+                                    </td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
                             </div>
-                            <div className="bg-gray-100 p-4 rounded-lg">
-                                <p className="text-gray-500 mb-4">Upcoming Payments</p>
-                                <div className="space-y-4">
-                                    {[1, 2, 3].map((_, index) => (
-                                        <div key={index} className="flex justify-between items-center bg-blue-100 p-4 rounded-lg">
-                                            <div className="flex items-center space-x-3">
-                                                <img
-                                                    src="/avatar.png" // Use an appropriate image
-                                                    alt="Profile"
-                                                    className="w-10 h-10 rounded-full"
-                                                />
-                                                <div>
-                                                    <p className="font-semibold">Wade Warren</p>
-                                                    <p className="text-sm text-gray-500">Maths</p>
-                                                </div>
-                                            </div>
-                                            <div className="text-right">
-                                                <p className="font-semibold">$100</p>
-                                                <p className="text-sm text-gray-500">12/07/2024</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="mt-6 text-xl font-bold">Total: $300</div>
-                        </div>
                     </div>
                 </div>
             )}
 
-            {activeTab === 'Receiving Payments' && (
-                <div className="container mx-auto py-10">
+            {activeTab === 'Fund wallet' && (
+                <div className=" py-10 ">
                     {/* Method of Receiving Payments */}
-                    <div className="bg-white shadow-lg p-6 rounded-lg mb-8">
-                        <h2 className="text-xl font-semibold mb-4">Method of Receiving Payments</h2>
-                        <p className="text-gray-500 mb-4">
-                            In order to be paid for your lessons, you must register a payment method.
-                        </p>
-                        <button className="w-full bg-blue-100 text-blue-600 font-semibold py-2 rounded-md flex items-center justify-center space-x-2 hover:bg-blue-200">
-                            <span>Add a payment method</span>
-                            <span className="text-xl font-bold">+</span>
-                        </button>
-                    </div>
-
-                    {/* Payment Frequency */}
-                    <div className="bg-white shadow-lg p-6 rounded-lg">
-                        <h2 className="text-xl font-semibold mb-4">Payment Frequency</h2>
-                        <p className="text-gray-500 mb-4">How frequently do you wish to be paid?</p>
-                        <div className="space-y-4">
-                            <div className="p-4 border border-gray-300 rounded-md flex items-start space-x-3">
-                                <input
-                                    type="radio"
-                                    name="paymentFrequency"
-                                    className="mt-1"
-                                    id="afterLessonCompletion"
-                                />
-                                <div>
-                                    <label htmlFor="afterLessonCompletion" className="font-semibold">
-                                        After Lesson Completion
-                                    </label>
-                                    <p className="text-gray-500">
-                                        Payments for completed lessons will be processed and credited to your account
-                                        within 48 hours after the lesson plan is finished.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="p-4 border-2 border-blue-400 bg-blue-100 rounded-md flex items-start space-x-3">
-                                <input
-                                    type="radio"
-                                    name="paymentFrequency"
-                                    className="mt-1"
-                                    id="monthlyPayments"
-                                    defaultChecked
-                                />
-                                <div>
-                                    <label htmlFor="monthlyPayments" className="font-semibold">
-                                        Monthly Payments
-                                    </label>
-                                    <p className="text-gray-500">
-                                        Your earnings will be compiled and paid out on the last day of each month.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <PaymentMethods methods={paymentMethods} />                    
                 </div>
             )}
 
-            {activeTab === 'Cancellation Policy' && (
+            {activeTab === 'Saved payment method' && (
                 <div className="container mx-auto py-10">
                     {/* Cancellation Policy Section */}
-                    <div className="bg-white shadow-lg p-6 rounded-lg">
-                        <h2 className="text-xl font-semibold mb-4">Cancellation Policy</h2>
-                        <p className="text-gray-500 mb-6">
-                            Our cancellation policy is designed to protect both teachers and students. Here’s what you need to know:
-                        </p>
-                        <div className="space-y-4">
-                            <div>
-                                <h3 className="font-semibold">Standard Cancellations</h3>
-                                <p className="text-gray-500">
-                                    Students must cancel at least 24 hours before the lesson to avoid any charges.
-                                </p>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold">No shows</h3>
-                                <p className="text-gray-500">
-                                    If a student does not show up for a scheduled lesson without prior notice, they will be charged the full lesson fee.
-                                </p>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold">Last-Minute Cancellations</h3>
-                                <p className="text-gray-500">
-                                    For cancellations made within 24 hours of the lesson, students will be charged 50% of the lesson fee.
-                                </p>
-                            </div>
-                        </div>
-                        <div className="mt-6">
-                            <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 flex items-center space-x-2">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-5 w-5"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                >
-                                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-11h2v4H9V7zm0 6h2v2H9v-2z" />
-                                </svg>
-                                <span>Modify Compensation Level</span>
-                            </button>
-                        </div>
-                    </div>
+                    <SavedPaymentMethod/>
                 </div>
             )}
             {/* Content based on selected tab */}
-            {activeTab === 'Taxes' && (
+            {activeTab === 'Receipts' && (
                 <div className="container mx-auto py-10">
                     <div className="bg-white shadow-lg p-6 rounded-lg">
-                        <h2 className="text-xl font-semibold mb-6">Taxes</h2>
-
-                        {/* Tax ID Input */}
-                        <div className="mb-6">
-                            <label className="block text-gray-700 font-semibold mb-2">
-                                Tax ID (VAT, GST, OST, HST, RFC)
-                            </label>
-                            <p className="text-gray-500 mb-4">
-                                Educify uses your country-specific tax ID to determine appropriate tax collection remittance and for receipt purposes, when applicable.
-                            </p>
-                            <div className="flex">
-                                <input
-                                    type="text"
-                                    placeholder="Tax ID"
-                                    className="border border-gray-300 p-3 rounded-lg w-full mr-4"
-                                />
-                                <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
-                                    Proceed
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* EU VAT Tax Collection */}
-                        <div className="mb-6">
-                            <div className="flex justify-between items-center mb-2">
-                                <label className="text-gray-700 font-semibold">
-                                    EU VAT Tax Collection
-                                </label>
-                                <input
-                                    type="checkbox"
-                                    className="h-6 w-6 text-blue-600 rounded-full"
-                                    defaultChecked
-                                />
-                            </div>
-                            <p className="text-gray-500">
-                                If applicable, charge VAT (value-added tax) to customers located within the EU. Any change made to your VAT settings will apply to all products in your school.
-                            </p>
-                            <p className="text-gray-400 mt-2 text-sm">
-                                When enabled, Teachable charges, files, and remits VAT to respective EU governments on your behalf. If your courses are VAT exempt, you can disable VAT charging in the EU.
-                            </p>
-                        </div>
-
-                        {/* Include taxes in all prices */}
-                        <div className="mb-6">
-                            <div className="flex justify-between items-center mb-2">
-                                <label className="text-gray-700 font-semibold">
-                                    Include taxes in all prices
-                                </label>
-                                <input
-                                    type="checkbox"
-                                    className="h-6 w-6 text-blue-600 rounded-full"
-                                />
-                            </div>
-                            <p className="text-gray-500">
-                                Choose whether you would like for your products to be tax inclusive or exclusive.
-                            </p>
-                            <p className="text-gray-400 mt-2 text-sm">
-                                When enabled, your customers will pay the price you set for your products, regardless of where they are located. Teachable will calculate and withdraw the appropriate taxes from that price.
-                            </p>
-                        </div>
+                        <h2 className="text-xl font-semibold mb-6">Receiptss</h2>
+                        <Receipts/>
                     </div>
                 </div>
             )}
