@@ -60,8 +60,8 @@ const Sidebar = () => {
         <MenuItem
           icon={<FaUser size={24} className='text-white' />}
           label='My Account'
-          link='/my-account'
-          active={isActive('/my-account')} // Pass active state
+          link='/myaccount'
+          active={isActive('/myaccount')} // Pass active state
         />
 
         <MenuItem
