@@ -2,7 +2,7 @@ import React from "react";
 
 const StudentLocation: React.FC = () => {
   return (
-    <div className="max-w-3xl mt-5 pb-10 p-6 bg-white rounded-xl shadow-lg mx-auto">
+    <div className="max-w-3xl mt-5 pb-10 p-6 bg-white rounded-3xl shadow-lg mx-auto">
       {/* Header */}
       <h2 className="text-lg font-bold text-gray-800 mb-4 text-center sm:text-left">
         Student Location

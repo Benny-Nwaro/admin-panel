@@ -37,9 +37,9 @@ const SettingsMenu: React.FC = () => {
   };
 
   return (
-    <div className="flex h-full w-full p-4">
+    <div className={`flex h-full w-full p-4 ${theme === "Dark" ? "bg-gray-800 text-white" : "bg-white text-black"}`}>
       {/* Sidebar */}
-      <div className="w-full h-full sm:w-1/3 lg:w-2/4 bg-white  p-6 mr-4 ">
+      <div className="w-full h-full sm:w-1/3 lg:w-2/4 p-6 mr-4">
         {/* Search Bar */}
         <div className="relative mb-6">
           <input
@@ -65,110 +65,49 @@ const SettingsMenu: React.FC = () => {
 
         {/* Menu Items */}
         <div className="space-y-6">
-          {/* Account Settings */}
-          <div
-            className="flex items-center justify-between cursor-pointer hover:bg-blue-100 rounded-lg px-4 py-2 transition"
-            onClick={() => setActiveComponent("ProfileSetting")}
-          >
-            <div className="flex items-center gap-4">
-              <svg
-                className="w-6 h-6 text-blue-500"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5.121 17.804A6.978 6.978 0 0111 15a6.978 6.978 0 015.879 2.804M21 21H3m6-10a6 6 0 116 0m-6 0v6m0-6h6"
-                />
-              </svg>
-              <span className="text-gray-700 font-medium">Account Settings</span>
+          {[
+            { id: "ProfileSetting", label: "Account Settings", icon: "M5.121 17.804A6.978 6.978 0 0111 15a6.978 6.978 0 015.879 2.804M21 21H3m6-10a6 6 0 116 0m-6 0v6m0-6h6" },
+            { id: "EditLogin", label: "Login & Security", icon: "M12 15v-3m0 3V9m0 6h0m0 0a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+            { id: "Privacy", label: "Privacy", icon: "M15 17h5l-1.405-1.405M9 5h.01M4.055 9.117C3.37 10.746 3 12.447 3 14c0 3.86 3.134 7 7 7s7-3.14 7-7c0-1.553-.37-3.254-1.055-4.883M15 17H5" },
+            { id: "NotificationSettings", label: "Notification Settings", icon: "M15 17h5l-1.405-1.405M9 5h.01M4.055 9.117C3.37 10.746 3 12.447 3 14c0 3.86 3.134 7 7 7s7-3.14 7-7c0-1.553-.37-3.254-1.055-4.883M15 17H5" },
+          ].map((menu) => (
+            <div
+              key={menu.id}
+              className={`flex items-center justify-between cursor-pointer rounded-lg px-4 py-2 transition ${
+                activeComponent === menu.id
+                  ? "bg-blue-100 text-blue-700"
+                  : "hover:bg-gray-100"
+              }`}
+              onClick={() => setActiveComponent(menu.id)}
+            >
+              <div className="flex items-center gap-4">
+                <svg
+                  className="w-6 h-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d={menu.icon}
+                  />
+                </svg>
+                <span className="font-medium">{menu.label}</span>
+              </div>
             </div>
-          </div>
+          ))}
 
-          {/* Login & Security */}
+          {/* Theme Toggle */}
           <div
-            className="flex items-center justify-between cursor-pointer hover:bg-blue-100 rounded-lg px-4 py-2 transition"
-            onClick={() => setActiveComponent("EditLogin")}
-          >
-            <div className="flex items-center gap-4">
-              <svg
-                className="w-6 h-6 text-blue-500"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 15v-3m0 3V9m0 6h0m0 0a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <span className="text-gray-700 font-medium">Login & Security</span>
-            </div>
-          </div>
-
-          {/* Data Management */}
-          <div
-            className="flex items-center justify-between cursor-pointer hover:bg-blue-100 rounded-lg px-4 py-2 transition"
-            onClick={() => setActiveComponent("Privacy")}
-          >
-            <div className="flex items-center gap-4">
-              <svg
-                className="w-6 h-6 text-blue-500"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 17h5l-1.405-1.405M9 5h.01M4.055 9.117C3.37 10.746 3 12.447 3 14c0 3.86 3.134 7 7 7s7-3.14 7-7c0-1.553-.37-3.254-1.055-4.883M15 17H5"
-                />
-              </svg>
-              <span className="text-gray-700 font-medium">Privacy</span>
-            </div>
-          </div>
-
-          {/* Notification Settings */}
-          <div
-            className="flex items-center justify-between cursor-pointer hover:bg-blue-100 rounded-lg px-4 py-2 transition"
-            onClick={() => setActiveComponent("NotificationSettings")}
-          >
-            <div className="flex items-center gap-4">
-              <svg
-                className="w-6 h-6 text-blue-500"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 17h5l-1.405-1.405M9 5h.01M4.055 9.117C3.37 10.746 3 12.447 3 14c0 3.86 3.134 7 7 7s7-3.14 7-7c0-1.553-.37-3.254-1.055-4.883M15 17H5"
-                />
-              </svg>
-              <span className="text-gray-700 font-medium">Notification Settings</span>
-            </div>
-          </div>
-
-          {/* Display */}
-          <div
-            className="flex items-center justify-between cursor-pointer hover:bg-blue-100 rounded-lg px-4 py-2 transition"
+            className="flex items-center justify-between cursor-pointer rounded-lg px-4 py-2 transition hover:bg-gray-100"
             onClick={toggleTheme}
           >
             <div className="flex items-center gap-4">
               <svg
-                className="w-6 h-6 text-blue-500"
+                className="w-6 h-6"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -181,16 +120,15 @@ const SettingsMenu: React.FC = () => {
                   d="M10 4H8c-1.104 0-2 .896-2 2v4m12-4h-2c-1.104 0-2 .896-2 2v4m0 0H6m12 0v8a2 2 0 01-2 2H8a2 2 0 01-2-2v-8m16 0h-8m4 4h4"
                 />
               </svg>
-              <span className="text-gray-700 font-medium">Display</span>
+              <span className="font-medium">Display</span>
             </div>
+            <span className="text-sm">{theme} </span>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="w-full  p-8">
-        {renderComponent()}
-      </div>
+      <div className="w-full p-8">{renderComponent()}</div>
     </div>
   );
 };
