@@ -10,7 +10,7 @@ const ToDoList = () => {
   ]
 
   return (
-    <div className='w-full max-w-sm p-4 my-6 bg-white shadow-lg rounded-3xl'>
+    <div className='w-full max-w-md p-4 my-6 bg-white shadow-lg rounded-3xl'>
       {/* Header */}
       <div className='flex justify-between items-center mb-4'>
         <h2 className='text-xl font-bold'>To Do</h2>

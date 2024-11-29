@@ -1,5 +1,3 @@
-// MainWrapper.tsx
-
 import {
   Box,
   ChakraProvider,
@@ -38,26 +36,41 @@ export default function MainWrapper({ children }: MainWrapperProps) {
             md: `"nav header" "nav main"`, // On larger screens, use sidebar and grid layout
           }}
           gridTemplateRows={{ base: 'auto 1fr', md: '60px 1fr' }}
-          gridTemplateColumns={{ base: '1fr', md: '280px 1fr' }}
-          minH='100vh'
-          gap='1'
+          gridTemplateColumns={{ base: '1fr', md: 'auto 1fr' }}
+          minH="100vh"
+          gap="1"
         >
-          <Box position='sticky' top={0} zIndex={10}>
+          <Box position="sticky" top={0} zIndex={10}>
             <Header onOpen={onOpen} />
           </Box>
-          <Box gridArea='nav' display={{ base: 'none', md: 'block' }} h='100vh'>
+
+          {/* Sidebar Wrapper */}
+          <Box
+            gridArea="nav"
+            display={{ base: 'none', md: 'block' }}
+            h="100vh"
+            bg="gray.800"
+            transition="width 0.3s ease"
+            width={{ base: '4rem', md: '4rem' }}
+            _hover={{
+              width: '18rem',
+              transition: 'width 0.3s ease',
+            }}
+          >
             <Sidebar />
           </Box>
 
-          <Box gridArea='main' bg='gray.100' p={{ base: 2, md: 4 }}>
+          {/* Main Content */}
+          <Box gridArea="main" bg="gray.100" p={{ base: 2, md: 4 }}>
             {children}
           </Box>
+
           {/* Drawer for Mobile Sidebar */}
-          <Drawer isOpen={isOpen} placement='left' onClose={onClose}>
+          <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
             <DrawerOverlay>
               <DrawerContent>
                 <DrawerCloseButton />
-                <DrawerBody className='bg-navbar-bg'>
+                <DrawerBody bg="gray.800">
                   <Sidebar />
                 </DrawerBody>
               </DrawerContent>
