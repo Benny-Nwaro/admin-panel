@@ -15,7 +15,7 @@ interface HeaderProps {
 
 const Header = ({ onOpen }: HeaderProps) => {
   return (
-    <header className=' w-full bg-white border-b border-gray-200'>
+    <header className=' w-full ml-3  bg-white border-b border-gray-200'>
       <div className='flex justify-between items-center px-6 py-4 w-full'>
         {/* Logo */}
 
