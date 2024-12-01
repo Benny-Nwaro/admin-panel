@@ -13,9 +13,9 @@ const Sidebar = () => {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <div className="group h-full relative">
+    <div className="group h-fulls  relative">
       {/* Sidebar Container */}
-      <div className="fixed top-0 left-0 h-full bg-navbar-bg w-16 md:w-20 transition-all duration-300 ease-in-out group-hover:w-72 shadow-md">
+      <div className="fixed pt-20 left-0 h-full bg-navbar-bg w-16 md:w-20 transition-all duration-300 ease-in-out group-hover:w-72 shadow-md">
         {/* Top Section */}
         <div className="mt-6">
           <MenuItem

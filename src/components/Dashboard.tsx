@@ -9,21 +9,21 @@ import UpcomingClass from './UpcomingClass'
 import { FC } from 'react'
 import MainWrapper from './MainWarpper'
 import Workspace from '@/app/workspace/page'
+import BookTrial from './BookTrial'
+import PendingInvoices from './PendingInvoice'
 
 const Dashboard: FC = () => {
   return (
     <>
       <MainWrapper>
-        <div className='p-6 grid grid-cols-1 lg:grid-cols-3 gap-6'>
-          <div className='lg:col-span-1'>
-            <h1>Hi Bekwa 👋, Welcome to your dashboard</h1>
-            <ToDoList />
-            <UpcomingClass />
+        <div className='flex flex-col max-w-full px-10 mx-auto space-y-5 w-full pt-8'>
+          <div className='flex flex-row space-x-3'>
+          <h1>Hi Bekwa 👋, Welcome to your dashboard </h1>
+            <button className=' rounded-full bg-yellow-500 text-white px-5'>Complete your profile  </button>
           </div>
-          <div className='lg:col-span-2 space-y-4'>
-            <Performance />
-            <QuickLinks />
-          </div>
+          <BookTrial/>
+          <UpcomingClass />
+          <PendingInvoices/>
         </div>
       </MainWrapper>
     </>

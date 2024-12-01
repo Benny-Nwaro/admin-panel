@@ -16,13 +16,13 @@ const IDCard: React.FC<IDCardProps> = ({
   expDate,
 }) => {
   return (
-    <div className="max-w-md  bg-white rounded-2xl shadow-lg p-6 mt-5 font-sans">
+    <div className="max-w-md bg-white rounded-2xl shadow-lg p-6 mt-5 font-sans">
       {/* Header */}
       <h3 className="text-lg font-semibold text-gray-800 mb-4">Identification</h3>
 
       {/* ID Type */}
       <div className="mb-4">
-        <span className="text-sm font-medium text-gray-500">ID type</span>
+        <span className="text-sm font-medium text-gray-500">ID Type</span>
         <p className="text-base font-semibold text-gray-800 mt-1">{idType}</p>
       </div>
 
@@ -35,8 +35,8 @@ const IDCard: React.FC<IDCardProps> = ({
         />
       </div>
 
-      {/* License Details */}
-      <div className="grid grid-cols-3 gap-4 text-gray-700">
+      {/* License Details (Responsive) */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-gray-700">
         <div>
           <span className="block text-sm font-medium text-gray-500">
             Driver’s License
@@ -44,9 +44,7 @@ const IDCard: React.FC<IDCardProps> = ({
           <p className="text-sm font-semibold mt-1">{licenseNumber}</p>
         </div>
         <div>
-          <span className="block text-sm font-medium text-gray-500">
-            Issue Date
-          </span>
+          <span className="block text-sm font-medium text-gray-500">Issue Date</span>
           <p className="text-sm font-semibold mt-1">{issueDate}</p>
         </div>
         <div>
