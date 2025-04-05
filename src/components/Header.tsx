@@ -22,7 +22,7 @@ const Header = ({ onOpen }: HeaderProps) => {
   },[])
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-50">
+    <header className="fixed top-0 left-0 w-full items-end bg-white border-b border-gray-200 z-50">
       <div className="flex justify-between items-center px-6 py-0">
         {/* Logo */}
         <Box>
@@ -39,7 +39,7 @@ const Header = ({ onOpen }: HeaderProps) => {
             color="#121A26"
           >
             <Image
-              src={Logo} // Update with the correct path
+              src={Logo} 
               alt="EduCify Logo"
               width={97}
               height={40}
@@ -93,12 +93,12 @@ const Header = ({ onOpen }: HeaderProps) => {
           </div>
         </div>
       </div>
-      <p hidden={displayHeader} className="bg-blue-500 py-2 text-center w-full text-white m-0 leading-relaxed">
+      {/* <p hidden={displayHeader} className="bg-blue-500 py-2 text-center w-full text-white m-0 leading-relaxed">
         Digital next cta thought latest. Donuts closing wiggle reach follow ask get move.{' '}
         <a href="#" className="underline font-bold hover:no-underline">
           View including.
         </a>
-      </p>
+      </p> */}
     </header>
   );
 };

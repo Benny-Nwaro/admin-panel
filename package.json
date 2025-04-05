@@ -19,13 +19,19 @@
     "@fullcalendar/react": "^6.1.15",
     "@fullcalendar/timegrid": "^6.1.15",
     "@heroicons/react": "^2.1.5",
+    "@mui/icons-material": "^7.0.0",
+    "@mui/material": "^7.0.0",
     "@syncfusion/ej2-react-schedule": "^27.1.48",
     "date-fns": "^4.1.0",
     "framer-motion": "^11.11.9",
+    "lucide-react": "^0.477.0",
     "next": "14.2.11",
     "react": "^18",
     "react-dom": "^18",
-    "react-icons": "^5.3.0"
+    "react-dropzone": "^14.3.8",
+    "react-icons": "^5.3.0",
+    "react-quill": "^2.0.0",
+    "recharts": "^2.15.1"
   },
   "devDependencies": {
     "@types/node": "^20",
