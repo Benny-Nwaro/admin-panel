@@ -1,4 +1,3 @@
-import Header from "../Header";
 import HeaderBar from "./HeaderBar";
 import StatsCard from "./StatsCard";
 import UserLocation from "./UserLocation";

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Payment from "./Payment";
 import ChatComponent from "./MessageBox";
+import Image from "next/image";
 
 type Message = {
   id: number;
@@ -143,7 +144,7 @@ const MessageList: React.FC = () => {
               >
                 <div className="flex items-center space-x-4">
                   {msg.avatar ? (
-                    <img src={msg.avatar} alt={msg.name} className="w-10 h-10 rounded-full" />
+                    <Image src={msg.avatar} alt={msg.name} className="w-10 h-10 rounded-full" />
                   ) : (
                     <div className="w-10 h-10 bg-gray-300 flex items-center justify-center rounded-full">
                       <span className="text-gray-600">{msg.name.charAt(0)}</span>

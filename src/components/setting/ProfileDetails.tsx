@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useState } from "react";
 
 const flags: Record<string, { name: string; image: string }> = {
@@ -51,7 +52,7 @@ const ProfileDetails: React.FC = () => {
         <div className="flex flex-col w-full lg:w-2/3 space-y-8">
           {/* Profile Photo */}
           <div className="flex flex-col items-center lg:items-start">
-            <img
+            <Image
               src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-user-profile-avatar-png-image_10211467.png"
               alt="Profile"
               className="w-24 h-24 rounded-full object-cover border-2 border-gray-300"
@@ -101,7 +102,7 @@ const ProfileDetails: React.FC = () => {
                   ))}
                 </select>
                 {flag && (
-                  <img
+                  <Image
                     src={flag.image}
                     alt={flag.name}
                     className="absolute top-2 right-4 w-6 h-4"

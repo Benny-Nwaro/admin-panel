@@ -84,10 +84,10 @@ const CreateNewTeacher: React.FC = () => {
           <span className="font-medium">Lesson Location</span>
           <div className="flex flex-col space-y-2 mt-2">
             <label className="flex items-center space-x-2">
-              <input type="checkbox" className="accent-blue-500" /> <span>At Teacher's Location</span>
+              <input type="checkbox" className="accent-blue-500" /> <span>At Teacher&apos;s Location</span>
             </label>
             <label className="flex items-center space-x-2">
-              <input type="checkbox" className="accent-blue-500" /> <span>At Student's Location</span>
+              <input type="checkbox" className="accent-blue-500" /> <span>At Student&apos;s Location</span>
             </label>
             <label className="flex items-center space-x-2">
               <input type="checkbox" className="accent-blue-500" /> <span>Online</span>

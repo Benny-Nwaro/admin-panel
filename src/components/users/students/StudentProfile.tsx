@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const StudentProfile: React.FC = () => {
@@ -10,7 +11,7 @@ const StudentProfile: React.FC = () => {
         {/* Personal Information */}
         <div className="col-span-1 bg-gray-50 p-4 rounded-lg shadow">
           <div className="flex flex-col items-center">
-            <img
+            <Image
               src="https://via.placeholder.com/100"
               alt="Profile"
               className="w-24 h-24 rounded-full"
@@ -59,7 +60,7 @@ const StudentProfile: React.FC = () => {
               <p className="text-sm font-semibold">Average Grade</p>
               <h3 className="text-xl font-bold">A-</h3>
               <p className="text-xs text-gray-500">
-                Bekwa's average grade is 78/100
+                Bekwa&apos;s average grade is 78/100
               </p>
             </div>
             <div className="bg-green-100 p-4 rounded-lg shadow">

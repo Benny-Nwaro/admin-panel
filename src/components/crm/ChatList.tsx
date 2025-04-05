@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface Chat {
@@ -66,7 +67,7 @@ const ChatList: React.FC = () => {
             {/* User Avatars */}
             <div className="flex -space-x-2">
               {chat.users.map((user, index) => (
-                <img
+                <Image
                   key={index}
                   src={user.avatar}
                   alt={user.name}

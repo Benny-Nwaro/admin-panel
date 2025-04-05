@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import { FaPlus, FaEllipsisV } from "react-icons/fa";
 
@@ -64,7 +65,7 @@ const SubjectTable = () => {
               >
                 <td className="p-3">{subject.id}</td>
                 <td className="p-3 flex items-center gap-3">
-                  <img
+                  <Image
                     src={subject.image}
                     alt={subject.title}
                     className="w-10 h-10 rounded object-cover"

@@ -2,7 +2,21 @@ import { useState } from "react";
 import PromoCodeForm from "./PromoCodeForm";
 import EditPromoCodeForm from "./EditPromoCodeForm";
 
-const initialPromotions = [
+// Define the type for promotion data
+export interface Promo {
+  id: number;
+  name: string;
+  startDate: string;
+  endDate: string;
+  status: "Active" | "Inactive";
+  percentage?: number;
+  users?: number;
+  maxUsage?: number;
+  type?: "Registration" | "Referral";
+  details?: string;
+}
+
+const initialPromotions: Promo[] = [
   { id: 1, name: "Register Promo", startDate: "18/12/2024", endDate: "18/12/2024", status: "Active" },
   { id: 2, name: "Register Promo", startDate: "18/12/2024", endDate: "18/12/2024", status: "Active" },
   { id: 3, name: "Register Promo", startDate: "18/12/2024", endDate: "18/12/2024", status: "Inactive" },
@@ -11,13 +25,13 @@ const initialPromotions = [
 ];
 
 const PromotionsTable = () => {
-  const [promotions, setPromotions] = useState(initialPromotions);
-  const [search, setSearch] = useState("");
+  const [promotions, setPromotions] = useState<Promo[]>(initialPromotions);
+  const [search, setSearch] = useState<string>("");
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
-  const [sortOption, setSortOption] = useState("sort");
-  const [showPromoForm, setShowPromoForm] = useState(false);
-  const [showEditPromoForm, setShowEditPromoForm] = useState(false); // Added state
-  const [editPromoData, setEditPromoData] = useState<any>(null); // Added state
+  const [sortOption, setSortOption] = useState<string>("sort");
+  const [showPromoForm, setShowPromoForm] = useState<boolean>(false);
+  const [showEditPromoForm, setShowEditPromoForm] = useState<boolean>(false);
+  const [editPromoData, setEditPromoData] = useState<Promo | null>(null);
 
   const handleOpenDropdown = (id: number) => {
     setOpenDropdown(openDropdown === id ? null : id);
@@ -27,9 +41,9 @@ const PromotionsTable = () => {
     setOpenDropdown(null);
   };
 
-  const handleEdit = (promo: any) => {
-    setEditPromoData(promo); // Set the promo data to be edited
-    setShowEditPromoForm(true); // Show the edit form
+  const handleEdit = (promo: Promo) => {
+    setEditPromoData(promo);
+    setShowEditPromoForm(true);
     handleCloseDropdown();
   };
 
@@ -62,7 +76,7 @@ const PromotionsTable = () => {
 
   const handleCloseEditPromoForm = () => {
     setShowEditPromoForm(false);
-    setEditPromoData(null); // Clear the edit data
+    setEditPromoData(null);
   };
 
   return (
@@ -78,8 +92,7 @@ const PromotionsTable = () => {
       </div>
 
       {showPromoForm && <PromoCodeForm onClose={handleClosePromoForm} />}
-
-      {showEditPromoForm && (
+      {showEditPromoForm && editPromoData && (
         <EditPromoCodeForm promo={editPromoData} onClose={handleCloseEditPromoForm} />
       )}
 
@@ -122,9 +135,11 @@ const PromotionsTable = () => {
                 <td className="p-3">{promo.startDate}</td>
                 <td className="p-3">{promo.endDate}</td>
                 <td className="p-3">
-                  <span className={`px-3 py-1 rounded text-white text-sm ${
-                    promo.status === "Active" ? "bg-green-500" : "bg-red-500"
-                  }`}>
+                  <span
+                    className={`px-3 py-1 rounded text-white text-sm ${
+                      promo.status === "Active" ? "bg-green-500" : "bg-red-500"
+                    }`}
+                  >
                     {promo.status}
                   </span>
                 </td>

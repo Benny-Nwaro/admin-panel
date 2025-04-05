@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface Certification {
@@ -55,7 +56,7 @@ const Certifications: React.FC<CertificationsProps> = ({ certifications }) => {
 
             {/* Certificate Image */}
             <div className="w-full">
-              <img
+              <Image
                 src={cert.image}
                 alt="Certificate"
                 className="w-full h-40 object-cover rounded-lg border border-gray-200"

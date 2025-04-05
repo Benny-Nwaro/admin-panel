@@ -28,9 +28,9 @@ const SubjectForm: React.FC<SubjectFormProps> = ({ onSubmit, onPreview }) => {
     ctaImage: null,
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>, name: 'images' | 'ctaImage') => {
     if (e.target.files) {

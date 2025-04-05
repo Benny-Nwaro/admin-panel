@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface IDCardProps {
@@ -28,7 +29,7 @@ const IDCard: React.FC<IDCardProps> = ({
 
       {/* Card Image */}
       <div className="mb-6">
-        <img
+        <Image
           src={cardImage}
           alt={`${idType} preview`}
           className="w-full rounded-md border border-gray-300 shadow-sm"

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PaymentDisplay from "./PaymentDisplay";
 
 
 const Payment: React.FC = () => {

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -85,7 +86,7 @@ const EditArticle: React.FC = () => {
         </p>
         {headerImage ? (
           <div className="relative inline-block">
-            <img
+            <Image
               src={URL.createObjectURL(headerImage)}
               alt="Header"
               className="w-32 h-20 object-cover rounded-lg shadow-md"
@@ -129,7 +130,7 @@ const EditArticle: React.FC = () => {
             <div className="flex gap-2 flex-wrap">
               {paragraph.images.map((image, index) => (
                 <div key={index} className="relative inline-block">
-                  <img
+                  <Image
                     src={URL.createObjectURL(image)}
                     alt={`Image ${index + 1}`}
                     className="w-24 h-16 object-cover rounded-lg shadow-md"

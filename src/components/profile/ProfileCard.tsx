@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface ProfileCardProps {
@@ -56,7 +57,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 
       {/* Profile Section */}
       <div className="flex flex-col items-center mb-6">
-        <img
+        <Image
           src={
             profileImage ||
             "https://via.placeholder.com/100?text=Avatar" /* Dummy Avatar */
@@ -67,7 +68,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
         <h2 className="text-xl font-bold text-gray-800 sm:text-2xl">{name}</h2>
         {flag && (
           <div className="flex items-center mt-2">
-            <img
+            <Image
               src={flag.image}
               alt={flag.name}
               className="w-8 h-5 rounded shadow-sm"

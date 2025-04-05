@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ChevronDown, Download, Plus } from "lucide-react";
+import { ChevronDown} from "lucide-react";
 
 interface Teacher {
   id: number;

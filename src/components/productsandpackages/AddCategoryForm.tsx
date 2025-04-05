@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CategoryPreview from "./CategoryPreview";
+import Image from "next/image";
 
 interface AddCategoryFormProps {
   onClose: () => void;
@@ -96,7 +97,7 @@ const AddCategoryForm: React.FC<AddCategoryFormProps> = ({ onClose }) => {
                 />
                 <label htmlFor="heroImageInput" className="cursor-pointer">
                   {image ? (
-                    <img
+                    <Image
                       src={URL.createObjectURL(image)}
                       alt="Hero Preview"
                       className="max-h-28 max-w-full"
@@ -155,7 +156,7 @@ const AddCategoryForm: React.FC<AddCategoryFormProps> = ({ onClose }) => {
                 />
                 <label htmlFor="ctaImageInput" className="cursor-pointer">
                   {ctaImage ? (
-                    <img
+                    <Image
                       src={URL.createObjectURL(ctaImage)}
                       alt="CTA Preview"
                       className="max-h-28 max-w-full"

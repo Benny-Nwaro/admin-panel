@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const EditFAQModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+const EditFAQModal: React.FC<{ onClose: () => void }> = () => {
   const [question, setQuestion] = useState("What is your rate for lessons?");
   const [userType, setUserType] = useState("Student");
   const [answer, setAnswer] = useState(

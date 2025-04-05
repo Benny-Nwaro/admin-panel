@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const ArticlePreview: React.FC = () => {
@@ -7,7 +8,7 @@ const ArticlePreview: React.FC = () => {
       <h1 className="text-3xl font-semibold mb-4">
         Metal model cloud playing ask on nobody so. Individual watches.
       </h1>
-      <img
+      <Image
         src="/cover-image.jpg"
         alt="Cover"
         className="w-full h-64 object-cover rounded-lg mb-6"
@@ -26,8 +27,8 @@ const ArticlePreview: React.FC = () => {
       
       {/* Image Row */}
       <div className="grid grid-cols-2 gap-4 my-4">
-        <img src="/image1.jpg" alt="" className="w-full h-40 object-cover rounded-lg" />
-        <img src="/image2.jpg" alt="" className="w-full h-40 object-cover rounded-lg" />
+        <Image src="/image1.jpg" alt="" className="w-full h-40 object-cover rounded-lg" />
+        <Image src="/image2.jpg" alt="" className="w-full h-40 object-cover rounded-lg" />
       </div>
       
       {/* Section with heading */}

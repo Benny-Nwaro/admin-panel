@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { Search, ChevronDown } from "lucide-react";
 import CourseOverview from "./CourseOverview";
-import tutor from "@/app/assets/images/tutor.png"
+import tutor from "@/app/assets/images/tutor.png";
+
+interface Instructor {
+  name: string;
+  profileImage: string;
+  tagline: string;
+}
+
 interface Course {
   id: number;
   title: string;
@@ -11,7 +18,7 @@ interface Course {
   price: string;
   author: string;
   students: number;
-  instructor: any;
+  instructor: Instructor;
 }
 
 const coursesData: Course[] = [
@@ -26,7 +33,7 @@ const coursesData: Course[] = [
     students: 1000,
     instructor: {
       name: "Bekwa U.",
-      profileImage:{tutor},
+      profileImage: tutor.src,
       tagline: "author's tagline"
     }
   },
@@ -41,7 +48,7 @@ const coursesData: Course[] = [
     students: 1000,
     instructor: {
       name: "Bekwa U.",
-      profileImage: {tutor},
+      profileImage: tutor.src,
       tagline: "author's tagline"
     }
   },
@@ -56,7 +63,7 @@ const coursesData: Course[] = [
     students: 1000,
     instructor: {
       name: "Bekwa U.",
-      profileImage: {tutor},
+      profileImage: tutor.src,
       tagline: "author's tagline"
     }
   }
@@ -70,7 +77,6 @@ const CoursesTable: React.FC = () => {
     course.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Show full-page CourseOverview if a course is selected
   if (selectedCourse) {
     return (
       <div className="p-6 bg-white w-full h-fit">

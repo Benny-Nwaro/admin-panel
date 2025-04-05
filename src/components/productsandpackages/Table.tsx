@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 import AddCategoryForm from "./AddCategoryForm";
 
-interface TableProps {
+interface TableProps<T> {
   title: string;
   columns: string[];
-  data: Record<string, any>[];
+  data: T[];
   actionLabel?: string;
-  onActionClick?: (item: any) => void;
+  onActionClick?: (item: T) => void;
   addButtonLabel?: string;
   onAddClick?: () => void;
 }
 
-const Table: React.FC<TableProps> = ({
+const Table = <T extends Record<string, any>>({
   title,
   columns,
   data,
@@ -21,14 +21,12 @@ const Table: React.FC<TableProps> = ({
   onActionClick,
   addButtonLabel,
   onAddClick,
-}) => {
+}: TableProps<T>) => {
   const [showAddCategoryForm, setShowAddCategoryForm] = useState(false);
 
   const handleAddCategoryClick = () => {
     setShowAddCategoryForm(true);
-    if (onAddClick) {
-      onAddClick(); // Call the original onAddClick if provided
-    }
+    onAddClick?.(); // Optional chaining
   };
 
   const handleCloseAddCategoryForm = () => {
@@ -68,9 +66,7 @@ const Table: React.FC<TableProps> = ({
                       {col}
                     </th>
                   ))}
-                  <th className="px-4 py-2 border border-gray-300">
-                    {actionLabel}
-                  </th>
+                  <th className="px-4 py-2 border border-gray-300">{actionLabel}</th>
                 </tr>
               </thead>
               <tbody>
@@ -79,33 +75,36 @@ const Table: React.FC<TableProps> = ({
                     key={rowIndex}
                     className={rowIndex % 2 === 0 ? "bg-blue-50" : "bg-white"}
                   >
-                    {Object.values(item).map((val, colIndex) => (
-                      <td
-                        key={colIndex}
-                        className="px-4 py-2 border border-gray-300"
-                      >
-                        {typeof val === "boolean" || val == null
-                          ? String(val)
-                          : typeof val === "string" &&
-                            (val.toLowerCase() === "active" ||
-                              val.toLowerCase() === "inactive") ? (
-                            <span
-                              className={`px-2 py-1 text-sm font-semibold rounded-md ${
-                                val.toLowerCase() === "active"
-                                  ? "bg-green-500 text-white"
-                                  : "bg-red-500 text-white"
-                              }`}
-                            >
-                              {val}
-                            </span>
-                          ) : (
-                            val
-                          )}
-                      </td>
-                    ))}
+                    {columns.map((col, colIndex) => {
+                      const val = item[col];
+                      return (
+                        <td
+                          key={colIndex}
+                          className="px-4 py-2 border border-gray-300"
+                        >
+                          {typeof val === "boolean" || val == null
+                            ? String(val)
+                            : typeof val === "string" &&
+                              (val.toLowerCase() === "active" ||
+                                val.toLowerCase() === "inactive") ? (
+                              <span
+                                className={`px-2 py-1 text-sm font-semibold rounded-md ${
+                                  val.toLowerCase() === "active"
+                                    ? "bg-green-500 text-white"
+                                    : "bg-red-500 text-white"
+                                }`}
+                              >
+                                {val}
+                              </span>
+                            ) : (
+                              val
+                            )}
+                        </td>
+                      );
+                    })}
                     <td className="px-4 py-2 border border-gray-300 text-center">
                       <button
-                        onClick={() => onActionClick && onActionClick(item)}
+                        onClick={() => onActionClick?.(item)}
                         className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600"
                       >
                         {actionLabel}

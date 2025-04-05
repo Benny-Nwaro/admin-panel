@@ -1,6 +1,8 @@
 import React from "react";
 import tutor from "../../app/assets/images/tutor.png"
 import course from "../../app/assets/images/course.png"
+import Image from "next/image";
+
 interface StudentCardProps {
   bgColor?: string;
   title?: string;
@@ -8,14 +10,14 @@ interface StudentCardProps {
 
 const StudentCard: React.FC<StudentCardProps> = ({ bgColor, title}) => {
   const userImageData = title?.includes("Tutors") || title?.includes("Students")? [tutor.src, tutor.src, tutor.src, tutor.src] : [course.src, course.src, course.src, course.src];
-  const courseImageData = [course.src, course.src, course.src, course.src]
+  // const courseImageData = [course.src, course.src, course.src, course.src]
   return (
     <div className={`relative w-full max-w-sm ${bgColor} rounded-2xl p-6 h-48 text-white shadow-lg`}>
       {/* Avatars */}
       <div className="flex -space-x-3">
         {userImageData.map(
           (src, index) => (
-            <img
+            <Image
               key={index}
               src={src}
               alt={`Avatar ${index + 1}`}

@@ -1,32 +1,44 @@
 import { useState, useEffect } from "react";
 
+interface Promo {
+  name: string;
+  percentage?: number;
+  users?: number;
+  maxUsage?: number;
+  startDate: string;
+  endDate: string;
+  type?: "Registration" | "Referral";
+  status: "Active" | "Inactive";
+  details?: string;
+}
+
 interface EditPromoCodeFormProps {
-  promo: any; // Assuming 'promo' has the same structure as initialPromotions in PromotionsTable
+  promo: Promo;
   onClose: () => void;
 }
 
 const EditPromoCodeForm: React.FC<EditPromoCodeFormProps> = ({ promo, onClose }) => {
   const [formData, setFormData] = useState({
     title: "",
-    percentage: "",
-    users: "",
-    maxUsage: "",
+    percentage: 0,
+    users: 0,
+    maxUsage: 0,
     startDate: "",
     endDate: "",
-    type: "Registration",
-    status: "Active",
+    type: "Registration" as "Registration" | "Referral",
+    status: "Active" as "Active" | "Inactive",
     details: "",
   });
 
   useEffect(() => {
     if (promo) {
       setFormData({
-        title: promo.name,
-        percentage: promo.percentage || "",
-        users: promo.users || "",
-        maxUsage: promo.maxUsage || "",
-        startDate: promo.startDate,
-        endDate: promo.endDate,
+        title: promo.name || "",
+        percentage: promo.percentage ?? 0,
+        users: promo.users ?? 0,
+        maxUsage: promo.maxUsage ?? 0,
+        startDate: promo.startDate || "",
+        endDate: promo.endDate || "",
         type: promo.type || "Registration",
         status: promo.status,
         details: promo.details || "",
@@ -37,12 +49,19 @@ const EditPromoCodeForm: React.FC<EditPromoCodeFormProps> = ({ promo, onClose })
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: ["percentage", "users", "maxUsage"].includes(name)
+        ? Number(value)
+        : value,
+    }));
   };
 
   const handleSaveChanges = () => {
     console.log("Saving changes:", formData);
-    // Add your save logic here
+    // Save logic here
     onClose();
   };
 
@@ -131,10 +150,16 @@ const EditPromoCodeForm: React.FC<EditPromoCodeFormProps> = ({ promo, onClose })
         </div>
 
         <div className="mt-4 flex justify-between">
-          <button className="border border-gray-400 text-gray-700 px-6 py-2 rounded" onClick={onClose}>
+          <button
+            className="border border-gray-400 text-gray-700 px-6 py-2 rounded"
+            onClick={onClose}
+          >
             Discard
           </button>
-          <button className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600" onClick={handleSaveChanges}>
+          <button
+            className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"
+            onClick={handleSaveChanges}
+          >
             Save Changes
           </button>
         </div>

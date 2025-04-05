@@ -1,5 +1,5 @@
+import Image from "next/image";
 import React from "react";
-
 interface CategoryPreviewProps {
   categoryName: string;
   description: string;
@@ -28,7 +28,7 @@ const CategoryPreview: React.FC<CategoryPreviewProps> = ({
       {/* Hero Section */}
       <div className="relative w-full h-64 bg-gray-200 rounded-lg overflow-hidden">
         {image && (
-          <img
+          <Image
             src={URL.createObjectURL(image)}
             alt={categoryName}
             className="w-full h-full object-cover"
@@ -63,7 +63,7 @@ const CategoryPreview: React.FC<CategoryPreviewProps> = ({
         </div>
         <div className="relative h-64 md:h-auto">
           {ctaImage && (
-            <img
+            <Image
               src={URL.createObjectURL(ctaImage)}
               alt="CTA Image"
               className="w-full h-full object-cover"
