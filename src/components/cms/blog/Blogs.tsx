@@ -1,5 +1,6 @@
+"use client"
+
 import React from "react";
-import "react-quill/dist/quill.snow.css";
 import BlogTable from "./BlogTable";
 
 const Blogs: React.FC = () => {
