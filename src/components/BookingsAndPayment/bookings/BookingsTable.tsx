@@ -1,5 +1,4 @@
 import { useState } from "react";
-import CustomBookingForm from "./CustomBookingForm";
 
 type Booking = {
   id: number;
@@ -36,7 +35,6 @@ const BookingsTable = () => {
   const [showDropdown, setShowDropdown] = useState<number | null>(null);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [currentPage, setCurrentPage] = useState(1);
-  const [showCustomBookingForm, setShowCustomBookingForm] = useState(false);
 
   const bookingsPerPage = 5;
 
@@ -59,17 +57,17 @@ const BookingsTable = () => {
     setShowDropdown(null);
   };
 
-  const handleSaveEdit = (updatedBooking: Booking) => {
-    setBookings(
-      bookings.map((booking) =>
-        booking.id === updatedBooking.id ? updatedBooking : booking
-      )
-    );
-    setEditingBooking(null);
-  };
-  const handleCreateCustomBooking = () => {
-    setShowCustomBookingForm(!showCustomBookingForm)
-  };
+  // const handleSaveEdit = (updatedBooking: Booking) => {
+  //   setBookings(
+  //     bookings.map((booking) =>
+  //       booking.id === updatedBooking.id ? updatedBooking : booking
+  //     )
+  //   );
+  //   setEditingBooking(null);
+  // };
+  // const handleCreateCustomBooking = () => {
+  //   setShowCustomBookingForm(!showCustomBookingForm)
+  // };
 
   const handleCreateBooking = () => {
     const newBooking: Booking = {

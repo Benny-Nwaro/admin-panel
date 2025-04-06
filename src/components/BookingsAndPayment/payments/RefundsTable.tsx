@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import Refunds from "./Refunds";
 import TransactionsTable from "./TransactionsTable";
-import { Table } from "lucide-react";
 import Deposits from "./Deposits";
 import WithDrawals from "./WithDrawals";
 
 const RefundsTable: React.FC = () => {
-  const [search, setSearch] = useState("");
-  const [sort, setSort] = useState<"Newest" | "Oldest">("Newest");
   const [activeTab, setActiveTab] = useState("Refunds");
 
   return (

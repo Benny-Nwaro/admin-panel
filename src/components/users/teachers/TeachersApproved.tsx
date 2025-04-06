@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ChevronDown, ChevronLeft, ChevronRight, MoreVertical, Search, Eye, Edit, Trash } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, Search, Eye, Edit, Trash } from "lucide-react";
 
 interface Teacher {
   id: number;

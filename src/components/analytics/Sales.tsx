@@ -1,6 +1,5 @@
 import React from 'react'
 import RevenueAnalytics from './RevenueAnalytics'
-import Receipts from '../Receipts'
 import RecentSales from './RecentSales'
 import UserLocation from '../dashboard/UserLocation'
 import KPISection from './KPISection'

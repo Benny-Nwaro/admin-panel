@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface InvoiceCardProps {
@@ -42,7 +43,7 @@ const InvoiceCard: React.FC<InvoiceCardProps> = ({
         {/* Invoice Details Section */}
         <div className="flex-1 bg-gray-100 p-6 rounded-2xl shadow-sm">
         <div className="flex items-center bg-blue-500 text-white px-6 py-4 rounded-t-3xl">
-        <img
+        <Image
           className="w-12 h-12 rounded-full mr-4"
           src={user.avatar}
           alt={`${user.name}'s avatar`}

@@ -7,6 +7,8 @@ import linkedin from "@/app/assets/icons/dashboard/linkedin.png";
 import pinterest from "@/app/assets/icons/dashboard/pinterest.png";
 import trustpilot from "@/app/assets/icons/dashboard/trustpilot.png";
 import google from "@/app/assets/icons/dashboard/google.png";
+import Image from "next/image";
+
 
 const socialPlatforms = [
   { name: "Facebook", metric: "Likes", value: "235k", impressions: "235k", icon: facebook },
@@ -31,7 +33,7 @@ const SocialEngagementSummary: React.FC = () => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
         {socialPlatforms.map((platform, index) => (
           <div key={index} className="bg-white text-black p-4 rounded-lg flex items-center gap-4 shadow-md">
-            <img src={platform.icon.src} alt={platform.name} className="w-10 h-10" />
+            <Image src={platform.icon.src} alt={platform.name} className="w-10 h-10" />
             <div>
               <h3 className="font-bold text-lg">{platform.name}</h3>
               <p className="text-sm">{platform.metric} <span className="font-bold">{platform.value}</span></p>

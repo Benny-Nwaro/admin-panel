@@ -3,7 +3,7 @@ import SeoMetaTagDetails from "./SeoMetaTagDetails";
 import EditSeoMetaTag from "./EditSeoMetaTag";
 
 const CreateSeoMetaTagForm: React.FC = () => {
-  const [pageName, setPageName] = useState<string>("Home");
+  const [pageName, setPageName] = useState<string>("Home Page"); // Initialize with "Home Page"
   const [keywords, setKeywords] = useState<string[]>([]);
   const [descriptions, setDescriptions] = useState<string>("");
   const [keywordInput, setKeywordInput] = useState("");
@@ -30,7 +30,11 @@ const CreateSeoMetaTagForm: React.FC = () => {
   };
 
   const handleOnEdit = () => {
-    setIsEditing(true); 
+    setIsEditing(true);
+  };
+
+  const handlePageNameChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setPageName(event.target.value);
   };
 
   return (
@@ -41,10 +45,14 @@ const CreateSeoMetaTagForm: React.FC = () => {
 
           <div className="mb-4">
             <label className="block text-sm font-medium mb-1">Page name</label>
-            <select className="w-full p-2 border rounded-lg">
-              <option>Home Page</option>
-              <option>Course Page</option>
-              <option>Group Lesson Page</option>
+            <select
+              className="w-full p-2 border rounded-lg"
+              value={pageName}
+              onChange={handlePageNameChange}
+            >
+              <option value="Home Page">Home Page</option>
+              <option value="Course Page">Course Page</option>
+              <option value="Group Lesson Page">Group Lesson Page</option>
             </select>
           </div>
 
@@ -102,10 +110,15 @@ const CreateSeoMetaTagForm: React.FC = () => {
           // description={descriptions}
           // setKeywords={setKeywords}
           // setDescription={setDescriptions}
-          // onSave={() => setIsEditing(false)} 
+          // onSave={() => setIsEditing(false)}
         />
       ) : (
-        <SeoMetaTagDetails pageName={pageName} keywords={keywords} description={descriptions} onEdit={handleOnEdit} />
+        <SeoMetaTagDetails
+          pageName={pageName}
+          keywords={keywords}
+          description={descriptions}
+          onEdit={handleOnEdit}
+        />
       )}
     </div>
   );

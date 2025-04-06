@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import "react-quill/dist/quill.snow.css";
-import AddBlogPost from "./AddBlogPost";
 import BlogTable from "./BlogTable";
 
 const Blogs: React.FC = () => {

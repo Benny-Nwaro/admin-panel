@@ -54,8 +54,10 @@ const AccountsTable: React.FC = () => {
   };
 
   const handleDelete = () => {
-    alert(`Delete ${selectedUser?.fullName}`);
-    handleCloseMenu();
+    if (selectedUser) {
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== selectedUser.id));
+      handleCloseMenu();
+    }
   };
 
   // Filter users based on search

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const salesData = [
@@ -137,8 +138,8 @@ const RecentSales: React.FC = () => {
             {salesData.map((sale) => (
               <tr key={sale.id} className="border-b">
                 <td className="p-3 text-sm">{sale.id}</td>
-                <td className="p-3 text-sm flex flex-row "><img src={sale.fromAvatar} className="rounded-full w-8 mr-3"/> {sale.billFrom}</td>
-                <td className="p-3 text-sm"><img src={sale.avatarTo} className="rounded-full w-8 mr-3 float-start"/>{sale.billTo}</td>
+                <td className="p-3 text-sm flex flex-row "><Image alt="" src={sale.fromAvatar} className="rounded-full w-8 mr-3"/> {sale.billFrom}</td>
+                <td className="p-3 text-sm"><Image alt="" src={sale.avatarTo} className="rounded-full w-8 mr-3 float-start"/>{sale.billTo}</td>
                 <td className="p-3 text-sm">{sale.date}</td>
                 <td className="p-3 text-sm">{sale.details}</td>
                 <td className="p-3 text-sm font-semibold">{sale.amount}</td>

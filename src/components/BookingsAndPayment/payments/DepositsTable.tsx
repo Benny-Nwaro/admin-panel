@@ -1,7 +1,17 @@
 import React from "react";
 
+type Deposit = {
+  id: number;
+  sender: string;
+  receiver: string;
+  method: string;
+  amount: number;
+  date: string; // Format as ISO string or any preferred date format
+  status: "Pending" | "Completed" | "Failed"; // Or any other statuses
+};
+
 const DepositsTable: React.FC = () => {
-  const deposits: any[] = []; // Empty array to simulate no deposits
+  const deposits: Deposit[] = []; // Empty array to simulate no deposits
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-md w-full max-w-5xl mx-auto">
@@ -29,8 +39,8 @@ const DepositsTable: React.FC = () => {
                 </td>
               </tr>
             ) : (
-              deposits.map((deposit, index) => (
-                <tr key={index} className="border-b">
+              deposits.map((deposit) => (
+                <tr key={deposit.id} className="border-b">
                   <td className="px-4 py-3">{deposit.sender}</td>
                   <td className="px-4 py-3">{deposit.receiver}</td>
                   <td className="px-4 py-3">{deposit.method}</td>

@@ -1,11 +1,6 @@
 "use client"
-import React, { useState } from 'react';
+import React from 'react';
 import MainWrapper from '@/components/MainWarpper';
-import ChatComponent from '@/components/messages/MessageBox';
-import MessageList from '@/components/messages/AllMessages';
-import PaymentDisplay from '@/components/messages/PaymentDisplay';
-import CreateNewTeacher from '@/components/users/teachers/CreateNewTeacher';
-import TeachersPending from '@/components/users/teachers/TeachersPending';
 import Teacher from '@/components/users/teachers/Teacher';
 
 const Message: React.FC = () => {

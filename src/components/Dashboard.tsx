@@ -2,15 +2,8 @@
 
 // src/components/Dashboard.tsx
 
-import ToDoList from './ToDoList'
-import QuickLinks from './QuickLinks'
-import Performance from './Performance'
-import UpcomingClass from './UpcomingClass'
 import { FC } from 'react'
 import MainWrapper from './MainWarpper'
-import Workspace from '@/app/workspace/page'
-import BookTrial from './BookTrial'
-import PendingInvoices from './PendingInvoice'
 import Home from '@/components/dashboard/Home'
 
 const Dashboard: FC = () => {

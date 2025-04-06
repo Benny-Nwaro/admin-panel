@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 const OngoingClasses: React.FC = () => {
@@ -22,7 +23,7 @@ const OngoingClasses: React.FC = () => {
                     </svg>
                 </span>
                 <p className="text-sm text-blue-700">
-                    Please note that only classes marked as "Complete" will be eligible for payment. Ensure you mark your
+                    Please note that only classes marked as Complete will be eligible for payment. Ensure you mark your
                     classes accordingly to receive timely compensation.
                 </p>
             </div>
@@ -32,9 +33,9 @@ const OngoingClasses: React.FC = () => {
 
             <div className="bg-blue-50 p-4 rounded-lg shadow-md flex items-center justify-between">
                 <div className="flex items-center">
-                    <img
+                    <Image
                         className="w-12 h-12 rounded-full object-cover mr-4"
-                        src="https://via.placeholder.com/150" // Placeholder for student's image
+                        src="https://via.placeholder.com/150" 
                         alt="Student"
                     />
                     <div>

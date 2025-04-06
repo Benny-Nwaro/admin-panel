@@ -15,22 +15,25 @@ const data = [
 const SocialAnalyticsChart: React.FC = () => {
   return (
     <div className="p-6 h-fit w-full max-md:w-full max-md:px-3">
-     
       <div className="bg-white p-4 rounded-xl shadow-md">
-      <div className="bg-gray-200 p-4 rounded-xl ">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold">Impression</h2>
-          <div className="bg-blue-500 text-black px-4 py-2 rounded-lg">Jan 2024 - Jun 2024</div>
+        <div className="bg-gray-200 p-4 rounded-xl ">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold">Impression</h2>
+            <div className="bg-blue-500 text-black px-4 py-2 rounded-lg">Jan 2024 - Jun 2024</div>
+          </div>
+          <h3 className="text-3xl font-bold">
+            244k <span className="text-gray-500 text-lg">(Total Impressions)</span>
+          </h3>
+          <span className="text-green-600 bg-green-100 px-3 py-1 rounded-lg font-semibold">
+            +23.40% 📈
+          </span>
         </div>
-        <h3 className="text-3xl font-bold">244k <span className="text-gray-500 text-lg">(Total Impressions)</span></h3>
-        <span className="text-green-600 bg-green-100 px-3 py-1 rounded-lg font-semibold">+23.40% 📈</span>
-      </div>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={data}>
             <XAxis dataKey="name" stroke="black" tick={{ fill: "black" }} />
             <YAxis stroke="black" tick={{ fill: "black" }} />
             <Tooltip contentStyle={{ backgroundColor: "#333", color: "black" }} />
-            <Bar dataKey="users" fill="#3498db" barRadius={5} />
+            <Bar dataKey="users" fill="#3498db" radius={5} /> {/* Corrected line here */}
           </BarChart>
         </ResponsiveContainer>
       </div>

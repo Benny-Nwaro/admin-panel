@@ -1,8 +1,6 @@
 "use client"
-import React, { useState } from 'react';
+import React from 'react';
 import MainWrapper from '@/components/MainWarpper';
-import Courses from '@/components/cms/courses/Courses';
-import PaymentDetails from '@/components/users/teachers/PaymentDetails';
 import RefundsTable from '@/components/BookingsAndPayment/payments/RefundsTable';
 
 const Message: React.FC = () => {

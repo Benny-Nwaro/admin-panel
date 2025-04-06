@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface Message {
@@ -37,7 +38,7 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ user, messages, onSendMes
       {/* Header */}
       <div className="bg-white shadow-md p-4 flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <img src={user?.avatar} alt={user?.name} className="w-10 h-10 rounded-full" />
+          <Image src={user?.avatar} alt={user?.name} className="w-10 h-10 rounded-full" />
           <div>
             <h3 className="text-sm font-semibold text-gray-800">{user?.name}</h3>
             <p className="text-xs text-gray-600">{user?.role}</p>
@@ -76,7 +77,7 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ user, messages, onSendMes
               }`}
             >
               {message.type === "incoming" && (
-                <img
+                <Image
                   src={message.avatar}
                   alt={message.sender}
                   className="w-8 h-8 rounded-full"
@@ -100,7 +101,7 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ user, messages, onSendMes
                 </div>
               </div>
               {message.type === "outgoing" && (
-                <img
+                <Image
                   src={message.avatar}
                   alt={message.sender}
                   className="w-8 h-8 rounded-full"

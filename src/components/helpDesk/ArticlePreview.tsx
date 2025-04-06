@@ -34,7 +34,7 @@ const ArticlePreview: React.FC = () => {
       {/* Section with heading */}
       <h2 className="text-xl font-bold mb-2">Ensure we into</h2>
       <p className="text-gray-700 mb-4">
-        Know ditching commitment just crystallize disband in conversation previous. Team who's see minimize technologically...
+        Know ditching commitment just crystallize disband in conversation previous. Team who see minimize technologically...
       </p>
       
       {/* Section with heading */}

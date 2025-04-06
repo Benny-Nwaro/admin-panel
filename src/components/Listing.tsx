@@ -47,7 +47,7 @@ export default function Listing() {
                                     My Studio
                                 </button>
                                 <button className="border border-[#9193A5] hover:bg-[#3198F5] text-[#171717] text-sm py-2 px-4 rounded-full">
-                                    Student's Location
+                                    Students Location
                                 </button>
                             </div>
                             <div className="bg-[#D3E9FD] rounded-2xl w-full">
@@ -129,7 +129,7 @@ export default function Listing() {
                                     My Studio
                                 </button>
                                 <button className="border border-[#9193A5] hover:bg-[#3198F5] text-[#171717] text-sm py-2 px-4 rounded-full">
-                                    Student's Location
+                                    Students Location
                                 </button>
                             </div>
                             <div className="bg-[#D3E9FD] rounded-2xl w-full">

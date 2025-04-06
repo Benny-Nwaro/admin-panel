@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { HiMiniChartBarSquare } from "react-icons/hi2";
 import { FaChevronDown } from "react-icons/fa";
 
 interface MenuItemProps {
@@ -10,7 +9,7 @@ interface MenuItemProps {
   subMenu?: { label: string; link: string }[];
 }
 
-const Menuitem: React.FC<MenuItemProps> = ({ icon, label, link, active, subMenu }) => {
+const Menuitem: React.FC<MenuItemProps> = ({ icon, label,  active, subMenu }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

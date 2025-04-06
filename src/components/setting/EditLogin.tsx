@@ -8,13 +8,20 @@ const EditLogin: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPasswords, setShowPasswords] = useState(false);
   const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
-  const [showFactText, setShowFactText] = useState(false)
-  const [factText, setFactText] = useState("")
-
+  const [showFactText, setShowFactText] = useState(false);
+  const [factText, setFactText] = useState(""); // Initialize factText as empty
 
   const toggleShowPasswords = () => setShowPasswords((prev) => !prev);
 
-  const toggleTwoFactor = () => setTwoFactorEnabled((prev) => !prev);
+  const toggleTwoFactor = () => {
+    setTwoFactorEnabled((prev) => !prev);
+    if (!twoFactorEnabled) {
+      setFactText("Two-Factor Authentication adds extra security.");
+    } else {
+      setFactText(""); // Clear fact text when disabled
+    }
+    setShowFactText(!twoFactorEnabled);
+  };
 
   const handleChangePassword = () => {
     if (newPassword === currentPassword) {
@@ -28,6 +35,7 @@ const EditLogin: React.FC = () => {
     }
 
     alert("Password changed successfully!");
+    // You could also add logic to actually change the password here.
   };
 
   return (
@@ -37,7 +45,8 @@ const EditLogin: React.FC = () => {
       {/* Change Password Section */}
       <div className="mb-4">
         <h3 className="text-lg font-light mb-4">Change Password</h3>
-        <div className=" ml-52 relative mb-4">
+        <div className="relative mb-4">
+          <label className="block text-sm font-medium mb-1">Current Password</label>
           <input
             type={showPasswords ? "text" : "password"}
             placeholder="Current Password"
@@ -52,7 +61,8 @@ const EditLogin: React.FC = () => {
             {showPasswords ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
           </span>
         </div>
-        <div className="ml-52 relative mb-2">
+        <div className="relative mb-2">
+          <label className="block text-sm font-medium mb-1">New Password</label>
           <input
             type={showPasswords ? "text" : "password"}
             placeholder="New Password"
@@ -67,7 +77,8 @@ const EditLogin: React.FC = () => {
             {showPasswords ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
           </span>
         </div>
-        <div className=" ml-52  relative mb-4">
+        <div className="relative mb-4">
+          <label className="block text-sm font-medium mb-1">Confirm New Password</label>
           <input
             type={showPasswords ? "text" : "password"}
             placeholder="Confirm New Password"
@@ -82,12 +93,13 @@ const EditLogin: React.FC = () => {
             {showPasswords ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
           </span>
         </div>
+        <button className="bg-blue-500 text-white p-2 rounded-md" onClick={handleChangePassword}>Change Password</button>
       </div>
 
       {/* Two-Factor Authentication */}
-      <div className="flex space-x-4 mb-6">
+      <div className="flex items-center space-x-4 mb-6">
         <h3 className="text-lg font-semibold">Two Factor Authentication</h3>
-        <label className="relative inline-flex  cursor-pointer">
+        <label className="relative inline-flex items-center cursor-pointer">
           <input
             type="checkbox"
             checked={twoFactorEnabled}
@@ -99,9 +111,11 @@ const EditLogin: React.FC = () => {
         <span className="text-sm text-gray-700">
           {twoFactorEnabled ? "Enabled" : "Disabled"}
         </span>
-        <span hidden={showFactText} className="text-sm text-gray-700">
-          {factText}
-        </span>
+        {showFactText && (
+          <span className="text-sm text-gray-700">
+            {factText}
+          </span>
+        )}
       </div>
 
       {/* Render LoginSecurity Component */}

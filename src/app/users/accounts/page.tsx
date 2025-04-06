@@ -1,9 +1,6 @@
 "use client"
-import React, { useState } from 'react';
+import React from 'react';
 import MainWrapper from '@/components/MainWarpper';
-import ChatComponent from '@/components/messages/MessageBox';
-import MessageList from '@/components/messages/AllMessages';
-import PaymentDisplay from '@/components/messages/PaymentDisplay';
 import AccountsTable from '@/components/users/accounts/AccountsTable';
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";

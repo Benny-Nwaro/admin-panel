@@ -3,7 +3,6 @@ import React, { useState } from "react";
 const Refunds: React.FC = () => {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<"Newest" | "Oldest">("Newest");
-  const [activeTab, setActiveTab] = useState("Refunds");
 
   const refunds = [
     { id: 1, sender: "Adenekan Aleem Ayomide", senderRole: "Student", receiver: "Bekwa Undie", receiverRole: "Blog Admin", method: "PayPal", status: "Refunded", date: "18/12/2024", amount: "$10,000" },

@@ -1,4 +1,11 @@
-import { PieChart, Pie, Cell, Legend } from "recharts";
+import { PieChart, Pie, Cell } from "recharts";
+
+// Define the type for the individual items in the data arrays
+interface DataItem {
+  name: string;
+  value: number;
+  color: string;
+}
 
 const data = {
   trafficSources: [
@@ -22,29 +29,33 @@ const data = {
   ],
 };
 
-const ChartCard = ({ title, data }: { title: string; data: any[] }) => {
+interface ChartCardProps {
+  title: string;
+  data: DataItem[]; // Use the DataItem type here
+}
+
+const ChartCard = ({ title, data }: ChartCardProps) => {
   return (
     <div className="bg-white p-2 rounded-2xl shadow-md w-full max-md:w-full flex flex-col items-center">
       <h3 className="font-semibold text-xl mb-4">{title}</h3>
       <div className="flex flex-row max-md:flex-row space-x-4 max-md:space-x-10 pr-5">
-      <PieChart width={200} height={200} className="flex self-start">
-        <Pie data={data} dataKey="value" cx="50%" cy="50%" innerRadius={50} outerRadius={80} fill="#8884d8">
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={entry.color} />
+        <PieChart width={200} height={200} className="flex self-start">
+          <Pie data={data} dataKey="value" cx="50%" cy="50%" innerRadius={50} outerRadius={80} fill="#8884d8">
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={entry.color} />
+            ))}
+          </Pie>
+        </PieChart>
+        <div className="mt-2 text-sm">
+          {data.map((item) => (
+            <div key={item.name} className="flex items-center gap-2 py-2">
+              <span className="w-3 h-3 rounded-full" style={{ background: item.color }}></span>
+              <span>{item.name}</span>
+              <span className="ml-auto">{item.value}%</span>
+            </div>
           ))}
-        </Pie>
-      </PieChart>
-      <div className="mt-2 text-sm">
-        {data.map((item) => (
-          <div key={item.name} className="flex items-center gap-2 py-2">
-            <span className="w-3 h-3 rounded-full" style={{ background: item.color }}></span>
-            <span>{item.name}</span>
-            <span className="ml-auto">{item.value}%</span>
-          </div>
-        ))}
+        </div>
       </div>
-      </div>
-     
     </div>
   );
 };

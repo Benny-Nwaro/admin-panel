@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useState } from "react";
 
 
@@ -56,7 +57,7 @@ const Payment: React.FC = () => {
             onClick={() => setSelectedItem(selectedItem === index ? null : index)}
           >
             <div className="flex items-center space-x-4">
-              <img
+              <Image
                 src={item.avatar}
                 alt={item.name}
                 className="w-12 h-12 rounded-full object-cover"

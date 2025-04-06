@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Calendar, ChevronDown, Upload, X } from "lucide-react";
+import { Calendar, ChevronDown, X } from "lucide-react";
 
 const CreateNewTeacher: React.FC = () => {
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>(["Algebra", "Calculus"]);
@@ -9,6 +9,36 @@ const CreateNewTeacher: React.FC = () => {
     Thursday: ["12:00 PM - 1:00 PM"],
     Friday: ["12:00 PM - 1:00 PM"],
   });
+  const [subjectCategory, setSubjectCategory] = useState<string>("Subject category");
+  const [subject, setSubject] = useState<string>("Subject");
+
+  const handleRemoveSubject = (subjectToRemove: string) => {
+    setSelectedSubjects(selectedSubjects.filter((subject) => subject !== subjectToRemove));
+  };
+
+  const handleAddSubject = () => {
+    if (subject && subject !== "Subject" && !selectedSubjects.includes(subject)) {
+      setSelectedSubjects([...selectedSubjects, subject]);
+      setSubject("Subject"); // Reset subject selection
+    }
+  };
+
+  const toggleAvailability = (day: string, time: string) => {
+    setAvailability((prevAvailability) => {
+      const dayAvailability = prevAvailability[day] || [];
+      if (dayAvailability.includes(time)) {
+        return {
+          ...prevAvailability,
+          [day]: dayAvailability.filter((t) => t !== time),
+        };
+      } else {
+        return {
+          ...prevAvailability,
+          [day]: [...dayAvailability, time],
+        };
+      }
+    });
+  };
 
   return (
     <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-6">
@@ -65,17 +95,28 @@ const CreateNewTeacher: React.FC = () => {
           <div className="flex space-x-2">
             {selectedSubjects.map((subject) => (
               <span key={subject} className="bg-blue-500 text-white px-3 py-1 rounded-lg flex items-center space-x-2">
-                {subject} <X size={14} className="ml-2 cursor-pointer" />
+                {subject} <X size={14} className="ml-2 cursor-pointer" onClick={() => handleRemoveSubject(subject)} />
               </span>
             ))}
           </div>
           <div className="flex space-x-4">
-            <select className="border px-3 py-2 rounded-lg">
+            <select className="border px-3 py-2 rounded-lg" value={subjectCategory} onChange={(e) => setSubjectCategory(e.target.value)}>
               <option>Subject category</option>
+              <option>Math</option>
+              <option>Science</option>
             </select>
-            <select className="border px-3 py-2 rounded-lg">
+            <select className="border px-3 py-2 rounded-lg" value={subject} onChange={(e) => setSubject(e.target.value)}>
               <option>Subject</option>
+              {subjectCategory === "Math" && (<>
+                <option>Algebra</option>
+                <option>Calculus</option>
+              </>)}
+              {subjectCategory === "Science" && (<>
+                <option>Physics</option>
+                <option>Chemistry</option>
+              </>)}
             </select>
+            <button className="bg-blue-500 text-white px-3 py-2 rounded-lg" onClick={handleAddSubject}>Add</button>
           </div>
         </div>
 
@@ -118,7 +159,7 @@ const CreateNewTeacher: React.FC = () => {
                 <tr key={time} className="border-t">
                   <td className="p-3">{time}</td>
                   {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((day) => (
-                    <td key={day} className="p-3">
+                    <td key={day} className="p-3 cursor-pointer" onClick={() => toggleAvailability(day, time)}>
                       {availability[day]?.includes(time) && (
                         <div className="bg-blue-500 text-white px-4 py-2 rounded-lg text-center">✔</div>
                       )}

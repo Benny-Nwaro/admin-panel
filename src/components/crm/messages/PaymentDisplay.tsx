@@ -1,5 +1,6 @@
+import Image from 'next/image';
 import React from 'react';
-
+Image
 const CheckoutIncomplete: React.FC = () => {
   return (
     <div className="flex-1 bg-white shadow-lg rounded-lg p-4 flex flex-col justify-center items-center">
@@ -9,7 +10,7 @@ const CheckoutIncomplete: React.FC = () => {
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-4">
             {/* Profile Image */}
-            <img
+            <Image
               src="https://via.placeholder.com/40"  // Replace with actual image source
               alt="Tutor"
               className="w-14 h-14 rounded-full"

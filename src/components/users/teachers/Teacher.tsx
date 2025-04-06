@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ChevronDown, Download, Plus } from "lucide-react";
+import { Download, Plus } from "lucide-react";
 import TeachersApproved from "./TeachersApproved";
 import TeachersPending from "./TeachersPending";
 import TeachersRejected from "./TeachersRejected";
@@ -12,24 +12,22 @@ interface Teacher {
   location: string;
 }
 
-const teachersData: Teacher[] = [
-  { id: 1, name: "Adenekan Aleem", status: "Pending", lesson: "Bead Maker", location: "online" },
-  { id: 2, name: "Ayomide Otedola", status: "Approved", lesson: "Driving", location: "online" },
-  { id: 3, name: "Olamide Baddo", status: "Rejected", lesson: "Mathematics", location: "online" },
-  { id: 4, name: "John Doe", status: "Pending", lesson: "Physics", location: "offline" },
-  { id: 5, name: "Jane Smith", status: "Approved", lesson: "Chemistry", location: "online" },
-];
+// const teachersData: Teacher[] = [
+//   { id: 1, name: "Adenekan Aleem", status: "Pending", lesson: "Bead Maker", location: "online" },
+//   { id: 2, name: "Ayomide Otedola", status: "Approved", lesson: "Driving", location: "online" },
+//   { id: 3, name: "Olamide Baddo", status: "Rejected", lesson: "Mathematics", location: "online" },
+//   { id: 4, name: "John Doe", status: "Pending", lesson: "Physics", location: "offline" },
+//   { id: 5, name: "Jane Smith", status: "Approved", lesson: "Chemistry", location: "online" },
+// ];
 
 const Teacher: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState<string>("Pending");
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const [sortAsc, setSortAsc] = useState<boolean>(true);
 
   // Filter and sort teachers
-  const filteredTeachers = teachersData
-    .filter((teacher) => teacher.status === selectedTab)
-    .filter((teacher) => teacher.name.toLowerCase().includes(searchTerm.toLowerCase()))
-    .sort((a, b) => (sortAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)));
+  // const filteredTeachers = teachersData
+  //   .filter((teacher) => teacher.status === selectedTab)
+  //   .filter((teacher) => teacher.name.toLowerCase().includes(searchTerm.toLowerCase()))
+  //   .sort((a, b) => (sortAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)));
 
   // Determine which component to render
   const renderTabContent = () => {

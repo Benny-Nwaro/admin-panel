@@ -24,9 +24,9 @@ const EditSeoMetaTag: React.FC = () => {
     }
   };
 
-  const removeKeyword = (index: number) => {
-    setKeywords(keywords.filter((_, i) => i !== index));
-  };
+  // const removeKeyword = (index: number) => {
+  //   setKeywords(keywords.filter((_, i) => i !== index));
+  // };
 
   return (
     <div className="mx-auto bg-white py-6 rounded-2xl max-md:w-full">

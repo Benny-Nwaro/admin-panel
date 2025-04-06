@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { FaTrash } from "react-icons/fa";
+import Image from "next/image";
 
 const EditBlogPost: React.FC = () => {
   const [title, setTitle] = useState("Lorem ipsum dolor sit amet");
@@ -44,7 +45,7 @@ const EditBlogPost: React.FC = () => {
         <div className="flex gap-4">
           {images.map((img) => (
             <div key={img.id} className="relative group">
-              <img
+              <Image
                 src={img.url}
                 alt={img.name}
                 className="w-24 h-24 object-cover rounded-lg"

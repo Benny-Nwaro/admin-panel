@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaChevronDown, FaPlus } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import AddBlogPost from "./AddBlogPost";
 
 interface Blog {
@@ -8,12 +8,13 @@ interface Blog {
   description: string;
   status: "Pending" | "Approved" | "Declined";
   dateCreated: string;
+  image: string | null;
 }
 
 const blogsData: Blog[] = [
-  { id: 1, title: "Blog Title", description: "Solutionize pretend gmail loop please club respectively focus happenings out. Out options don’t loss individual diarize donuts power.", status: "Pending", dateCreated: "12/03/2024" },
-  { id: 2, title: "Blog Title", description: "Solutionize pretend gmail loop please club respectively focus happenings out. Out options don’t loss individual diarize donuts power.", status: "Approved", dateCreated: "12/03/2024" },
-  { id: 3, title: "Blog Title", description: "Solutionize pretend gmail loop please club respectively focus happenings out. Out options don’t loss individual diarize donuts power.", status: "Declined", dateCreated: "12/03/2024" }
+  { id: 1, title: "Blog Title", description: "Solutionize pretend gmail loop please club respectively focus happenings out. Out options don’t loss individual diarize donuts power.", status: "Pending", dateCreated: "12/03/2024", image: null },
+  { id: 2, title: "Blog Title", description: "Solutionize pretend gmail loop please club respectively focus happenings out. Out options don’t loss individual diarize donuts power.", status: "Approved", dateCreated: "12/03/2024", image: null },
+  { id: 3, title: "Blog Title", description: "Solutionize pretend gmail loop please club respectively focus happenings out. Out options don’t loss individual diarize donuts power.", status: "Declined", dateCreated: "12/03/2024", image: null }
 ];
 
 const BlogTable: React.FC = () => {
@@ -33,6 +34,15 @@ const BlogTable: React.FC = () => {
         return "bg-gray-300";
     }
   };
+
+  const handleAddBlog = (newBlog: Blog) => {
+    setBlogs((prevBlogs) => [...prevBlogs, newBlog]);
+  };
+
+  const filteredBlogs = blogs.filter((blog) =>
+    blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    blog.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="p-6">
@@ -74,7 +84,7 @@ const BlogTable: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {blogs.map((blog) => (
+              {filteredBlogs.map((blog) => (
                 <tr key={blog.id} className={`border-b ${blog.id % 2 === 0 ? "bg-white" : "bg-blue-100"}`}>
                   <td className="p-3">
                     <div className="font-bold">{blog.title}</div>
@@ -87,9 +97,7 @@ const BlogTable: React.FC = () => {
                   </td>
                   <td className="p-3">{blog.dateCreated}</td>
                   <td className="p-3">
-                    <button className="bg-blue-400 text-white px-4 py-2 rounded-lg flex items-center">
-                      Actions <FaChevronDown className="ml-2" />
-                    </button>
+                    <button className="text-blue-500 hover:text-blue-700">Edit</button>
                   </td>
                 </tr>
               ))}
@@ -98,19 +106,16 @@ const BlogTable: React.FC = () => {
         </div>
       </div>
 
-      {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white rounded-xl shadow-lg w-2/6 mt-10">
-            <div className="flex justify-between items-center mb-4">
-              <button
-                className="text-black font-bold text-xl mx-auto"
-                onClick={() => setIsModalOpen(false)}
-              >
-                &times;
-              </button>
-            </div>
-            <AddBlogPost />
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-1/2">
+            <AddBlogPost onAddBlog={handleAddBlog} />
+            <button
+              className="absolute top-0 right-0 p-4"
+              onClick={() => setIsModalOpen(false)}
+            >
+              &times;
+            </button>
           </div>
         </div>
       )}

@@ -1,6 +1,5 @@
 import React from "react";
 import { FaBolt, FaUsers, FaChalkboardTeacher } from "react-icons/fa";
-import LiveClassModal from "./LiveClassModal";
 import LessonTable from "./LessonTable";
 
 const LiveClassesAnalytics: React.FC = () => {

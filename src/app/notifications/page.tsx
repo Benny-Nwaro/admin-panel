@@ -1,7 +1,6 @@
 "use client"
-import React, { useState } from 'react';
+import React from 'react';
 import MainWrapper from '@/components/MainWarpper';
-import SocialAnalytics from '@/components/analytics/SocialAnalytics';
 import Notifications from '@/components/notification/Notifications';
 
 const notifications: React.FC = () => {

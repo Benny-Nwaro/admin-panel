@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import AddCategoryForm from "./AddCategoryForm";
 
-interface TableProps<T> {
+interface TableProps<T extends { [key: string]: unknown }> {
   title: string;
   columns: string[];
   data: T[];
@@ -13,7 +13,7 @@ interface TableProps<T> {
   onAddClick?: () => void;
 }
 
-const Table = <T extends Record<string, any>>({
+const Table = <T extends { [key: string]: unknown }>({
   title,
   columns,
   data,
@@ -26,11 +26,38 @@ const Table = <T extends Record<string, any>>({
 
   const handleAddCategoryClick = () => {
     setShowAddCategoryForm(true);
-    onAddClick?.(); // Optional chaining
+    onAddClick?.();
   };
 
   const handleCloseAddCategoryForm = () => {
     setShowAddCategoryForm(false);
+  };
+
+  const renderCellValue = (val: unknown): React.ReactNode => {
+    if (val == null) {
+      return "N/A";
+    }
+
+    if (typeof val === "boolean") {
+      return val ? "Yes" : "No";
+    }
+
+    if (typeof val === "string" && (val.toLowerCase() === "active" || val.toLowerCase() === "inactive")) {
+      return (
+        <span
+          className={`px-2 py-1 text-sm font-semibold rounded-md ${
+            val.toLowerCase() === "active" ? "bg-green-500 text-white" : "bg-red-500 text-white"
+          }`}
+        >
+          {val}
+        </span>
+      );
+    }
+
+    if (typeof val === "object" && val && Object.keys(val).length === 0) {
+      return "Empty"; // Or "N/A" or JSON.stringify(val)
+    }
+
   };
 
   return (
@@ -49,6 +76,7 @@ const Table = <T extends Record<string, any>>({
               <button
                 onClick={handleAddCategoryClick}
                 className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                aria-label={`Add ${title}`}
               >
                 {addButtonLabel}
               </button>
@@ -62,11 +90,14 @@ const Table = <T extends Record<string, any>>({
                     <th
                       key={index}
                       className="px-4 py-2 text-left border border-gray-300"
+                      scope="col"
                     >
                       {col}
                     </th>
                   ))}
-                  <th className="px-4 py-2 border border-gray-300">{actionLabel}</th>
+                  <th className="px-4 py-2 border border-gray-300" scope="col">
+                    {actionLabel}
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -76,29 +107,13 @@ const Table = <T extends Record<string, any>>({
                     className={rowIndex % 2 === 0 ? "bg-blue-50" : "bg-white"}
                   >
                     {columns.map((col, colIndex) => {
-                      const val = item[col];
+                      const val = item[col as keyof T];
                       return (
                         <td
                           key={colIndex}
                           className="px-4 py-2 border border-gray-300"
                         >
-                          {typeof val === "boolean" || val == null
-                            ? String(val)
-                            : typeof val === "string" &&
-                              (val.toLowerCase() === "active" ||
-                                val.toLowerCase() === "inactive") ? (
-                              <span
-                                className={`px-2 py-1 text-sm font-semibold rounded-md ${
-                                  val.toLowerCase() === "active"
-                                    ? "bg-green-500 text-white"
-                                    : "bg-red-500 text-white"
-                                }`}
-                              >
-                                {val}
-                              </span>
-                            ) : (
-                              val
-                            )}
+                          {renderCellValue(val)}
                         </td>
                       );
                     })}
@@ -106,6 +121,7 @@ const Table = <T extends Record<string, any>>({
                       <button
                         onClick={() => onActionClick?.(item)}
                         className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600"
+                        aria-label={`Perform action on item ${rowIndex + 1}`}
                       >
                         {actionLabel}
                       </button>

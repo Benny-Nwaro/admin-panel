@@ -2,7 +2,7 @@ import React from "react";
 import { BarChart, Bar, ResponsiveContainer } from "recharts";
 import { FaUsers, FaExchangeAlt, FaDollarSign, FaChartLine } from "react-icons/fa";
 
-const data = Array.from({ length: 50 }, (_, i) => ({
+const data = Array.from({ length: 50 }, () => ({
   value: Math.floor(Math.random() * 100),
 }));
 

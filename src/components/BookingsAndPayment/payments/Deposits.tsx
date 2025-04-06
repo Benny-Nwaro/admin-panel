@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Deposits: React.FC = () => {
-  const [activeTab, setActiveTab] = useState("Deposits");
 
-  const tabs = ["Payments", "Deposits", "Refunds", "Deposits"];
 
   return (
     <div className="p-6">
