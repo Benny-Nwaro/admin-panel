@@ -1,6 +1,6 @@
+"use client";
 import { useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import dynamic from 'next/dynamic';
 
 interface PromoCodeFormProps {
   onClose: () => void;
@@ -17,6 +17,10 @@ interface FormData {
   status: "Active" | "Inactive";
   details: string;
 }
+
+const ReactQuillDynamic = dynamic(() => import('react-quill'), {
+  ssr: false,
+});
 
 const PromoCodeForm: React.FC<PromoCodeFormProps> = ({ onClose }) => {
   const [formData, setFormData] = useState<FormData>({
@@ -177,7 +181,7 @@ const PromoCodeForm: React.FC<PromoCodeFormProps> = ({ onClose }) => {
             <label htmlFor="details" className="block text-sm font-medium text-gray-700">
               Promo Terms and Details
             </label>
-            <ReactQuill
+            <ReactQuillDynamic
               value={formData.details}
               onChange={handleDetailsChange}
               className="mt-1 block w-full h-48"
