@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useState } from 'react';
 import { FiSettings, FiLogOut } from 'react-icons/fi';
 import Link from 'next/link';
@@ -43,9 +43,9 @@ const Sidebar = () => {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <div className="group h-full pt-10 relative">
+    <div className="group h-full max-md:h-full pt-10  relative">
       {/* Sidebar Container */}
-      <div className="fixed left-0 h-full bg-black w-16 md:w-20 transition-all duration-300 ease-in-out group-hover:lg:w-72 max-md:w-64 max-md:translate-x-0 max-md:shadow-md z-40">
+      <div className="fixed  left-0 h-full bg-black w-16 md:w-20 transition-all duration-300 ease-in-out group-hover:lg:w-72  max-md:h-full shadow-md">
         {/* Top Section */}
         <div className="mt-6">
           <MenuItem
@@ -60,13 +60,13 @@ const Sidebar = () => {
               icon={<HiMiniChartBarSquare size={24} />}
               label="Analytics"
               link="#"
-              active={isActive('/classes/calendar') || pathname.startsWith('/analytics')}
+              active={isActive('/classes/calendar')}
               onClick={() => setAnalyticsOpen(!analyticsOpen)}
             />
             {analyticsOpen && (
               <div className="ml-10 mt-2 bg-gray-800 rounded-md shadow-lg">
                 <SubMenuItem label="Marketting" link="/analytics/marketting" active={isActive('/analytics/marketting')} />
-                <SubMenuItem label="Sales" link="/analytics/sales" active={isActive('/analytics/sales')} />
+                <SubMenuItem label="Sales" link="/analytics/sales" active={isActive('/analytics/overview')} />
                 <SubMenuItem label="Social" link="/analytics/socials" active={isActive('/analytics/socials')} />
                 <SubMenuItem label="Live classes" link="/analytics/liveclasses" active={isActive('/analytics/liveclasses')} />
                 <SubMenuItem label="Users" link="/analytics/users" active={isActive('/analytics/users')} />
@@ -86,7 +86,7 @@ const Sidebar = () => {
               icon={<AiFillMessage size={24} />}
               label="CRM"
               link="#"
-              active={isActive('/crm') || pathname.startsWith('/crm')}
+              active={isActive('/crm')}
               onClick={() => setCrmOpen(!crmOpen)}
             />
             {crmOpen && (
@@ -112,7 +112,7 @@ const Sidebar = () => {
               icon={<AiFillMessage size={24} />}
               label="Content management"
               link="#"
-              active={isActive('/cms') || pathname.startsWith('/cms')}
+              active={isActive('/cms')}
               onClick={() => setCmsOpen(!cmsOpen)}
             />
             {cmsOpen && (
@@ -128,7 +128,7 @@ const Sidebar = () => {
               icon={<AiFillMessage size={24} />}
               label="User Management"
               link="#"
-              active={isActive('/users') || pathname.startsWith('/users')}
+              active={isActive('/users')}
               onClick={() => setUsersOpen(!usersOpen)}
             />
             {usersOpen && (
@@ -145,8 +145,8 @@ const Sidebar = () => {
               icon={<AiFillDollarCircle size={24} />}
               label="Bookings & Payments"
               link="#"
-              active={isActive('/bookingsandpayments') || pathname.startsWith('/bookingsandpayments')}
-              onClick={() => setBookingsOpen(!bookingsOpen)}
+              active={isActive('/bookingsandpayments')}
+              onClick={() => setBookingsOpen(!usersOpen)}
             />
             {bookingsOpen && (
               <div className="ml-10 mt-2 bg-gray-800 rounded-md shadow-lg">
@@ -161,7 +161,7 @@ const Sidebar = () => {
               icon={<TbPackages size={24} />}
               label="Products & Packages"
               link="#"
-              active={isActive('/productsandpackages') || pathname.startsWith('/productsandpackages')}
+              active={isActive('/products')}
               onClick={() => setProductsOpen(!productsOpen)}
             />
             {productsOpen && (
@@ -195,11 +195,11 @@ const Sidebar = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="absolute border-t-2 border-white mt-12 w-full bottom-0">
+        <div className="absolute border-t-2 border-white mt-12 w-full">
           <MenuItem
             icon={<RiGuideLine size={24} />}
             label="Enable guide"
-            link="/guide"
+            link="/settings"
             active={isActive('/guide')}
           />
           <MenuItem
@@ -234,7 +234,9 @@ const MenuItem = ({ icon, label, link, active, isLogout, onClick }: MenuItemProp
         >
           <div className="text-white">{icon}</div>
           <span
-            className={`text-white font-bold text-sm whitespace-nowrap transition-opacity duration-300 max-md:opacity-100 group-hover:opacity-100 opacity-0`}
+            className={`text-white font-bold text-sm whitespace-nowrap transition-opacity duration-300 ${
+              isLogout ? 'text-red-500' : ''
+            }  group-hover:opacity-100 opacity-0`}
           >
             {label}
           </span>
