@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Box,
   ChakraProvider,
@@ -6,7 +8,7 @@ import {
   Grid,
   useDisclosure,
 } from '@chakra-ui/react';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import Sidebar from './Sidebar';
 import Header from './Header';
 
@@ -16,6 +18,11 @@ interface MainWrapperProps {
 
 const MainWrapper = ({ children }: MainWrapperProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Sync state
+
+  // const toggleMobileMenu = () => {
+  //   setIsMobileMenuOpen(!isMobileMenuOpen);
+  // };
 
   return (
     <ChakraProvider>
@@ -47,7 +54,12 @@ const MainWrapper = ({ children }: MainWrapperProps) => {
           <Sidebar />
         </Box>
 
-        <Box gridArea="main" p={{ base: 2, md: 4 }} w="full">
+        <Box
+          gridArea="main"
+          p={{ base: 2, md: 4 }}
+          w="full"
+          className={`${isMobileMenuOpen ? 'max-md:ml-64' : ''} transition-margin duration-300 ease-in-out`}
+        >
           {children}
         </Box>
 

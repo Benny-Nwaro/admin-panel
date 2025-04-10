@@ -39,32 +39,15 @@ const Sidebar = () => {
   const [usersOpen, setUsersOpen] = useState(false);
   const [bookingsOpen, setBookingsOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
 
   const isActive = (path: string) => pathname === path;
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
   return (
-    <>
-      {/* Mobile Menu Button */}
-      <div className="max-md:fixed max-md:top-0 max-md:left-0 max-md:bg-black max-md:text-white max-md:w-full max-md:p-4 max-md:z-50 flex justify-between items-center">
-        <span className="font-bold text-xl">Dashboard</span>
-        <button onClick={toggleMobileMenu} className="max-md:block md:hidden">
-          {isMobileMenuOpen ? <FiLogOut size={24} className="rotate-180" /> : <FiSettings size={24} />}
-        </button>
-      </div>
-
+    <div className="group h-full pt-10 relative">
       {/* Sidebar Container */}
-      <div
-        className={`fixed left-0 h-full bg-black w-16 md:w-20 transition-all duration-300 ease-in-out group-hover:lg:w-72 max-md:h-full max-md:z-40 max-md:bg-black max-md:shadow-md ${
-          isMobileMenuOpen ? 'max-md:translate-x-0' : 'max-md:-translate-x-full'
-        }`}
-      >
+      <div className="fixed left-0 h-full bg-black w-16 md:w-20 transition-all duration-300 ease-in-out group-hover:lg:w-72 max-md:w-64 max-md:translate-x-0 max-md:shadow-md z-40">
         {/* Top Section */}
-        <div className="mt-6 md:mt-6">
+        <div className="mt-6">
           <MenuItem
             icon={<BiSolidHome size={24} />}
             label="Dashboard"
@@ -233,14 +216,7 @@ const Sidebar = () => {
           />
         </div>
       </div>
-      {/* Overlay to prevent interaction with main content when mobile menu is open */}
-      {isMobileMenuOpen && (
-        <div
-          onClick={toggleMobileMenu}
-          className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-30 md:hidden"
-        ></div>
-      )}
-    </>
+    </div>
   );
 };
 
@@ -258,9 +234,7 @@ const MenuItem = ({ icon, label, link, active, isLogout, onClick }: MenuItemProp
         >
           <div className="text-white">{icon}</div>
           <span
-            className={`text-white font-bold text-sm whitespace-nowrap transition-opacity duration-300 max-md:opacity-100 ${
-              isLogout ? 'text-red-500' : ''
-            } group-hover:opacity-100 opacity-0`}
+            className={`text-white font-bold text-sm whitespace-nowrap transition-opacity duration-300 max-md:opacity-100 group-hover:opacity-100 opacity-0`}
           >
             {label}
           </span>
