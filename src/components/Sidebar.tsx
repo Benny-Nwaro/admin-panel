@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from 'react';
 import { FiSettings, FiLogOut } from 'react-icons/fi';
 import Link from 'next/link';
@@ -39,15 +39,32 @@ const Sidebar = () => {
   const [usersOpen, setUsersOpen] = useState(false);
   const [bookingsOpen, setBookingsOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
 
   const isActive = (path: string) => pathname === path;
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
-    <div className="group h-full max-md:h-full pt-10  relative">
+    <>
+      {/* Mobile Menu Button */}
+      <div className="max-md:fixed max-md:top-0 max-md:left-0 max-md:bg-black max-md:text-white max-md:w-full max-md:p-4 max-md:z-50 flex justify-between items-center">
+        <span className="font-bold text-xl">Dashboard</span>
+        <button onClick={toggleMobileMenu} className="max-md:block md:hidden">
+          {isMobileMenuOpen ? <FiLogOut size={24} className="rotate-180" /> : <FiSettings size={24} />}
+        </button>
+      </div>
+
       {/* Sidebar Container */}
-      <div className="fixed  left-0 h-full bg-black w-16 md:w-20 transition-all duration-300 ease-in-out group-hover:lg:w-72  max-md:h-full shadow-md">
+      <div
+        className={`fixed left-0 h-full bg-black w-16 md:w-20 transition-all duration-300 ease-in-out group-hover:lg:w-72 max-md:h-full max-md:z-40 max-md:bg-black max-md:shadow-md ${
+          isMobileMenuOpen ? 'max-md:translate-x-0' : 'max-md:-translate-x-full'
+        }`}
+      >
         {/* Top Section */}
-        <div className="mt-6">
+        <div className="mt-6 md:mt-6">
           <MenuItem
             icon={<BiSolidHome size={24} />}
             label="Dashboard"
@@ -60,13 +77,13 @@ const Sidebar = () => {
               icon={<HiMiniChartBarSquare size={24} />}
               label="Analytics"
               link="#"
-              active={isActive('/classes/calendar')}
+              active={isActive('/classes/calendar') || pathname.startsWith('/analytics')}
               onClick={() => setAnalyticsOpen(!analyticsOpen)}
             />
             {analyticsOpen && (
               <div className="ml-10 mt-2 bg-gray-800 rounded-md shadow-lg">
                 <SubMenuItem label="Marketting" link="/analytics/marketting" active={isActive('/analytics/marketting')} />
-                <SubMenuItem label="Sales" link="/analytics/sales" active={isActive('/analytics/overview')} />
+                <SubMenuItem label="Sales" link="/analytics/sales" active={isActive('/analytics/sales')} />
                 <SubMenuItem label="Social" link="/analytics/socials" active={isActive('/analytics/socials')} />
                 <SubMenuItem label="Live classes" link="/analytics/liveclasses" active={isActive('/analytics/liveclasses')} />
                 <SubMenuItem label="Users" link="/analytics/users" active={isActive('/analytics/users')} />
@@ -86,7 +103,7 @@ const Sidebar = () => {
               icon={<AiFillMessage size={24} />}
               label="CRM"
               link="#"
-              active={isActive('/crm')}
+              active={isActive('/crm') || pathname.startsWith('/crm')}
               onClick={() => setCrmOpen(!crmOpen)}
             />
             {crmOpen && (
@@ -112,7 +129,7 @@ const Sidebar = () => {
               icon={<AiFillMessage size={24} />}
               label="Content management"
               link="#"
-              active={isActive('/cms')}
+              active={isActive('/cms') || pathname.startsWith('/cms')}
               onClick={() => setCmsOpen(!cmsOpen)}
             />
             {cmsOpen && (
@@ -128,7 +145,7 @@ const Sidebar = () => {
               icon={<AiFillMessage size={24} />}
               label="User Management"
               link="#"
-              active={isActive('/users')}
+              active={isActive('/users') || pathname.startsWith('/users')}
               onClick={() => setUsersOpen(!usersOpen)}
             />
             {usersOpen && (
@@ -145,8 +162,8 @@ const Sidebar = () => {
               icon={<AiFillDollarCircle size={24} />}
               label="Bookings & Payments"
               link="#"
-              active={isActive('/bookingsandpayments')}
-              onClick={() => setBookingsOpen(!usersOpen)}
+              active={isActive('/bookingsandpayments') || pathname.startsWith('/bookingsandpayments')}
+              onClick={() => setBookingsOpen(!bookingsOpen)}
             />
             {bookingsOpen && (
               <div className="ml-10 mt-2 bg-gray-800 rounded-md shadow-lg">
@@ -161,7 +178,7 @@ const Sidebar = () => {
               icon={<TbPackages size={24} />}
               label="Products & Packages"
               link="#"
-              active={isActive('/products')}
+              active={isActive('/productsandpackages') || pathname.startsWith('/productsandpackages')}
               onClick={() => setProductsOpen(!productsOpen)}
             />
             {productsOpen && (
@@ -195,11 +212,11 @@ const Sidebar = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="absolute border-t-2 border-white mt-12 w-full">
+        <div className="absolute border-t-2 border-white mt-12 w-full bottom-0">
           <MenuItem
             icon={<RiGuideLine size={24} />}
             label="Enable guide"
-            link="/settings"
+            link="/guide"
             active={isActive('/guide')}
           />
           <MenuItem
@@ -216,7 +233,14 @@ const Sidebar = () => {
           />
         </div>
       </div>
-    </div>
+      {/* Overlay to prevent interaction with main content when mobile menu is open */}
+      {isMobileMenuOpen && (
+        <div
+          onClick={toggleMobileMenu}
+          className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-30 md:hidden"
+        ></div>
+      )}
+    </>
   );
 };
 
@@ -234,9 +258,9 @@ const MenuItem = ({ icon, label, link, active, isLogout, onClick }: MenuItemProp
         >
           <div className="text-white">{icon}</div>
           <span
-            className={`text-white font-bold text-sm whitespace-nowrap transition-opacity duration-300 ${
+            className={`text-white font-bold text-sm whitespace-nowrap transition-opacity duration-300 max-md:opacity-100 ${
               isLogout ? 'text-red-500' : ''
-            }  group-hover:opacity-100 opacity-0`}
+            } group-hover:opacity-100 opacity-0`}
           >
             {label}
           </span>
