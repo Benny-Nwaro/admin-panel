@@ -1,5 +1,7 @@
+import Image from "next/image";
 import React, { useState } from "react";
 import { FaUpload } from "react-icons/fa";
+
 
 interface Blog {
   id: number;
@@ -82,7 +84,7 @@ const AddBlogPost: React.FC<AddBlogPostProps> = ({ onAddBlog }) => {
           <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" id="imageUpload" />
           <label htmlFor="imageUpload" className="cursor-pointer">
             {imagePreview ? (
-              <img src={imagePreview} alt="Preview" className="max-w-full max-h-48 rounded-lg" />
+              <Image src={imagePreview} alt="Preview" className="max-w-full max-h-48 rounded-lg" />
             ) : (
               <>
                 <FaUpload className="text-gray-400 text-2xl mb-2" />

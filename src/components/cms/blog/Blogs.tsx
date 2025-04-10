@@ -7,7 +7,6 @@ const Blogs: React.FC = () => {
 
   return (
     <div>
-        {/* <AddBlogPost/> */}
         <BlogTable/>
     </div>
    
