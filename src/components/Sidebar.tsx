@@ -190,7 +190,7 @@ const Sidebar = () => {
           />
         </div>
 
-        <div className="absolute border-t border-white  w-full mt-12"> {/* Reduced top margin, moved to bottom */}
+        <div className="absolute border-t border-white  w-full mt-24"> {/* Reduced top margin, moved to bottom */}
           <MenuItem
             icon={<RiGuideLine size={20} />} 
             label="Enable guide"
@@ -220,7 +220,7 @@ const MenuItem = ({ icon, label, link, active, isLogout, onClick }: MenuItemProp
     <div onClick={onClick} className="w-full cursor-pointer">
       <Link href={link} className="w-full">
         <div
-          className={`flex items-center gap-2 px-1.5 py-1 transition-all duration-300 ${ /* Reduced padding and gap */
+          className={`flex items-center gap-2 px-1.5 py-1.5 transition-all duration-300 ${ /* Reduced padding and gap */
             active
               ? 'border rounded-md border-'
               : 'hover:bg-gray-700'
