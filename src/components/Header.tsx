@@ -8,9 +8,10 @@ import {
 } from "@heroicons/react/24/outline"; // Updated Heroicons v2 import
 import Logo from "../app/assets/images/Educify-logo.svg";
 import ProfilePic from "../app/assets/images/educify_pic.png";
-import { Box, IconButton, Text } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { Bars3Icon } from "@heroicons/react/24/solid"; // Import HamburgerIcon from Heroicons
 import { useEffect, useState } from "react";
+
+
 
 interface HeaderProps {
   onOpen: () => void; // Define onOpen as a function with no parameters that returns nothing
@@ -27,21 +28,17 @@ const Header = ({ onOpen }: HeaderProps) => {
     <>
       {displayHeader && (
         <header className="fixed top-0 left-0 w-full items-end bg-white border-b border-gray-200 z-50">
-          <div className="flex justify-between items-center px-6 py-0">
+          <div className="flex justify-between items-center px-6 py-0 h-16"> {/* Added fixed height for consistent header */}
             {/* Logo */}
-            <Box>
-              <IconButton
-                display={{ base: "block", md: "none" }}
-                icon={<HamburgerIcon />}
+            <div className="flex items-center">
+              <button
+                className="md:hidden focus:outline-none"
                 onClick={onOpen}
                 aria-label="Open Menu"
-              />
-              <Text
-                display={{ base: "none", md: "block" }}
-                fontSize="26"
-                fontWeight="400"
-                color="#121A26"
               >
+                <Bars3Icon className="h-6 w-6 text-gray-700" />
+              </button>
+              <div className="hidden md:block">
                 <Image
                   src={Logo}
                   alt="EduCify Logo"
@@ -49,12 +46,12 @@ const Header = ({ onOpen }: HeaderProps) => {
                   height={40}
                   className="object-contain"
                 />
-              </Text>
-            </Box>
+              </div>
+            </div>
 
             {/* Search Bar */}
-            <div className="hidden md:flex items-center bg-gray-50 border border-gray-300 rounded-full p-4 gap-3 w-[420px] h-[52px]">
-              <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" />{" "}
+            <div className="hidden md:flex items-center bg-gray-50 border border-gray-300 rounded-full p-4 gap-3 w-[420px] h-12"> {/* Adjusted height */}
+              <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search for anything"
@@ -65,32 +62,30 @@ const Header = ({ onOpen }: HeaderProps) => {
             {/* User Profile & Notifications */}
             <div className="flex items-center gap-4">
               {/* Help Icon */}
-              <div className="relative w-12 h-12 bg-gray-50 border border-gray-200 rounded-full flex items-center justify-center">
-                <QuestionMarkCircleIcon className="h-6 w-6 text-gray-600" />{" "}
-                {/* Help Icon */}
+              <div className="relative w-10 h-10 bg-gray-50 border border-gray-200 rounded-full flex items-center justify-center"> {/* Reduced size */}
+                <QuestionMarkCircleIcon className="h-5 w-5 text-gray-600" />
               </div>
 
               {/* Notification Icon */}
-              <div className="relative w-12 h-12 bg-gray-50 border border-gray-200 rounded-full flex items-center justify-center">
-                <BellIcon className="h-6 w-6 text-gray-600" />{" "}
-                {/* Notification Bell */}
+              <div className="relative w-10 h-10 bg-gray-50 border border-gray-200 rounded-full flex items-center justify-center"> {/* Reduced size */}
+                <BellIcon className="h-5 w-5 text-gray-600" />
                 <div className="absolute top-0 right-0 w-5 h-5 bg-red-600 text-white rounded-full flex items-center justify-center text-xs font-bold">
-                  23 {/* Notification Count */}
+                  23
                 </div>
               </div>
 
               {/* Profile Section */}
-              <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-full p-3">
+              <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-full p-2"> {/* Reduced padding */}
                 <div>
                   <p className="text-sm font-semibold text-gray-800">Bekwa Undie</p>
                   <p className="text-xs text-gray-500">Student</p>
                 </div>
-                <div className="w-10 h-10 rounded-full bg-gray-400">
+                <div className="w-8 h-8 rounded-full bg-gray-400"> {/* Reduced size */}
                   <Image
                     src={ProfilePic} // Update with correct path
                     alt="Profile Image"
-                    width={40}
-                    height={40}
+                    width={32} // Reduced size
+                    height={32} // Reduced size
                     className="rounded-full object-cover"
                   />
                 </div>

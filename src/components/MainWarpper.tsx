@@ -1,14 +1,6 @@
 "use client"
 
-import {
-  Box,
-  ChakraProvider,
-  Drawer,
-  DrawerContent,
-  Grid,
-  useDisclosure,
-} from '@chakra-ui/react';
-import { ReactNode, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import Sidebar from './Sidebar';
 import Header from './Header';
 
@@ -17,59 +9,67 @@ interface MainWrapperProps {
 }
 
 const MainWrapper = ({ children }: MainWrapperProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Sync state
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // const toggleMobileMenu = () => {
-  //   setIsMobileMenuOpen(!isMobileMenuOpen);
-  // };
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   return (
-    <ChakraProvider>
-      <Grid
-        templateAreas={{
-          base: `"header" "main"`,
-          md: `"nav header" "nav main"`,
-        }}
-        templateRows={{ base: 'auto 1fr', md: '60px 1fr' }}
-        templateColumns={{ base: '1fr', md: 'auto 1fr' }}
-        minH="100vh"
-        gap={1}
+    <div className="min-h-screen grid gap-y-1 md:grid-cols-[auto_1fr] md:grid-rows-[auto_1fr]">
+      {/* Header */}
+      <div className="sticky  top-0 z-10 w-full" id="header">
+        <Header onOpen={toggleMobileMenu} />
+      </div>
+
+      {/* Sidebar (Desktop) */}
+      <aside
+        className="hidden md:block h-full transition-width duration-300 ease-in-out hover:md:w-64"
+        style={{ width: '4px' }} // Initial narrow width
+        id="desktop-nav"
       >
-        <Box position="sticky" top={0} zIndex={10} w="full">
-          <Header onOpen={onOpen} />
-        </Box>
+        <Sidebar />
+      </aside>
 
-        <Box
-          gridArea="nav"
-          display={{ base: 'none', md: 'block' }}
-          h="full"
-          width={{ md: '1rem' }}
-          transition="width 0.3s ease"
-          _hover={{
-            width: '16rem',
-            transition: 'width 0.3s ease',
-          }}
+      {/* Main Content */}
+      <main
+        className={`w-full p-2 md:p-4 transition-margin duration-300 ease-in-out  ${
+          isMobileMenuOpen ? '' : ''
+        }`}
+        id="main"
+      >
+        {children}
+      </main>
+
+      {/* Mobile Drawer */}
+      <div
+        className={`fixed left-0 top-0 h-full w-64  shadow-md z-20 transition-transform duration-300 ease-in-out md:hidden ${
+          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+        id="mobile-drawer"
+      >
+        <Sidebar />
+        <button
+          onClick={toggleMobileMenu}
+          className="absolute top-2 right-2 p-2 rounded-md hover:bg-red-700"
         >
-          <Sidebar />
-        </Box>
-
-        <Box
-          gridArea="main"
-          p={{ base: 2, md: 4 }}
-          w="full"
-          className={`${isMobileMenuOpen ? 'max-md:ml-64' : ''} transition-margin duration-300 ease-in-out`}
-        >
-          {children}
-        </Box>
-
-        <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
-          <DrawerContent>
-            <Sidebar />
-          </DrawerContent>
-        </Drawer>
-      </Grid>
-    </ChakraProvider>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
   );
 };
 

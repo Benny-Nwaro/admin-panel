@@ -14,7 +14,6 @@ import { MdLiveHelp } from "react-icons/md";
 import { PiTrashSimpleFill } from "react-icons/pi";
 import { RiGuideLine } from "react-icons/ri";
 
-// Define prop types for MenuItem
 interface MenuItemProps {
   icon: React.ReactNode;
   label: string;
@@ -24,7 +23,6 @@ interface MenuItemProps {
   onClick?: () => void;
 }
 
-// Define prop types for SubMenuItem
 interface SubMenuItemProps {
   label: string;
   link: string;
@@ -43,13 +41,11 @@ const Sidebar = () => {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <div className="group h-full max-md:h-full pt-10  relative">
-      {/* Sidebar Container */}
-      <div className="fixed  left-0 h-full bg-black w-16 md:w-20 transition-all duration-300 ease-in-out group-hover:lg:w-72  max-md:h-full shadow-md">
-        {/* Top Section */}
-        <div className="mt-6">
+    <div className="group h-full max-md:h-full mt-16 relative z-50"> {/* Reduced top padding */}
+      <div className="fixed left-0 h-full bg-black w-12 md:w-14 transition-all duration-300 ease-in-out group-hover:lg:w-48 max-md:h-full shadow-md "> {/* Reduced initial width, expanded width */}
+        <div className="mt-3"> {/* Reduced top margin */}
           <MenuItem
-            icon={<BiSolidHome size={24} />}
+            icon={<BiSolidHome size={20} />} 
             label="Dashboard"
             link="/"
             active={isActive('/')}
@@ -57,14 +53,14 @@ const Sidebar = () => {
 
           <div className="relative">
             <MenuItem
-              icon={<HiMiniChartBarSquare size={24} />}
+              icon={<HiMiniChartBarSquare size={20} />} 
               label="Analytics"
               link="#"
               active={isActive('/classes/calendar')}
               onClick={() => setAnalyticsOpen(!analyticsOpen)}
             />
             {analyticsOpen && (
-              <div className="ml-10 mt-2 bg-gray-800 rounded-md shadow-lg">
+              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md"> {/* Reduced margin and padding */}
                 <SubMenuItem label="Marketting" link="/analytics/marketting" active={isActive('/analytics/marketting')} />
                 <SubMenuItem label="Sales" link="/analytics/sales" active={isActive('/analytics/overview')} />
                 <SubMenuItem label="Social" link="/analytics/socials" active={isActive('/analytics/socials')} />
@@ -75,7 +71,7 @@ const Sidebar = () => {
           </div>
 
           <MenuItem
-            icon={<IoNotificationsOutline size={24} />}
+            icon={<IoNotificationsOutline size={20} />} 
             label="Notifications"
             link="/notifications"
             active={isActive('/notifications')}
@@ -83,14 +79,14 @@ const Sidebar = () => {
 
           <div className='relative'>
             <MenuItem
-              icon={<AiFillMessage size={24} />}
+              icon={<AiFillMessage size={20} />} 
               label="CRM"
               link="#"
               active={isActive('/crm')}
               onClick={() => setCrmOpen(!crmOpen)}
             />
             {crmOpen && (
-              <div className="ml-10 mt-2 bg-gray-800 rounded-md shadow-lg">
+              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md"> {/* Reduced margin and padding */}
                 <SubMenuItem label="Message" link="/crm/messages" active={isActive('/crm/messages')} />
                 <SubMenuItem label="Requests" link="/crm/requests" active={isActive('/crm/requests')} />
                 <SubMenuItem label="SMS" link="/crm/sms" active={isActive('/crm/sms')} />
@@ -101,7 +97,7 @@ const Sidebar = () => {
           </div>
 
           <MenuItem
-            icon={<DiGoogleAnalytics size={24} />}
+            icon={<DiGoogleAnalytics size={20} />} 
             label="SEO"
             link="/seo"
             active={isActive('/seo')}
@@ -109,14 +105,14 @@ const Sidebar = () => {
 
           <div className='relative'>
             <MenuItem
-              icon={<AiFillMessage size={24} />}
+              icon={<AiFillMessage size={20} />} 
               label="Content management"
               link="#"
               active={isActive('/cms')}
               onClick={() => setCmsOpen(!cmsOpen)}
             />
             {cmsOpen && (
-              <div className="ml-10 mt-2 bg-gray-800 rounded-md shadow-lg">
+              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md"> {/* Reduced margin and padding */}
                 <SubMenuItem label="Blog" link="/cms/blogs" active={isActive('/cms/blogs')} />
                 <SubMenuItem label="Courses" link="/cms/courses" active={isActive('/cms/courses')} />
               </div>
@@ -125,14 +121,14 @@ const Sidebar = () => {
 
           <div className='relative'>
             <MenuItem
-              icon={<AiFillMessage size={24} />}
+              icon={<AiFillMessage size={20} />} 
               label="User Management"
               link="#"
               active={isActive('/users')}
               onClick={() => setUsersOpen(!usersOpen)}
             />
             {usersOpen && (
-              <div className="ml-10 mt-2 bg-gray-800 rounded-md shadow-lg">
+              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md"> {/* Reduced margin and padding */}
                 <SubMenuItem label="Students" link="/users/students" active={isActive('/users/students')} />
                 <SubMenuItem label="Teachers" link="/users/teachers" active={isActive('/users/teachers')} />
                 <SubMenuItem label="Accounts" link="/users/accounts" active={isActive('/users/accounts')} />
@@ -142,14 +138,14 @@ const Sidebar = () => {
 
           <div className='relative'>
             <MenuItem
-              icon={<AiFillDollarCircle size={24} />}
+              icon={<AiFillDollarCircle size={20} />} 
               label="Bookings & Payments"
               link="#"
               active={isActive('/bookingsandpayments')}
               onClick={() => setBookingsOpen(!usersOpen)}
             />
             {bookingsOpen && (
-              <div className="ml-10 mt-2 bg-gray-800 rounded-md shadow-lg">
+              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md"> {/* Reduced margin and padding */}
                 <SubMenuItem label="Bookings" link="/bookingsandpayments/bookings" active={isActive('/bookingsandpayments/bookings')} />
                 <SubMenuItem label="Payments" link="/bookingsandpayments/payments" active={isActive('/bookingsandpayments/payments')} />
               </div>
@@ -158,14 +154,14 @@ const Sidebar = () => {
 
           <div className='relative'>
             <MenuItem
-              icon={<TbPackages size={24} />}
+              icon={<TbPackages size={20} />} 
               label="Products & Packages"
               link="#"
               active={isActive('/products')}
               onClick={() => setProductsOpen(!productsOpen)}
             />
             {productsOpen && (
-              <div className="ml-10 mt-2 bg-gray-800 rounded-md shadow-lg">
+              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md"> {/* Reduced margin and padding */}
                 <SubMenuItem label="Products" link="/productsandpackages/products" active={isActive('/productsandpackages/products')} />
                 <SubMenuItem label="Categories" link="/productsandpackages/categories" active={isActive('/productsandpackages/categories')} />
                 <SubMenuItem label="Subjects" link="/productsandpackages/subjects" active={isActive('/productsandpackages/subjects')} />
@@ -175,41 +171,40 @@ const Sidebar = () => {
           </div>
 
           <MenuItem
-            icon={<GoGift size={24} />}
+            icon={<GoGift size={20} />} 
             label="Promotions"
             link="/promotions"
             active={isActive('/promotions')}
           />
           <MenuItem
-            icon={<MdLiveHelp size={24} />}
+            icon={<MdLiveHelp size={20} />} 
             label="Help Desk"
             link="/help"
             active={isActive('/help')}
           />
           <MenuItem
-            icon={<PiTrashSimpleFill size={24} />}
+            icon={<PiTrashSimpleFill size={20} />} 
             label="Trash"
             link="/trash"
             active={isActive('/trash')}
           />
         </div>
 
-        {/* Bottom Section */}
-        <div className="absolute border-t-2 border-white mt-12 w-full">
+        <div className="absolute border-t border-white  w-full mt-12"> {/* Reduced top margin, moved to bottom */}
           <MenuItem
-            icon={<RiGuideLine size={24} />}
+            icon={<RiGuideLine size={20} />} 
             label="Enable guide"
             link="/settings"
             active={isActive('/guide')}
           />
           <MenuItem
-            icon={<FiSettings size={24} />}
+            icon={<FiSettings size={20} />} 
             label="Settings"
             link="/settings"
             active={isActive('/settings')}
           />
           <MenuItem
-            icon={<FiLogOut size={24} className="text-red-500 rotate-180" />}
+            icon={<FiLogOut size={20} className="text-red-500 rotate-180" />} 
             label="Log Out"
             link="/logout"
             isLogout
@@ -220,21 +215,20 @@ const Sidebar = () => {
   );
 };
 
-// MenuItem Component with explicit prop types
 const MenuItem = ({ icon, label, link, active, isLogout, onClick }: MenuItemProps) => {
   return (
     <div onClick={onClick} className="w-full cursor-pointer">
       <Link href={link} className="w-full">
         <div
-          className={`flex items-center gap-4 px-2 py-3 transition-all duration-300 ${
+          className={`flex items-center gap-2 px-1.5 py-3 transition-all duration-300 ${ /* Reduced padding and gap */
             active
-              ? 'border-2 rounded-2xl border-'
+              ? 'border rounded-md border-'
               : 'hover:bg-gray-700'
           }`}
         >
           <div className="text-white">{icon}</div>
           <span
-            className={`text-white font-bold text-sm whitespace-nowrap transition-opacity duration-300 ${
+            className={`text-white font-bold text-xs whitespace-nowrap transition-opacity duration-300 ${ /* Smaller font size */
               isLogout ? 'text-red-500' : ''
             }  group-hover:opacity-100 opacity-0`}
           >
@@ -246,10 +240,9 @@ const MenuItem = ({ icon, label, link, active, isLogout, onClick }: MenuItemProp
   );
 };
 
-// SubMenuItem Component with explicit prop types
 const SubMenuItem = ({ label, link, active }: SubMenuItemProps) => {
   return (
-    <Link href={link} className={`block px-4 py-2 text-white text-sm hover:bg-gray-600 ${active ? 'bg-gray-700' : ''}`}>
+    <Link href={link} className={`block px-3 py-1.5 text-white text-xs hover:bg-gray-600 ${active ? 'bg-gray-700' : ''}`}> {/* Reduced padding and font size */}
       {label}
     </Link>
   );

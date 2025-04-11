@@ -18,11 +18,14 @@ const StudentCard: React.FC<StudentCardProps> = ({ bgColor, title}) => {
         {userImageData.map(
           (src, index) => (
             <Image
-              key={index}
-              src={src}
-              alt={`Avatar ${index + 1}`}
-              className="w-10 h-10 border-2 border-white rounded-full"
-            />
+            key={index}
+            src={src}
+            alt={`Avatar ${index + 1}`}
+            width={40}
+            height={40}
+            className="w-10 h-10 border-2 border-white rounded-full"
+          />
+          
           )
         )}
       </div>
