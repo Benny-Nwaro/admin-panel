@@ -43,7 +43,7 @@ const MainWrapper = ({ children }: MainWrapperProps) => {
 
       {/* Mobile Drawer */}
       <div
-        className={`fixed left-0 top-0 h-full w-64  shadow-md z-20 transition-transform duration-300 ease-in-out md:hidden ${
+        className={`fixed left-0 top-0 h-full bg-black bg-opacity-75  w-48 max-md:w-48  shadow-md z-20 transition-transform duration-300 ease-in-out md:hidden ${
           isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
         id="mobile-drawer"
@@ -51,7 +51,7 @@ const MainWrapper = ({ children }: MainWrapperProps) => {
         <Sidebar />
         <button
           onClick={toggleMobileMenu}
-          className="absolute top-2 right-2 p-2 rounded-md hover:bg-red-700"
+          className="absolute top-4 text-white right-2 p-2 rounded-md hover:bg-red-700"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

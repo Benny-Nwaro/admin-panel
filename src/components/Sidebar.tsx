@@ -42,7 +42,7 @@ const Sidebar = () => {
 
   return (
     <div className="group h-full max-md:h-full mt-16 relative z-50"> {/* Reduced top padding */}
-      <div className="fixed left-0 h-full bg-black w-12 md:w-14 transition-all duration-300 ease-in-out group-hover:lg:w-48 max-md:h-full shadow-md "> {/* Reduced initial width, expanded width */}
+      <div className="fixed left-0 h-full bg-black max-md:w-48 w-12 md:w-14 transition-all duration-300 ease-in-out group-hover:lg:w-48 max-md:h-full shadow-md "> {/* Reduced initial width, expanded width */}
         <div className="mt-3"> {/* Reduced top margin */}
           <MenuItem
             icon={<BiSolidHome size={20} />} 
@@ -230,7 +230,7 @@ const MenuItem = ({ icon, label, link, active, isLogout, onClick }: MenuItemProp
           <span
             className={`text-white font-bold text-xs whitespace-nowrap transition-opacity duration-300 ${ /* Smaller font size */
               isLogout ? 'text-red-500' : ''
-            }  group-hover:opacity-100 opacity-0`}
+            }  lg:group-hover:opacity-100 lg:opacity-0`}
           >
             {label}
           </span>
