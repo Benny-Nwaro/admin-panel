@@ -220,7 +220,7 @@ const MenuItem = ({ icon, label, link, active, isLogout, onClick }: MenuItemProp
     <div onClick={onClick} className="w-full cursor-pointer">
       <Link href={link} className="w-full">
         <div
-          className={`flex items-center gap-2 px-1.5 py-3 transition-all duration-300 ${ /* Reduced padding and gap */
+          className={`flex items-center gap-2 px-1.5 py-1 transition-all duration-300 ${ /* Reduced padding and gap */
             active
               ? 'border rounded-md border-'
               : 'hover:bg-gray-700'

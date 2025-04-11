@@ -7,8 +7,7 @@ const Message: React.FC = () => {
 
     return (
         <MainWrapper>
-            <Home/>
-        
+            <Home/> 
     </MainWrapper>
     );
 };

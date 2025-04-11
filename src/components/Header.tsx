@@ -26,7 +26,7 @@ const Header = ({ onOpen }: HeaderProps) => {
 
   return (
     <>
-      {displayHeader && (
+    
         <header className="fixed top-0 left-0 w-full items-end bg-white border-b border-gray-200 z-50">
           <div className="flex justify-between items-center px-6 py-0 h-16"> {/* Added fixed height for consistent header */}
             {/* Logo */}
@@ -93,11 +93,11 @@ const Header = ({ onOpen }: HeaderProps) => {
             </div>
           </div>
         </header>
-      )}
+     
 
       {/* CTA Banner when header is hidden */}
       {!displayHeader && (
-        <p className="bg-blue-500 py-2 text-center w-full text-white m-0 leading-relaxed">
+        <p className="bg-blue-500 py-1 text-center w-full text-white m-0 leading-relaxed">
           Digital next cta thought latest. Donuts closing wiggle reach follow ask get move.{" "}
           <a href="#" className="underline font-bold hover:no-underline">
             View including.
