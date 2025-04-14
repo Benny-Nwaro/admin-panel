@@ -5,9 +5,9 @@ import UserLocation from "./UserLocation";
 
 export default function Home() {
     return (
-      <div className="p-6 bg-gray-100 min-h-screen">
+      <div className="lg:p-6 bg-gray-100 min-h-screen max-md:w-full">
         <HeaderBar/>
-        <div className="lg:flex flex-row grid grid-cols-2 sm:grid-cols-2 gap-4 mt-6">
+        <div className="flex flex-col md:flex-row lg:space-x-4 max-md:space-y-4 mt-4">
           <StatsCard title="Students"  bgColor="bg-orange-500" />
           <StatsCard title="Tutors" bgColor="bg-purple-950"  />
           <StatsCard title="Lessons"  bgColor="bg-blue-400"  />

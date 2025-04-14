@@ -7,7 +7,9 @@ const Message: React.FC = () => {
 
     return (
         <MainWrapper>
+            <div className='max-md:mt-16'>
             <Home/> 
+            </div>
     </MainWrapper>
     );
 };

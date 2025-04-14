@@ -33,7 +33,7 @@ const MainWrapper = ({ children }: MainWrapperProps) => {
 
       {/* Main Content */}
       <main
-        className={`w-screen md:mx-4 p-2 md:p-4 transition-margin duration-300 ease-in-out  ${
+        className={`lg:w-screen max-md:w-full  p-2 transition-margin duration-300 ease-in-out  ${
           isMobileMenuOpen ? '' : ''
         }`}
         id="main"

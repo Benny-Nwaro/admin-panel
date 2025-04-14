@@ -3,12 +3,12 @@ import tutor from "../../app/assets/images/tutor.png"
 import course from "../../app/assets/images/course.png"
 import Image from "next/image";
 
-interface StudentCardProps {
+interface StatsCardProps {
   bgColor?: string;
   title?: string;
 }
 
-const StudentCard: React.FC<StudentCardProps> = ({ bgColor, title}) => {
+const StatsCard: React.FC<StatsCardProps> = ({ bgColor, title}) => {
   const userImageData = title?.includes("Tutors") || title?.includes("Students")? [tutor.src, tutor.src, tutor.src, tutor.src] : [course.src, course.src, course.src, course.src];
   // const courseImageData = [course.src, course.src, course.src, course.src]
   return (
@@ -60,4 +60,4 @@ const StudentCard: React.FC<StudentCardProps> = ({ bgColor, title}) => {
   );
 };
 
-export default StudentCard;
+export default StatsCard;

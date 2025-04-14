@@ -5,7 +5,7 @@ import UserLocation from '../dashboard/UserLocation'
 
 function Home() {
   return (
-    <div className='lg:pl-20 max-md:mt-4'>
+    <div className='max-md:px-3'>
         <UserLocation/>
         <KPISection/>
         <Charts/>

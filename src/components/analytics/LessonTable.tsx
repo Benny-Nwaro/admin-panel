@@ -37,45 +37,53 @@ const LessonTable: React.FC = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full  max-md:overflow-x-scroll">
       {/* Table Container with Horizontal Scrolling */}
-      <div className="overflow-x-auto">
-        <table className="min-w-full border-collapse">
+      <div className="w-full overflow-x-auto ">
+        <table className="w-full sm:min-w-full border-collapse text-sm sm:text-base ">
           {/* Table Header */}
           <thead>
             <tr className="bg-white text-black text-left">
-              <th className="p-4">Students</th>
-              <th className="p-4">Lessons</th>
-              <th className="p-4">Teacher</th>
-              <th className="p-4">Status</th>
-              <th className="p-4">Date Created</th>
-              <th className="p-4">Duration</th>
-              <th className="p-4"></th>
+              <th className="p-2 sm:p-4">Students</th>
+              <th className="p-2 sm:p-4">Lessons</th>
+              <th className="p-2 sm:p-4 hidden sm:table-cell">Teacher</th>
+              <th className="p-2 sm:p-4">Status</th>
+              <th className="p-2 sm:p-4 hidden md:table-cell">Date Created</th>
+              <th className="p-2 sm:p-4 hidden md:table-cell">Duration</th>
+              <th className="p-2 sm:p-4"></th>
             </tr>
           </thead>
 
           {/* Table Body */}
-          <tbody>
+          <tbody className="max-md:w-full">
             {lessons.map((lesson, index) => (
-              <tr key={lesson.id} className={`${index % 2 === 0 ? "bg-blue-200 text-black" : "bg-white text-black"} text-left`}>
-                <td className="p-4 font-bold">{lesson.id} {lesson.student}</td>
-                <td className="p-4">
-                  <span className="font-bold">{lesson.lessonTitle}</span><br />
-                  <span className="text-sm">{lesson.lessonType}</span>
+              <tr
+                key={lesson.id}
+                className={`${index % 2 === 0 ? "bg-blue-200 text-black" : "bg-white text-black"} text-left`}
+              >
+                <td className="p-2 sm:p-4 font-bold">
+                  <span className="block sm:hidden">{lesson.id}</span>
+                  <span className="hidden sm:block">{lesson.id} {lesson.student}</span>
                 </td>
-                <td className="p-4">
-                  <span className="font-bold">{lesson.teacher}</span><br />
-                  <span className="text-sm">{lesson.mode}</span>
+                <td className="p-2 sm:p-4">
+                  <span className="font-bold block">{lesson.lessonTitle}</span>
+                  <span className="text-xs sm:text-sm block">{lesson.lessonType}</span>
                 </td>
-                <td className="p-4">
-                  <span className="bg-green-600 text-white px-3 py-1 rounded-full text-sm">{lesson.status}</span>
+                <td className="p-2 sm:p-4 hidden sm:table-cell">
+                  <span className="font-bold block">{lesson.teacher}</span>
+                  <span className="text-xs sm:text-sm block">{lesson.mode}</span>
                 </td>
-                <td className="p-4">{lesson.date}</td>
-                <td className="p-4">{lesson.duration}</td>
-                <td className="p-4">
+                <td className="p-2 sm:p-4">
+                  <span className="bg-green-600 text-white px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm">
+                    {lesson.status}
+                  </span>
+                </td>
+                <td className="p-2 sm:p-4 hidden md:table-cell">{lesson.date}</td>
+                <td className="p-2 sm:p-4 hidden md:table-cell">{lesson.duration}</td>
+                <td className="p-2 sm:p-4">
                   <button
                     onClick={() => openModal(lesson)}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                    className="bg-blue-500 text-white px-2 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-sm"
                   >
                     Details →
                   </button>

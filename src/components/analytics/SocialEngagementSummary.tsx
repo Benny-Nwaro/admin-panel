@@ -33,7 +33,7 @@ const SocialEngagementSummary: React.FC = () => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
         {socialPlatforms.map((platform, index) => (
           <div key={index} className="bg-white text-black p-4 rounded-lg flex items-center gap-4 shadow-md">
-            <Image src={platform.icon.src} alt={platform.name} className="w-10 h-10" />
+            <Image src={platform.icon.src} alt={platform.name} width={20} height={20} className="w-10 h-10" />
             <div>
               <h3 className="font-bold text-lg">{platform.name}</h3>
               <p className="text-sm">{platform.metric} <span className="font-bold">{platform.value}</span></p>

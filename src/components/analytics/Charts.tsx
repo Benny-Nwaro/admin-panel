@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 // Define the type for the individual items in the data arrays
 interface DataItem {
@@ -36,19 +36,23 @@ interface ChartCardProps {
 
 const ChartCard = ({ title, data }: ChartCardProps) => {
   return (
-    <div className="bg-white p-2 rounded-2xl shadow-md w-full max-md:w-full flex flex-col items-center">
-      <h3 className="font-semibold text-xl mb-4">{title}</h3>
-      <div className="flex flex-row max-md:flex-row space-x-4 max-md:space-x-10 pr-5">
-        <PieChart width={200} height={200} className="flex self-start">
-          <Pie data={data} dataKey="value" cx="50%" cy="50%" innerRadius={50} outerRadius={80} fill="#8884d8">
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={entry.color} />
-            ))}
-          </Pie>
-        </PieChart>
-        <div className="mt-2 text-sm">
+    <div className="bg-white p-3 sm:p-4 rounded-2xl shadow-md w-full flex flex-col items-center">
+      <h3 className="font-semibold text-lg sm:text-xl mb-2 sm:mb-4">{title}</h3>
+      <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 w-full">
+        <div className="w-full sm:w-auto max-w-[200px] h-[200px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie data={data} dataKey="value" cx="50%" cy="50%" innerRadius={50} outerRadius={80} fill="#8884d8">
+                {data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="text-sm w-full sm:w-auto">
           {data.map((item) => (
-            <div key={item.name} className="flex items-center gap-2 py-2">
+            <div key={item.name} className="flex items-center gap-2 py-1">
               <span className="w-3 h-3 rounded-full" style={{ background: item.color }}></span>
               <span>{item.name}</span>
               <span className="ml-auto">{item.value}%</span>
@@ -62,7 +66,7 @@ const ChartCard = ({ title, data }: ChartCardProps) => {
 
 const Charts = () => {
   return (
-    <div className="flex flex-row max-md:flex-col gap-4 justify-center p-4">
+    <div className="flex flex-row max-md:flex-col gap-4 justify-center p-2 sm:p-4">
       <ChartCard title="Traffic Sources" data={data.trafficSources} />
       <ChartCard title="Age Groups" data={data.ageGroups} />
       <ChartCard title="Geographic Locations" data={data.locations} />
