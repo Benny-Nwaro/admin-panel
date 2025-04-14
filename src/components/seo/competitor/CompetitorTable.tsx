@@ -47,7 +47,7 @@ const competitorsData = [
 
 const CompetitorTable: React.FC = () => {
   return (
-    <div className="w-full bg-white rounded-lg shadow-md p-4 overflow-x-auto">
+    <div className="w-full bg-white rounded-lg shadow-md p-4 overflow-x-scroll text-nowrap max-md:mt-4">
       <table className="w-full border-collapse">
         <thead>
           <tr className="text-gray-500 text-left text-sm">

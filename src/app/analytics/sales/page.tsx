@@ -7,7 +7,9 @@ const Message: React.FC = () => {
 
     return (
         <MainWrapper>
+            <div className=''>
             <Sales/>        
+            </div>
     </MainWrapper>
     );
 };

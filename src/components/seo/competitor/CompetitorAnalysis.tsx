@@ -11,12 +11,12 @@ const competitors = [
 
 const CompetitorAnalysis: React.FC = () => {
   return (
-    <div className="w-full p-4 bg-white rounded-lg shadow-md">
+    <div className="w-full p-4 bg-white rounded-lg shadow-md overflow-x-scroll">
       <h2 className="text-lg font-bold text-gray-800">COMPETITOR ANALYSIS</h2>
       <p className="text-sm text-gray-500 mb-4">
         Here are the domains that rank for similar keywords
       </p>
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex flex-wrap max-md:flex-nowrap text-nowrap items-center gap-2 overflow-x-scroll ">
         {competitors.map((competitor) => (
           <span
             key={competitor.name}

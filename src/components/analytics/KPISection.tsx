@@ -15,11 +15,11 @@ const kpis = [
 
 const KPISection: React.FC = () => {
   return (
-    <div className="p-6">
+    <div className=" lg:w-full max-md:w-full">
       <h2 className="text-xl font-semibold text-gray-900 mb-4">Key Performance Indicators (KPIs)</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="flex lg:flex-row lg:w-full lg:space-x-4 max-md:flex-col max-md:w-full max-md:space-y-4">
         {kpis.map((kpi, index) => (
-          <div key={index} className={`rounded-xl p-4 text-white ${kpi.color} relative shadow-lg`}>
+          <div key={index} className={`rounded-xl p-4 max-md:w-full lg:w-full text-white ${kpi.color} relative shadow-lg`}>
             <ResponsiveContainer width="100%" height={100}>
               <BarChart data={data}>
                 <Bar dataKey="value" fill="rgba(255,255,255,0.5)" />

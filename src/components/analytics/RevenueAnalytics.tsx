@@ -21,13 +21,13 @@ const RevenueAnalytics = () => {
     <div className="bg-white p-6 rounded-2xl shadow-md w-full">
       <div className="flex justify-between items-center mb-4">
         <div>
-          <h2 className="text-xl font-semibold">Revenue Analytics</h2>
-          <p className="text-3xl font-bold">$415,260</p>
+          <h2 className="text-xl font-semibold max-md:text-lg">Revenue Analytics</h2>
+          <p className="text-3xl font-bold  max-md:text-lg">$415,260</p>
           <span className="text-green-600 font-semibold flex items-center">
             +23.40% <FaArrowUp className="ml-1" />
           </span>
         </div>
-        <div className="bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer">
+        <div className="bg-blue-500 text-white px-2 py-2 rounded-lg cursor-pointer max-md:text-sm">
           Jan 2024 - Jun 2024
         </div>
       </div>

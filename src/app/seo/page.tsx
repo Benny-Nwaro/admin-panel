@@ -6,11 +6,13 @@ import SEO from '@/components/seo/SEO';
 const notifications: React.FC = () => {
 
     return (
-        <MainWrapper>
-            <div className='lg:mx-12'>
-            <SEO/>        
-            </div>
-    </MainWrapper>
+        <div>
+            <MainWrapper> 
+                <div className='lg:mx-16'>
+                <SEO/>        
+                </div>         
+            </MainWrapper>
+        </div>
     );
 };
 

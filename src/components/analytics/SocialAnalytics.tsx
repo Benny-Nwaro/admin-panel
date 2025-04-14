@@ -7,14 +7,10 @@ const SocialAnalytics: React.FC = () => {
 
 
   return (
-    <div className="flex flex-col lg:px-12 max-md:mt-10">
-        <div>
+    <div className="flex flex-col max-md:mt-10">
         <SocialEngagementSummary/>
-        </div>
-      <div className="flex flex-row lg:w-full max-md:flex-col">
       <SocialAnalyticsChart/>
         <SocialTrafficTable/>
-      </div>
      
     </div>
   );

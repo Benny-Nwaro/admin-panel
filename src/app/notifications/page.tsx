@@ -7,7 +7,7 @@ const notifications: React.FC = () => {
 
     return (
         <MainWrapper>
-            <div className='lg:mx-12'>
+            <div className='lg:mx-16'>
             <Notifications/>        
             </div>
     </MainWrapper>

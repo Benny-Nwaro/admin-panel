@@ -19,9 +19,9 @@ const colors = ["#4CAF50", "#FF0000", "#2196F3", "#FFA500", "#008080"];
 
 const MonthlyTrafficChart: React.FC = () => {
   return (
-    <div className="w-full bg-white p-6 rounded-lg shadow-md">
+    <div className="w-full bg-white lg:p-6 max-md:p-2 text-nowrap rounded-lg shadow-md overflow-x-scroll max-md:mt-4">
       <h2 className="text-lg font-semibold text-gray-800 mb-4">Monthly Traffic</h2>
-      <ResponsiveContainer width="100%" height={400}>
+      <ResponsiveContainer className={"text-nowrap flex overflow-x-scroll max-md:w-full max-md:flex-nowrap "} width="100%" height={400}>
         <LineChart data={data}>
           <XAxis dataKey="name" stroke="#ccc" />
           <YAxis stroke="#ccc" />

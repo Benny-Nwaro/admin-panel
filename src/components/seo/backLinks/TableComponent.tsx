@@ -56,9 +56,9 @@ const TableComponent: React.FC = () => {
   );
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="lg:p-6  min-h-screen max-md:mt-4 text-nowrap">
       {/* Search and Export Section */}
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-4 max-md:text-sm">
         <input
           type="text"
           placeholder="Search"
@@ -70,7 +70,7 @@ const TableComponent: React.FC = () => {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
+      <div className="overflow-x-auto bg-white">
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-gray-200 text-left text-gray-600 text-sm">

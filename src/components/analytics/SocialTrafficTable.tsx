@@ -15,41 +15,50 @@ const SocialTrafficTable: React.FC = () => {
   return (
     <div className="py-4 bg-white shadow-lg mt-4 rounded-lg w-full h-fit max-md:w-full max-md:px-3">
       {/* Header */}
-      <div className="flex justify-between items-center bg-gray-200 pb-4">
+      <div className="flex justify-between items-center bg-gray-200 pb-4 px-4">
         <h2 className="text-lg font-semibold text-gray-700">Social Traffic</h2>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-md text-sm flex items-center">
+        <button className="bg-blue-500 text-white px-3 py-1.5 rounded-md text-sm flex items-center">
           📅 Jan 2024 - Jun 2024 ▼
         </button>
       </div>
 
-      {/* Table */}
+      {/* Data List */}
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse">
-          {/* Table Head */}
-          <thead>
-            <tr className="bg-gray-100 text-gray-600 text-left">
-              <th className="px-4 py-2">Platform</th>
-              <th className="px-4 py-2">Visitors</th>
-              <th className="px-4 py-2">Clicks</th>
-              <th className="px-4 py-2">Clickthrough Rate</th>
-            </tr>
-          </thead>
+        <div className="w-full">
+          {/* Header Row (for larger screens) */}
+          <div className="bg-gray-100 text-gray-600 text-left hidden sm:grid grid-cols-4 p-4">
+            <div className="font-semibold">Platform</div>
+            <div className="font-semibold">Visitors</div>
+            <div className="font-semibold">Clicks</div>
+            <div className="font-semibold">Clickthrough Rate</div>
+          </div>
 
-          {/* Table Body */}
-          <tbody>
-            {data.map((row, index) => (
-              <tr
-                key={index}
-                className="border-b hover:bg-gray-50 transition-colors"
-              >
-                <td className="px-4 py-2 font-medium">{row.platform}</td>
-                <td className="px-4 py-2">{row.visitors}</td>
-                <td className="px-4 py-2">{row.clicks}</td>
-                <td className="px-4 py-2">{row.ctr}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          {/* Data Rows */}
+          {data.map((row, index) => (
+            <div
+              key={index}
+              className="border-b hover:bg-gray-50 transition-colors p-4 sm:grid grid-cols-4"
+            >
+              {/* Mobile View (Stacked) */}
+              <div className="flex justify-between sm:block">
+                <div className="text-gray-600 sm:hidden font-semibold mr-2">Platform:</div>
+                <div>{row.platform}</div>
+              </div>
+              <div className="flex justify-between sm:block">
+                <div className="text-gray-600 sm:hidden font-semibold mr-2">Visitors:</div>
+                <div>{row.visitors}</div>
+              </div>
+              <div className="flex justify-between sm:block">
+                <div className="text-gray-600 sm:hidden font-semibold mr-2">Clicks:</div>
+                <div>{row.clicks}</div>
+              </div>
+              <div className="flex justify-between sm:block">
+                <div className="text-gray-600 sm:hidden font-semibold mr-2">CTR:</div>
+                <div>{row.ctr}</div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

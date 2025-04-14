@@ -6,11 +6,13 @@ import KPISection from './KPISection'
 
 function Sales() {
   return (
-    <div className='flex flex-col space-y-5 pl-32 pr-12'>
+    <div className='flex flex-col w-full space-y-5 lg:px-16 max-md:mt-20  max-md:overflow-x-scroll  '>
         <KPISection/>
         <UserLocation/>
         <RevenueAnalytics/>
-        <RecentSales/>
+        <div className=''>
+          <RecentSales/>
+        </div>
     </div>
   )
 }

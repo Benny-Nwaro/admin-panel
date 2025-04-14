@@ -2,9 +2,9 @@ import React from "react";
 
 const KeywordInput: React.FC = () => {
   return (
-    <div className="w-full bg-black text-white p-2">
+    <div className="w-full text-white p-2">
       {/* Top text */}
-      <p className="text-sm text-gray-300">
+      <p className="text-sm text-gray-600">
         Paste keywords, or{" "}
         <span className="text-red-500 font-semibold cursor-pointer hover:underline">
           Import from <span className="text-blue-500">CSV</span>

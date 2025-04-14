@@ -30,27 +30,31 @@ const SEO: React.FC = () => {
   };
 
   return (
-    <div className="w-full mx-auto mt-10 p-6 bg-white rounded-lg ">
-      {/* Tabs Section */}
-      <div className="flex border-b mb-4">
-        {tabs.map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 font-semibold transition-colors ${
-              activeTab === tab
-                ? "border-b-2 border-black text-black"
-                : "text-gray-500 hover:text-black"
-            }`}
-          >
-            {tab}
-          </button>
-        ))}
+    <div className="max-md:sticky max-md:top-0">
+       <div className="w-full mx-auto mt-6 sm:mt-10 p-4 sm:p-6 bg-white rounded-lg">
+        {/* Tabs Section */}
+        <div className="border-b mb-4  text-nowrap overflow-x-scroll ">
+          <div className="flex w-max sm:w-full">
+            {tabs.map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-3 sm:px-4 py-2 font-semibold transition-colors whitespace-nowrap text-sm sm:text-base  ${
+                  activeTab === tab
+                    ? "border-b-2 border-black text-black"
+                    : "text-gray-500 hover:text-black"
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
-
-      {/* Dynamic Content */}
-      <div className="p-4 bg-white w-full">{renderContent()}</div>
+       {/* Dynamic Content */}
+       <div className="p-3 sm:p-4 bg-white w-full overflow-x-scroll h-screen">{renderContent()}</div>
     </div>
+   
   );
 };
 

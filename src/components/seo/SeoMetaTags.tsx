@@ -19,10 +19,10 @@ const SeoMetaTags: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="w-full mx-auto p-6 bg-white shadow-md rounded-lg">
+    <div className="w-full mx-auto lg:p-6 bg-white rounded-lg overflow-x-scroll">
       {/* Header Section */}
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-bold">SEO METATAGS</h2>
+      <div className="flex justify-between items-center mb-4 overflow-x-scroll text-nowrap max-md:text-sm">
+        <h2 className="text-lg font-bold max-md:text-sm">SEO METATAGS</h2>
         <button
           onClick={() => setIsModalOpen(true)}
           className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold"
@@ -32,7 +32,7 @@ const SeoMetaTags: React.FC = () => {
       </div>
 
       {/* Table Section */}
-      <div className="border rounded-lg overflow-hidden">
+      <div className="border rounded-lg overflow-scroll max-md:text-sm text-nowrap">
         <table className="w-full text-left border-collapse">
           <thead className="bg-white">
             <tr>
@@ -74,14 +74,14 @@ const SeoMetaTags: React.FC = () => {
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center lg:pt-20 items-center">
           <div className="p-6 rounded-lg lg:w-2/5">
             <CreateSeoMetaTagForm />
-            <div className="flex justify-end mt-4">
-              {/* <button
+            {/* <div className="flex justify-end mt-4">
+              <button
                 onClick={() => setIsModalOpen(false)}
                 className="bg-red-500 text-white px-4 py-2 rounded-lg"
               >
                 Close
-              </button> */}
-            </div>
+              </button>
+            </div> */}
           </div>
         </div>
       )}
