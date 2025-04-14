@@ -1,7 +1,6 @@
 "use client"
 import React from 'react';
 import MainWrapper from '@/components/MainWarpper';
-import Dashboard from '@/components/Dashboard';
 import Home from '@/app/page';
 
 const dashboard: React.FC = () => {
