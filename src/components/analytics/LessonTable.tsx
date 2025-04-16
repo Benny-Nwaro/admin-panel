@@ -37,13 +37,13 @@ const LessonTable: React.FC = () => {
   };
 
   return (
-    <div className="w-full  max-md:overflow-x-scroll">
+    <div className="w-full text-nowrap  max-md:overflow-x-scroll">
       {/* Table Container with Horizontal Scrolling */}
       <div className="w-full overflow-x-auto ">
-        <table className="w-full sm:min-w-full border-collapse text-sm sm:text-base ">
+        <table className="w-full sm:min-w-full border-collapse text-sm sm:text-base text-nowrap">
           {/* Table Header */}
           <thead>
-            <tr className="bg-white text-black text-left">
+            <tr className="bg-white text-black text-left text-nowrap">
               <th className="p-2 sm:p-4">Students</th>
               <th className="p-2 sm:p-4">Lessons</th>
               <th className="p-2 sm:p-4 hidden sm:table-cell">Teacher</th>
@@ -55,11 +55,11 @@ const LessonTable: React.FC = () => {
           </thead>
 
           {/* Table Body */}
-          <tbody className="max-md:w-full">
+          <tbody className="max-md:w-full text-left text-nowrap">
             {lessons.map((lesson, index) => (
               <tr
                 key={lesson.id}
-                className={`${index % 2 === 0 ? "bg-blue-200 text-black" : "bg-white text-black"} text-left`}
+                className={`${index % 2 === 0 ? "bg-blue-200 text-black" : "bg-white text-black"} text-left text-nowrap`}
               >
                 <td className="p-2 sm:p-4 font-bold">
                   <span className="block sm:hidden">{lesson.id}</span>

@@ -34,7 +34,7 @@ const LiveClassesAnalytics: React.FC = () => {
   };
 
   return (
-    <div className="p-4 sm:p-6 bg-white min-h-screen text-black max-md:pt-20 max-md:w-full">
+    <div className="p-4 lg:mx-16 sm:p-6 bg-white min-h-screen text-black max-md:pt-20 max-md:w-full">
       {/* Top Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-6">
         {stats.map((stat, index) => (

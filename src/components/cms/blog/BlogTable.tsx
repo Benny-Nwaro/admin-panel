@@ -45,7 +45,7 @@ const BlogTable: React.FC = () => {
   );
 
   return (
-    <div className="p-6">
+    <div className="lg:p-6">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-bold">ALL BLOGS</h2>
         <button
@@ -56,9 +56,9 @@ const BlogTable: React.FC = () => {
         </button>
       </div>
 
-      <div className="bg-white rounded-lg p-6">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-md font-semibold">All Blog Posts</h3>
+      <div className="bg-white rounded-lg lg:p-6">
+        <div className="flex justify-between max-md:flex-col lg:items-center mb-4">
+          <h3 className="text-md font-semibold max-md:text-left">All Blog Posts</h3>
           <div className="flex space-x-3">
             <select className="border px-3 py-2 rounded-lg shadow">
               <option>Sort</option>
@@ -73,7 +73,7 @@ const BlogTable: React.FC = () => {
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-lg">
+        <div className="overflow-auto text-nowrap rounded-lg">
           <table className="w-full">
             <thead>
               <tr>
@@ -107,15 +107,9 @@ const BlogTable: React.FC = () => {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-1/2">
-            <AddBlogPost onAddBlog={handleAddBlog} />
-            <button
-              className="absolute top-0 right-0 p-4"
-              onClick={() => setIsModalOpen(false)}
-            >
-              &times;
-            </button>
+        <div className="fixed inset-0  flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg lg:w-1/2">
+            <AddBlogPost onAddBlog={handleAddBlog} onClose={() => setIsModalOpen(false)}/>
           </div>
         </div>
       )}

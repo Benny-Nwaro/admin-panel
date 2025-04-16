@@ -65,7 +65,7 @@ const Sidebar = () => {
                 <SubMenuItem label="Sales" link="/analytics/sales" active={isActive('/analytics/overview')} />
                 <SubMenuItem label="Social" link="/analytics/socials" active={isActive('/analytics/socials')} />
                 <SubMenuItem label="Live classes" link="/analytics/liveclasses" active={isActive('/analytics/liveclasses')} />
-                <SubMenuItem label="Users" link="/analytics/users" active={isActive('/analytics/users')} />
+                <SubMenuItem label="Users" link="/analytics/users/teachers" active={isActive('/analytics/users/teachers')} />
               </div>
             )}
           </div>

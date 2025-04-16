@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import { Search, ChevronDown } from "lucide-react";
 import CourseOverview from "./CourseOverview";
@@ -101,11 +102,11 @@ const CoursesTable: React.FC = () => {
   }
 
   return (
-    <div className="w-full mx-auto p-6 bg-white rounded-lg">
+    <div className="w-full mx-auto lg:p-6 bg-white rounded-lg">
       <h2 className="text-xl font-bold mb-4">COURSES</h2>
 
       {/* Header Section */}
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between lg:items-center max-md:flex-col mb-4">
         <h3 className="font-semibold text-lg">All Courses</h3>
         <div className="flex gap-2">
           <button className="flex items-center px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-100">
@@ -125,7 +126,7 @@ const CoursesTable: React.FC = () => {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto text-nowrap">
         <table className="w-full border-collapse">
           <thead>
             <tr className="text-left">

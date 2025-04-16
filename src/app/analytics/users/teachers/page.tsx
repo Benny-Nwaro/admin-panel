@@ -1,15 +1,13 @@
 "use client"
 import React from 'react';
 import MainWrapper from '@/components/MainWarpper';
-import Home from '@/components/analytics/Home';
+import Dashboard from '@/components/analytics/users/teachers/Dashboard';
 
 const Message: React.FC = () => {
 
     return (
         <MainWrapper>
-            <div className='max-md:mt-16 lg:mx-16'>
-            <Home/> 
-            </div>
+            <Dashboard/>        
     </MainWrapper>
     );
 };

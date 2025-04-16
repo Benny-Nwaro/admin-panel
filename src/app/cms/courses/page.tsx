@@ -7,8 +7,8 @@ const Message: React.FC = () => {
 
     return (
         <MainWrapper>
-        <div className="flex flex-col lg:flex-row gap-4 pt-10 lg:px-10 ">
-            <div className="flex-1 bg-white shadow-lg rounded-lg p-4">
+        <div className="flex flex-col lg:flex-row gap-4 pt-10  ">
+            <div className="flex-1 bg-white shadow-lg rounded-lg p-4 lg:mx-16">
                 <Courses />
             </div>
         </div>
