@@ -1,19 +1,14 @@
-"use client"
-import React from 'react';
-import MainWrapper from '@/components/MainWarpper';
-import MessageList from '@/components/messages/AllMessages';
+import EmailList from "@/components/crm/emails/EmailList";
+import Sidebar from "@/components/crm/emails/Sidebar";
+import MainWrapper from "@/components/MainWarpper";
 
-const Message: React.FC = () => {
-
-    return (
-        <MainWrapper>
-        <div className="flex flex-col lg:flex-row gap-4 pt-10 lg:px-10 ">
-            <div className="flex-1 bg-white shadow-lg rounded-lg p-4">
-                <MessageList />
-            </div>
-        </div>
+export default function Page() {
+  return (
+    <MainWrapper>
+    <div className="flex flex-col lg:flex-row gap-4 pt-10 lg:mx-16">
+      <Sidebar />
+      <EmailList />
+    </div>
     </MainWrapper>
-    );
-};
-
-export default Message;
+  );
+}
