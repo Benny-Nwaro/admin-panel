@@ -10,7 +10,7 @@ const Dashboard: FC = () => {
   return (
     <>
       <MainWrapper>
-        <div className='flex flex-col max-w-full max-md:px-2 lg:px-10 mx-auto space-y-5 w-full pt-8'>
+        <div className='flex flex-col max-w-full max-md:px-2 lg:px-10 mx-auto space-y-5 w-full pt-8 '>
           <Home/>
         </div>
       </MainWrapper>

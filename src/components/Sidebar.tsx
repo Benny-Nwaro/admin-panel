@@ -60,7 +60,7 @@ const Sidebar = () => {
               onClick={() => setAnalyticsOpen(!analyticsOpen)}
             />
             {analyticsOpen && (
-              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md"> {/* Reduced margin and padding */}
+              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md z-0"> {/* Reduced margin and padding */}
                 <SubMenuItem label="Marketting" link="/analytics/marketting" active={isActive('/analytics/marketting')} />
                 <SubMenuItem label="Sales" link="/analytics/sales" active={isActive('/analytics/overview')} />
                 <SubMenuItem label="Social" link="/analytics/socials" active={isActive('/analytics/socials')} />
@@ -86,7 +86,7 @@ const Sidebar = () => {
               onClick={() => setCrmOpen(!crmOpen)}
             />
             {crmOpen && (
-              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md"> {/* Reduced margin and padding */}
+              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md z-0"> {/* Reduced margin and padding */}
                 <SubMenuItem label="Message" link="/crm/messages" active={isActive('/crm/messages')} />
                 <SubMenuItem label="Requests" link="/crm/requests" active={isActive('/crm/requests')} />
                 <SubMenuItem label="SMS" link="/crm/sms" active={isActive('/crm/sms')} />
@@ -112,7 +112,7 @@ const Sidebar = () => {
               onClick={() => setCmsOpen(!cmsOpen)}
             />
             {cmsOpen && (
-              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md"> {/* Reduced margin and padding */}
+              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md z-0"> {/* Reduced margin and padding */}
                 <SubMenuItem label="Blog" link="/cms/blogs" active={isActive('/cms/blogs')} />
                 <SubMenuItem label="Courses" link="/cms/courses" active={isActive('/cms/courses')} />
               </div>
@@ -128,7 +128,7 @@ const Sidebar = () => {
               onClick={() => setUsersOpen(!usersOpen)}
             />
             {usersOpen && (
-              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md"> {/* Reduced margin and padding */}
+              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md z-0"> {/* Reduced margin and padding */}
                 <SubMenuItem label="Students" link="/users/students" active={isActive('/users/students')} />
                 <SubMenuItem label="Teachers" link="/users/teachers" active={isActive('/users/teachers')} />
                 <SubMenuItem label="Accounts" link="/users/accounts" active={isActive('/users/accounts')} />
@@ -145,7 +145,7 @@ const Sidebar = () => {
               onClick={() => setBookingsOpen(!usersOpen)}
             />
             {bookingsOpen && (
-              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md"> {/* Reduced margin and padding */}
+              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md z-0"> {/* Reduced margin and padding */}
                 <SubMenuItem label="Bookings" link="/bookingsandpayments/bookings" active={isActive('/bookingsandpayments/bookings')} />
                 <SubMenuItem label="Payments" link="/bookingsandpayments/payments" active={isActive('/bookingsandpayments/payments')} />
               </div>
@@ -161,7 +161,7 @@ const Sidebar = () => {
               onClick={() => setProductsOpen(!productsOpen)}
             />
             {productsOpen && (
-              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md"> {/* Reduced margin and padding */}
+              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md z-0"> {/* Reduced margin and padding */}
                 <SubMenuItem label="Products" link="/productsandpackages/products" active={isActive('/productsandpackages/products')} />
                 <SubMenuItem label="Categories" link="/productsandpackages/categories" active={isActive('/productsandpackages/categories')} />
                 <SubMenuItem label="Subjects" link="/productsandpackages/subjects" active={isActive('/productsandpackages/subjects')} />
@@ -242,7 +242,7 @@ const MenuItem = ({ icon, label, link, active, isLogout, onClick }: MenuItemProp
 
 const SubMenuItem = ({ label, link, active }: SubMenuItemProps) => {
   return (
-    <Link href={link} className={`block px-3 py-1.5 text-white text-xs hover:bg-gray-600 z-0 ${active ? 'bg-gray-700 z-0' : 'z-0'}`}> {/* Reduced padding and font size */}
+    <Link href={link} className={`block px-3 py-1.5 text-white text-xs whitespace-nowrap transition-opacity duration-300 lg:group-hover:opacity-100 lg:opacity-0 hover:bg-gray-600 z-0 ${active ? 'bg-gray-700 z-0' : 'z-0'}`}> {/* Reduced padding and font size */}
       {label}
     </Link>
   );
