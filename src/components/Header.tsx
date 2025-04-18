@@ -48,12 +48,12 @@ const Header = ({ onOpen }: HeaderProps) => {
           </div>
 
           {/* Search Bar - Hidden on small screens, shown on medium and up */}
-          <div className="hidden md:flex items-center bg-gray-50 border border-gray-300 rounded-full p-2 sm:p-4 gap-2 sm:gap-3 w-full max-w-sm h-10 sm:h-12">
+          <div className="hidden md:flex items-center bg-gray-50 border border-gray-300 rounded-full px-4 py-2 gap-2 w-full max-w-sm focus-within:ring-2 focus-within:ring-blue-400">
             <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" />
             <input
               type="text"
               placeholder="Search for anything"
-              className="flex-1 bg-transparent outline-none text-gray-700 text-sm"
+              className="flex-1 bg-transparent outline-none text-gray-700 text-sm placeholder:text-gray-400"
             />
           </div>
 
