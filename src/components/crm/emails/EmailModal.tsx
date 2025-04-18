@@ -62,44 +62,18 @@ export default function EmailModal({ open, onClose }: EmailModalProps) {
           className="mt-4 w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
 
-        {/* Toolbar */}
-        {/* <div className="mt-4 flex items-center justify-between">
-          <select className="border rounded-md px-2 py-1 text-sm">
-            <option>Inter</option>
-          </select>
-          <div className="flex gap-2 text-gray-600 text-sm">
-            <button className="p-1 hover:text-black">📎</button>
-            <button className="p-1 hover:text-black">📷</button>
-            <button className="p-1 hover:text-black">🖼️</button>
-            <button className="p-1 hover:text-black">🗎</button>
-            <button className="p-1 hover:text-black font-bold">B</button>
-            <button className="p-1 hover:text-black italic">I</button>
-            <button className="p-1 hover:text-black underline">U</button>
-            <button className="p-1 hover:text-black">•</button>
-            <button className="p-1 hover:text-black">1.</button>
-            <button className="p-1 hover:text-black">≡</button>
-            <button className="p-1 hover:text-black">⇅</button>
-            <button className="p-1 hover:text-black">🗑️</button>
-            <button className="p-1 hover:text-black">✉️</button>
-          </div>
-        </div> */}
-
 <div className="mt-4">
       <ReactQuill
         value={message}
         onChange={setMessage}
         modules={modules}
         placeholder="Write a message..."
-        style={{ height: "520px" }} // Adjust wrapper height
+        style={{ height: "300px" }} // Adjust wrapper height
         className="bg-[#F1F1F9]"
       />
     </div>
 
-        {/* Message Box */}
-        {/* <textarea
-          placeholder="Write a message..."
-          className="mt-4 w-full h-3/5  bg-[#F1F1F9] border border-gray-300 rounded-md px-4 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-        /> */}
+    
 
         {/* Footer Buttons */}
         <div className="flex mt-3 justify-between items-center gap-4">
