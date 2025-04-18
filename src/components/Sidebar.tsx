@@ -242,7 +242,7 @@ const MenuItem = ({ icon, label, link, active, isLogout, onClick }: MenuItemProp
 
 const SubMenuItem = ({ label, link, active }: SubMenuItemProps) => {
   return (
-    <Link href={link} className={`block px-3 py-1.5 text-white text-xs hover:bg-gray-600 ${active ? 'bg-gray-700' : ''}`}> {/* Reduced padding and font size */}
+    <Link href={link} className={`block px-3 py-1.5 text-white text-xs hover:bg-gray-600 z-0 ${active ? 'bg-gray-700' : ''}`}> {/* Reduced padding and font size */}
       {label}
     </Link>
   );
