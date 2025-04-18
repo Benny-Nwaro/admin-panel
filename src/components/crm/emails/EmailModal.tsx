@@ -76,7 +76,7 @@ export default function EmailModal({ open, onClose }: EmailModalProps) {
     
 
         {/* Footer Buttons */}
-        <div className="flex mt-3 justify-between items-center gap-4">
+        <div className="flex mt-8 justify-between items-center gap-4">
             <div className='space-x-3'>
             <button className="px-4 py-2 border rounded-full">Save to drafts</button>
             <button onClick={() => setIsModalOpen(true)} className="px-4 py-2 border border-blue-500 text-blue-500 rounded-full">Schedule Send</button>
