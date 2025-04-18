@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Send, Image, Paperclip, Search } from "lucide-react";
+import { Send, Image, Paperclip, Search, ArrowLeftIcon } from "lucide-react";
 
 interface Message {
   id: string;
@@ -65,6 +65,8 @@ const ChatLayout = () => {
   ]);
   const [currentContact, setCurrentContact] = useState<Contact>(initialContacts[2]);
   const [newMessageText, setNewMessageText] = useState("");
+    const [hidden, setHidden] = useState("hidden");
+    const [sidebarHidden, setSidebarHidden] = useState("");
   const [selectedFiles, setSelectedFiles] = useState<File[] | undefined>();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -101,6 +103,9 @@ const ChatLayout = () => {
         timestamp: new Date().toLocaleTimeString(),
       },
     ]);
+
+    setHidden("")
+    setSidebarHidden("hidden")
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -114,11 +119,15 @@ const ChatLayout = () => {
       setSelectedFiles(Array.from(e.target.files));
     }
   };
+  const handleBackButton = ()=>{
+    setHidden("hidden")
+    setSidebarHidden("")
+  }
 
   return (
-    <div className="flex h-full bg-[#F1F1F9]">
+    <div className="flex lg:h-full max-md:h-screen max-md:mt-12 bg-[#F1F1F9] max-md:flex-col">
       {/* Sidebar */}
-      <div className="w-1/4 bg-white border-r p-4 max-md:w-full">
+      <div className={`w-1/4 bg-white border-r p-4 max-md:w-full max-md:${sidebarHidden}`}>
         <div className="flex items-center gap-2 mb-6">
           <Search className="w-4 h-4 text-gray-500" />
           <input
@@ -173,7 +182,9 @@ const ChatLayout = () => {
       </div>
 
       {/* Main Chat */}
-      <div className="flex-1 flex flex-col">
+      <div className={`flex-1 flex flex-col max-md:${hidden}`}>
+         <span className="justify-start max-md:mt-4 w-full flex text-blue-600 font-bold text-xs bg-white lg:hidden" onClick={handleBackButton}><ArrowLeftIcon size={18}/> Go back</span>
+
         {/* Header */}
         <div className="p-4 border-b bg-white flex items-center gap-3">
           <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white bg-purple-600">
@@ -207,7 +218,7 @@ const ChatLayout = () => {
               }`}
             >
               {message.sender === "contact" && (
-                <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white bg-purple-600">
+                <div className="w-10 h-10 max-md:px-3 rounded-full flex items-center justify-center font-bold text-white bg-purple-600">
                   {currentContact.avatar}
                 </div>
               )}
