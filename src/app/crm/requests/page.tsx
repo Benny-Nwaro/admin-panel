@@ -7,7 +7,7 @@ const Message: React.FC = () => {
 
     return (
         <MainWrapper>
-            <div className="flex-1 h-full bg-white mx-16 shadow-lg rounded-lg p-4">
+            <div className="flex-1 h-full bg-white lg:mx-16 shadow-lg rounded-lg p-4">
                 <ChatLayout />
             </div>
         

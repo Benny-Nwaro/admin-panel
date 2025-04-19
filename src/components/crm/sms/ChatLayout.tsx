@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Send, Image, Paperclip } from "lucide-react";
+import { Send, Image, Paperclip, ArrowLeftIcon } from "lucide-react";
 import SmsModal from "./SmsModal";
 
 interface Message {
@@ -70,6 +70,8 @@ const ChatLayout = () => {
   const [currentContact, setCurrentContact] = useState<Contact>(initialContacts[0]);
   const [newMessageText, setNewMessageText] = useState("");
   const [selectedFiles, setSelectedFiles] = useState<File[] | undefined>(); // State for selected files
+  const [hidden, setHidden] = useState("hidden");
+  const [sidebarHidden, setSidebarHidden] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
@@ -113,6 +115,8 @@ const ChatLayout = () => {
         timestamp: new Date().toLocaleTimeString(),
       },
     ]);
+    setHidden("")
+    setSidebarHidden("hidden")
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -127,10 +131,15 @@ const ChatLayout = () => {
     }
   };
 
+  const handleBackButton = ()=>{
+    setHidden("hidden")
+    setSidebarHidden("")
+  }
+
   return (
-    <div className="flex h-full bg-[#f1f1f9]">
+    <div className="flex h-full  max-md:h-screen  max-md:flex-col max-md:w-full bg-[#f1f1f9]">
       {/* Sidebar */}
-      <div className="w-1/4 bg-white border-r p-4 max-md:w-full overflow-auto">
+      <div className={`w-1/4 bg-white border-r p-4 max-md:w-full overflow-auto max-md:${sidebarHidden}`}>
         <div className="flex justify-between items-center mb-4">
           <h2 className="font-bold text-lg">Send SMS</h2>
           <button onClick={() => setIsModalOpen(true)}  className="bg-blue-500 text-white text-sm px-3 py-1 rounded">
@@ -181,7 +190,9 @@ const ChatLayout = () => {
       </div>
 
       {/* Main Chat Area */}
-      <div className="flex-1 flex flex-col">
+      <div className={`flex-1 flex flex-col max-md:${hidden}`}>
+      <span className="justify-start max-md:mt-4 w-full flex text-blue-600 font-bold text-xs bg-white lg:hidden" onClick={handleBackButton}><ArrowLeftIcon size={18}/> Go back</span>
+
         {/* Header */}
         <div className="p-4 border-b bg-white">
           <h2 className="font-bold text-lg">{currentContact.name}</h2>
@@ -256,7 +267,7 @@ const ChatLayout = () => {
             multiple // Allow selecting multiple files
           />
           <button
-            className="text-xl"
+            className="text-xl px-0 mx-0"
             onClick={() => fileInputRef.current?.click()}
             title="Attach File"
           >
@@ -271,7 +282,7 @@ const ChatLayout = () => {
             style={{display: 'none'}}
             multiple
             />
-          <button className="text-xl"  onClick={() => imageInputRef.current?.click()} title="Attach Image">
+          <button className="text-xl px-0 mx-0"  onClick={() => imageInputRef.current?.click()} title="Attach Image">
             <Image size={24}  />
           </button>
           <input

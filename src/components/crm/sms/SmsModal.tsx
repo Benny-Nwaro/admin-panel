@@ -116,7 +116,7 @@ export default function SmsModal({ open, onClose }: EmailModalProps) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-end z-50">
-      <div className="bg-white w-full max-w-3xl h-screen rounded-r-xl shadow-lg p-4 flex flex-col">
+      <div className="bg-white w-full max-w-3xl h-screen lg:rounded-r-xl shadow-lg p-4 flex flex-col">
         {/* Header */}
         <div className="flex justify-between items-center border-b pb-4">
           <h2 className="text-xl font-semibold">New SMS</h2>

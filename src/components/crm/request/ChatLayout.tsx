@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Send, Image, Paperclip, Search } from "lucide-react";
+import { Send, Image, Paperclip, Search, ArrowLeftIcon } from "lucide-react";
+
 
 interface Message {
   id: string;
@@ -72,6 +73,8 @@ const ChatLayout = () => {
   const [currentContact, setCurrentContact] = useState<Contact>(initialContacts[2]);
   const [newMessageText, setNewMessageText] = useState("");
   const [selectedFiles, setSelectedFiles] = useState<File[] | undefined>();
+  const [hidden, setHidden] = useState("hidden");
+  const [sidebarHidden, setSidebarHidden] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
@@ -113,6 +116,8 @@ const ChatLayout = () => {
         }),
       },
     ]);
+    setHidden("")
+    setSidebarHidden("hidden")
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -127,10 +132,15 @@ const ChatLayout = () => {
     }
   };
 
+  const handleBackButton = ()=>{
+    setHidden("hidden")
+    setSidebarHidden("")
+  }
+
   return (
-    <div className="flex h-full bg-[#f1f1f9]">
+    <div className="flex h-full  max-md:h-screen max-md:mt-8 max-md:flex-col max-md:w-full bg-[#f1f1f9]">
       {/* Sidebar */}
-      <div className="w-1/4 bg-white border-r p-4 max-md:w-full">
+      <div className={`w-1/4 bg-white lg:border-r p-4 max-md:w-full max-md:${sidebarHidden}`}>
         <div className="flex items-center gap-2 mb-6">
           <Search className="w-4 h-4 text-gray-500" />
           <input
@@ -183,7 +193,8 @@ const ChatLayout = () => {
       </div>
 
       {/* Main Chat */}
-      <div className="flex-1 flex flex-col">
+      <div className={`flex-1 flex flex-col  max-md:${hidden}`}>
+      <span className="justify-start max-md:mt-4 w-full flex text-blue-600 font-bold text-xs bg-white lg:hidden" onClick={handleBackButton}><ArrowLeftIcon size={18}/> Go back</span>
         <div className="p-4 border-b bg-white flex items-center gap-3">
           <div
             className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white"
@@ -192,7 +203,7 @@ const ChatLayout = () => {
             {currentContact.avatar}
           </div>
           <div>
-            <h2 className="font-bold text-lg">{currentContact.name}</h2>
+            <h2 className="font-bold text-lg max-md:text-sm">{currentContact.name}</h2>
             <span
               className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                 currentContact.status === "Approved"
@@ -218,7 +229,7 @@ const ChatLayout = () => {
             >
               {message.sender === "contact" && (
                 <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white"
+                  className="w-10 h-10 max-md:px-3 rounded-full flex items-center justify-center font-bold text-white"
                   style={{ backgroundColor: getAvatarColor(currentContact.avatar) }}
                 >
                   {currentContact.avatar}
@@ -268,8 +279,13 @@ const ChatLayout = () => {
             style={{ display: "none" }}
             multiple
           />
-          <button onClick={() => fileInputRef.current?.click()} title="Attach File">
-            <Paperclip size={24} />
+          <button
+            className="lg:text-xl px-0 mx-0"
+            onClick={() => fileInputRef.current?.click()}
+            title="Attach File"
+    
+          >
+            <Paperclip className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7" />
           </button>
 
           <input
@@ -280,8 +296,12 @@ const ChatLayout = () => {
             style={{ display: "none" }}
             multiple
           />
-          <button onClick={() => imageInputRef.current?.click()} title="Attach Image">
-            <Image size={24} />
+          <button
+            className="lg:text-xl px-0 mx-0"
+            onClick={() => imageInputRef.current?.click()}
+            title="Attach Image"
+          >
+            <Image className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7" />
           </button>
 
           <input
@@ -289,12 +309,19 @@ const ChatLayout = () => {
             placeholder="Write a message..."
             value={newMessageText}
             onChange={(e) => setNewMessageText(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
             className="flex-1 bg-[#F1F1F9] px-4 py-2 rounded-full focus:outline-none text-sm"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                handleSendMessage();
+              }
+            }}
           />
-
-          <button onClick={handleSendMessage} title="Send">
-            <Send className="text-blue-500" />
+          <button
+            onClick={handleSendMessage}
+            className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full"
+          >
+          <Send className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7" />  
           </button>
         </div>
       </div>
