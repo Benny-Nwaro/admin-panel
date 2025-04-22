@@ -22,7 +22,7 @@ const ComplaintDetails: React.FC<ComplaintDetailsProps> = ({
   onResolve,
 }) => {
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-2xl">
       {/* Header */}
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-semibold">Complaints Details</h2>

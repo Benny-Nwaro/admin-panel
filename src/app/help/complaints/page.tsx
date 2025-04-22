@@ -1,17 +1,17 @@
 "use client"
 import React from 'react';
 import MainWrapper from '@/components/MainWarpper';
-import TrashPage2 from '@/components/TrashPage2';
+import ComplaintsTable from '@/components/helpDesk/complaints/ComplaintsTable';
 
-const Message: React.FC = () => {
+const Complaints: React.FC = () => {
 
     return (
         <MainWrapper>
             <div className='lg:mx-16 max-md:px-3 max-md:mt-12'>
-            <TrashPage2/>        
+            <ComplaintsTable/>        
             </div>
     </MainWrapper>
     );
 };
 
-export default Message;
+export default Complaints;

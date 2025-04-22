@@ -1,6 +1,19 @@
+"use client"
 import React, { useState } from "react";
+import "react-quill/dist/quill.snow.css";
 
-const AddArticleForm: React.FC = () => {
+import dynamic from "next/dynamic";
+import "react-quill/dist/quill.snow.css";
+
+// Dynamically import ReactQuill with SSR disabled
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+
+
+interface AddArticleFormProps {
+  onClose: () => void;
+}
+
+const AddArticleForm: React.FC<AddArticleFormProps> = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [image, setImage] = useState<File | null>(null);
@@ -12,7 +25,7 @@ const AddArticleForm: React.FC = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-xl p-6">
+    <div className="max-w-xl mx-auto bg-white  rounded-xl p-6">
       <h2 className="text-2xl font-semibold text-gray-900 mb-6">
         Add New Article
       </h2>
@@ -62,21 +75,20 @@ const AddArticleForm: React.FC = () => {
       <div className="mb-6">
         <h3 className="text-lg font-medium text-gray-800 mb-2">Body</h3>
         <label className="block text-gray-600 mb-1">Body text</label>
-        <textarea
-          placeholder="Input text here"
-          className="w-full p-3 border rounded-lg shadow-sm outline-none focus:ring-2 focus:ring-blue-400"
-          rows={4}
+        <ReactQuill
           value={body}
-          onChange={(e) => setBody(e.target.value)}
+          onChange={setBody}
+          className="bg-white"
+          theme="snow"
         />
       </div>
 
       {/* Buttons */}
-      <div className="flex justify-between">
-        <button className="bg-blue-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-600 transition">
+      <div className="flex justify-center space-x-5">
+        <button className="bg-blue-500 text-white px-6 py-2 rounded-full shadow-md hover:bg-blue-600 transition">
           Submit
         </button>
-        <button className="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg shadow-md hover:bg-gray-300 transition">
+        <button className="border border-blue-600 text-blue-600 px-6 py-2 rounded-full shadow-md hover:bg-gray-50 transition">
           Preview
         </button>
       </div>

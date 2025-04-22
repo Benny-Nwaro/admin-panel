@@ -37,6 +37,8 @@ const Sidebar = () => {
   const [usersOpen, setUsersOpen] = useState(false);
   const [bookingsOpen, setBookingsOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
+
 
   const isActive = (path: string) => pathname === path;
 
@@ -176,12 +178,23 @@ const Sidebar = () => {
             link="/promotions"
             active={isActive('/promotions')}
           />
-          <MenuItem
-            icon={<MdLiveHelp size={20} />} 
-            label="Help Desk"
-            link="/help"
-            active={isActive('/help')}
-          />
+
+          <div className='relative'>
+            <MenuItem
+              icon={<MdLiveHelp size={20} />} 
+              label="Help Desk"
+              link="#"
+              active={isActive('/help')}
+              onClick={() => setHelpOpen(!helpOpen)}
+            />
+            {helpOpen && (
+              <div className="ml-8 mt-1 bg-gray-800 rounded-md shadow-md z-0"> {/* Reduced margin and padding */}
+                <SubMenuItem label="FAQs" link="/help/faqs" active={isActive('/help/faqs')} />
+                <SubMenuItem label="Complaints" link="/help/complaints" active={isActive('/help/complaints')} />
+                <SubMenuItem label="Articles" link="/help/articles" active={isActive('/help/articles')} />
+              </div>
+            )}
+          </div>
           <MenuItem
             icon={<PiTrashSimpleFill size={20} />} 
             label="Trash"
