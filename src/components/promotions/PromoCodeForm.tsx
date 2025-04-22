@@ -1,6 +1,8 @@
 "use client";
+
 import { useState } from "react";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
+import "react-quill/dist/quill.snow.css";
 
 interface PromoCodeFormProps {
   onClose: () => void;
@@ -18,9 +20,7 @@ interface FormData {
   details: string;
 }
 
-const ReactQuillDynamic = dynamic(() => import('react-quill'), {
-  ssr: false,
-});
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const PromoCodeForm: React.FC<PromoCodeFormProps> = ({ onClose }) => {
   const [formData, setFormData] = useState<FormData>({
@@ -35,7 +35,9 @@ const PromoCodeForm: React.FC<PromoCodeFormProps> = ({ onClose }) => {
     details: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -46,12 +48,11 @@ const PromoCodeForm: React.FC<PromoCodeFormProps> = ({ onClose }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form data:", formData);
-    // Add your form submission logic here
     onClose();
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">Setup Your Promo Code</h2>
@@ -61,130 +62,64 @@ const PromoCodeForm: React.FC<PromoCodeFormProps> = ({ onClose }) => {
         </div>
 
         <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-              Promo Title
-            </label>
-            <input
-              type="text"
-              name="title"
-              id="title"
-              placeholder="Enter Promo Title"
-              value={formData.title}
-              onChange={handleChange}
-              className="mt-1 block w-full border rounded px-3 py-2"
-            />
-          </div>
-          <div>
-            <label htmlFor="percentage" className="block text-sm font-medium text-gray-700">
-              Promo Percentage
-            </label>
-            <input
-              type="number"
-              name="percentage"
-              id="percentage"
-              placeholder="Enter Promo Percentage"
-              value={formData.percentage}
-              onChange={handleChange}
-              className="mt-1 block w-full border rounded px-3 py-2"
-            />
-          </div>
+          <FormInput label="Promo Title" name="title" value={formData.title} onChange={handleChange} />
+          <FormInput
+            label="Promo Percentage"
+            name="percentage"
+            type="number"
+            value={formData.percentage}
+            onChange={handleChange}
+          />
+          <FormInput
+            label="Number of Users"
+            name="users"
+            type="number"
+            value={formData.users}
+            onChange={handleChange}
+          />
+          <FormInput
+            label="Max Usage"
+            name="maxUsage"
+            type="number"
+            value={formData.maxUsage}
+            onChange={handleChange}
+          />
+          <FormInput
+            label="Start Date"
+            name="startDate"
+            type="date"
+            value={formData.startDate}
+            onChange={handleChange}
+          />
+          <FormInput
+            label="End Date"
+            name="endDate"
+            type="date"
+            value={formData.endDate}
+            onChange={handleChange}
+          />
 
-          <div>
-            <label htmlFor="users" className="block text-sm font-medium text-gray-700">
-              Number of Users
-            </label>
-            <input
-              type="number"
-              name="users"
-              id="users"
-              placeholder="Enter Number of Users"
-              value={formData.users}
-              onChange={handleChange}
-              className="mt-1 block w-full border rounded px-3 py-2"
-            />
-          </div>
-          <div>
-            <label htmlFor="maxUsage" className="block text-sm font-medium text-gray-700">
-              Max Usage
-            </label>
-            <input
-              type="number"
-              name="maxUsage"
-              id="maxUsage"
-              placeholder="Enter Max Usage"
-              value={formData.maxUsage}
-              onChange={handleChange}
-              className="mt-1 block w-full border rounded px-3 py-2"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="startDate" className="block text-sm font-medium text-gray-700">
-              Start Date
-            </label>
-            <input
-              type="date"
-              name="startDate"
-              id="startDate"
-              value={formData.startDate}
-              onChange={handleChange}
-              className="mt-1 block w-full border rounded px-3 py-2"
-            />
-          </div>
-          <div>
-            <label htmlFor="endDate" className="block text-sm font-medium text-gray-700">
-              End Date
-            </label>
-            <input
-              type="date"
-              name="endDate"
-              id="endDate"
-              value={formData.endDate}
-              onChange={handleChange}
-              className="mt-1 block w-full border rounded px-3 py-2"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="type" className="block text-sm font-medium text-gray-700">
-              Promotion Type
-            </label>
-            <select
-              name="type"
-              id="type"
-              value={formData.type}
-              onChange={handleChange}
-              className="mt-1 block w-full border rounded px-3 py-2"
-            >
-              <option value="Registration">Registration</option>
-              <option value="Referral">Referral</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="status" className="block text-sm font-medium text-gray-700">
-              Status
-            </label>
-            <select
-              name="status"
-              id="status"
-              value={formData.status}
-              onChange={handleChange}
-              className="mt-1 block w-full border rounded px-3 py-2"
-            >
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
-            </select>
-          </div>
+          <FormSelect
+            label="Promotion Type"
+            name="type"
+            value={formData.type}
+            onChange={handleChange}
+            options={["Registration", "Referral"]}
+          />
+          <FormSelect
+            label="Status"
+            name="status"
+            value={formData.status}
+            onChange={handleChange}
+            options={["Active", "Inactive"]}
+          />
 
           <div className="mt-4 col-span-2">
-            <label htmlFor="details" className="block text-sm font-medium text-gray-700">
-              Promo Terms and Details
-            </label>
-            <ReactQuillDynamic
+            <label className="block text-sm font-medium text-gray-700">Promo Terms and Details</label>
+            <ReactQuill
               value={formData.details}
               onChange={handleDetailsChange}
-              className="mt-1 block w-full h-48"
+              className="mt-1 block w-full h-48 outline outline-2 outline-gray-300 focus:outline-blue-500"
             />
           </div>
 
@@ -198,6 +133,70 @@ const PromoCodeForm: React.FC<PromoCodeFormProps> = ({ onClose }) => {
     </div>
   );
 };
+
+// Reusable Input Component
+const FormInput = ({
+  label,
+  name,
+  type = "text",
+  value,
+  onChange,
+}: {
+  label: string;
+  name: string;
+  type?: string;
+  value: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+}) => (
+  <div>
+    <label htmlFor={name} className="block text-sm font-medium text-gray-700">
+      {label}
+    </label>
+    <input
+      type={type}
+      name={name}
+      id={name}
+      placeholder={`Enter ${label}`}
+      value={value}
+      onChange={onChange}
+      className="mt-1 block w-full border rounded px-3 py-2 outline outline-2 outline-gray-300 focus:outline-blue-500"
+    />
+  </div>
+);
+
+// Reusable Select Component
+const FormSelect = ({
+  label,
+  name,
+  value,
+  onChange,
+  options,
+}: {
+  label: string;
+  name: string;
+  value: string;
+  onChange: React.ChangeEventHandler<HTMLSelectElement>;
+  options: string[];
+}) => (
+  <div>
+    <label htmlFor={name} className="block text-sm font-medium text-gray-700">
+      {label}
+    </label>
+    <select
+      name={name}
+      id={name}
+      value={value}
+      onChange={onChange}
+      className="mt-1 block w-full border rounded px-3 py-2 outline outline-2 outline-gray-300 focus:outline-blue-500"
+    >
+      {options.map((opt) => (
+        <option key={opt} value={opt}>
+          {opt}
+        </option>
+      ))}
+    </select>
+  </div>
+);
 
 export default PromoCodeForm;
 export type { PromoCodeFormProps };

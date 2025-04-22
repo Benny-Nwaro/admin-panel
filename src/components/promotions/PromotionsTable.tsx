@@ -1,9 +1,8 @@
-"use client"
-import { useState } from "react";
+"use client";
+import { useEffect, useRef, useState } from "react";
 import PromoCodeForm from "./PromoCodeForm";
 import EditPromoCodeForm from "./EditPromoCodeForm";
 
-// Define the type for promotion data
 export interface Promo {
   id: number;
   name: string;
@@ -18,11 +17,11 @@ export interface Promo {
 }
 
 const initialPromotions: Promo[] = [
-  { id: 1, name: "Register Promo", startDate: "18/12/2024", endDate: "18/12/2024", status: "Active" },
-  { id: 2, name: "Register Promo", startDate: "18/12/2024", endDate: "18/12/2024", status: "Active" },
-  { id: 3, name: "Register Promo", startDate: "18/12/2024", endDate: "18/12/2024", status: "Inactive" },
-  { id: 4, name: "Register Promo", startDate: "18/12/2024", endDate: "18/12/2024", status: "Active" },
-  { id: 5, name: "Register Promo", startDate: "18/12/2024", endDate: "18/12/2024", status: "Inactive" },
+  { id: 1, name: "Register Promo", startDate: "2024-12-18", endDate: "2024-12-18", status: "Active" },
+  { id: 2, name: "Register Promo", startDate: "2024-12-18", endDate: "2024-12-18", status: "Active" },
+  { id: 3, name: "Register Promo", startDate: "2024-12-18", endDate: "2024-12-18", status: "Inactive" },
+  { id: 4, name: "Register Promo", startDate: "2024-12-18", endDate: "2024-12-18", status: "Active" },
+  { id: 5, name: "Register Promo", startDate: "2024-12-18", endDate: "2024-12-18", status: "Inactive" },
 ];
 
 const PromotionsTable = () => {
@@ -34,24 +33,31 @@ const PromotionsTable = () => {
   const [showEditPromoForm, setShowEditPromoForm] = useState<boolean>(false);
   const [editPromoData, setEditPromoData] = useState<Promo | null>(null);
 
-  const handleOpenDropdown = (id: number) => {
-    setOpenDropdown(openDropdown === id ? null : id);
-  };
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleCloseDropdown = () => {
-    setOpenDropdown(null);
-  };
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setOpenDropdown(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleEdit = (promo: Promo) => {
     setEditPromoData(promo);
     setShowEditPromoForm(true);
-    handleCloseDropdown();
+    setOpenDropdown(null);
   };
 
   const handleDelete = (id: number) => {
-    const updatedPromotions = promotions.filter((promo) => promo.id !== id);
-    setPromotions(updatedPromotions);
-    handleCloseDropdown();
+    setPromotions(promotions.filter((promo) => promo.id !== id));
+    setOpenDropdown(null);
   };
 
   const filteredPromotions = promotions.filter((promo) =>
@@ -59,26 +65,13 @@ const PromotionsTable = () => {
   );
 
   const sortedPromotions = [...filteredPromotions].sort((a, b) => {
-    if (sortOption === "name") {
-      return a.name.localeCompare(b.name);
-    } else if (sortOption === "date") {
-      return a.startDate.localeCompare(b.startDate);
-    }
+    if (sortOption === "name") return a.name.localeCompare(b.name);
+    if (sortOption === "date") return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
     return 0;
   });
 
-  const handleCreatePromo = () => {
-    setShowPromoForm(true);
-  };
+  const tdRef = useRef<HTMLTableCellElement>(null);
 
-  const handleClosePromoForm = () => {
-    setShowPromoForm(false);
-  };
-
-  const handleCloseEditPromoForm = () => {
-    setShowEditPromoForm(false);
-    setEditPromoData(null);
-  };
 
   return (
     <div className="w-full p-6 bg-white shadow rounded-lg">
@@ -86,15 +79,18 @@ const PromotionsTable = () => {
         <h2 className="text-xl font-semibold">PROMOTIONS</h2>
         <button
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          onClick={handleCreatePromo}
+          onClick={() => setShowPromoForm(true)}
         >
           Create New Promo Code
         </button>
       </div>
 
-      {showPromoForm && <PromoCodeForm onClose={handleClosePromoForm} />}
+      {showPromoForm && <PromoCodeForm onClose={() => setShowPromoForm(false)} />}
       {showEditPromoForm && editPromoData && (
-        <EditPromoCodeForm promo={editPromoData} onClose={handleCloseEditPromoForm} />
+        <EditPromoCodeForm promo={editPromoData} onClose={() => {
+          setShowEditPromoForm(false);
+          setEditPromoData(null);
+        }} />
       )}
 
       <div className="flex justify-between items-center mb-4">
@@ -144,14 +140,15 @@ const PromotionsTable = () => {
                     {promo.status}
                   </span>
                 </td>
-                <td className="p-3 relative">
+                <td className="p-3 relative" ref={tdRef}>
                   <button
                     className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
-                    onClick={() => handleOpenDropdown(promo.id)}
+                    onClick={() =>
+                      setOpenDropdown(openDropdown === promo.id ? null : promo.id)
+                    }
                   >
                     Actions ▼
                   </button>
-
                   {openDropdown === promo.id && (
                     <div className="absolute right-0 mt-2 w-32 bg-white border rounded shadow-lg z-50">
                       <button
