@@ -56,6 +56,8 @@ const ProfileDetails: React.FC = () => {
               src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-user-profile-avatar-png-image_10211467.png"
               alt="Profile"
               className="w-24 h-24 rounded-full object-cover border-2 border-gray-300"
+              width={20}
+              height={20}
             />
             <button className="mt-3 px-4 py-2 bg-blue-500 text-white font-medium text-sm rounded-full shadow hover:bg-blue-600 transition">
               Change Profile Photo
@@ -106,6 +108,8 @@ const ProfileDetails: React.FC = () => {
                     src={flag.image}
                     alt={flag.name}
                     className="absolute top-2 right-4 w-6 h-4"
+                    width={20}
+                    height={20}
                   />
                 )}
               </div>

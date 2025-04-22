@@ -72,6 +72,8 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
               src={flag.image}
               alt={flag.name}
               className="w-8 h-5 rounded shadow-sm"
+              width={20}
+              height={20}
             />
             <span className="ml-2 text-sm font-medium text-gray-600">
               {flag.name}
