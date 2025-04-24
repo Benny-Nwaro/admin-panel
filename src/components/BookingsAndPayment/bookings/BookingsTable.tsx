@@ -1,7 +1,10 @@
 import { useState } from "react";
+import CustomBookingForm from "./CustomBookingForm";
+import SendReminderModal from "./SendReminderModal";
 
 type Booking = {
   id: number;
+  email: string;
   student: string;
   lesson: string;
   subLesson: string;
@@ -13,6 +16,7 @@ type Booking = {
 
 const initialBookings: Booking[] = Array.from({ length: 25 }, (_, i) => ({
   id: i + 1,
+  email: `student${i + 1}@email.com`,
   student: `Student ${i + 1}`,
   lesson: "Private Lessons",
   subLesson: "Intermediate Piano Lessons",
@@ -22,7 +26,7 @@ const initialBookings: Booking[] = Array.from({ length: 25 }, (_, i) => ({
   amount: "per hour",
 }));
 
-const statusColors: Record<string, string> = {
+const statusColors: Record<Booking["status"], string> = {
   "Pending Payment": "bg-yellow-400 text-white",
   "Completed": "bg-green-500 text-white",
   "Rejected": "bg-red-500 text-white",
@@ -35,6 +39,9 @@ const BookingsTable = () => {
   const [showDropdown, setShowDropdown] = useState<number | null>(null);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [currentPage, setCurrentPage] = useState(1);
+  const [showCustomBookingForm, setShowCustomBookingForm] = useState(false);
+  const [showReminderModal, setShowReminderModal] = useState(false);
+  const [reminderEmail, setReminderEmail] = useState<string | null>(null);
 
   const bookingsPerPage = 5;
 
@@ -57,30 +64,15 @@ const BookingsTable = () => {
     setShowDropdown(null);
   };
 
-  // const handleSaveEdit = (updatedBooking: Booking) => {
-  //   setBookings(
-  //     bookings.map((booking) =>
-  //       booking.id === updatedBooking.id ? updatedBooking : booking
-  //     )
-  //   );
-  //   setEditingBooking(null);
-  // };
-  // const handleCreateCustomBooking = () => {
-  //   setShowCustomBookingForm(!showCustomBookingForm)
-  // };
-
   const handleCreateBooking = () => {
-    const newBooking: Booking = {
-      id: bookings.length + 1,
-      student: "New Student",
-      lesson: "New Lesson",
-      subLesson: "Sub Lesson",
-      teacher: "New Teacher",
-      status: "Pending Payment",
-      date: new Date().toLocaleDateString(),
-      amount: "per hour",
-    };
-    setBookings([...bookings, newBooking]);
+    setShowCustomBookingForm(true);
+  };
+
+  const handleSendReminder = (message: string) => {
+    console.log(`Sending reminder to ${reminderEmail}:`, message);
+    // Add API logic here
+    setShowReminderModal(false);
+    setReminderEmail(null);
   };
 
   const filteredBookings = bookings.filter((booking) =>
@@ -93,8 +85,22 @@ const BookingsTable = () => {
     currentPage * bookingsPerPage
   );
 
+  if (showCustomBookingForm) {
+    return (
+      <div className="p-6 bg-white rounded-lg">
+        <span
+          className="hover:text-blue-500 hover:cursor-pointer font-bold"
+          onClick={() => setShowCustomBookingForm(false)}
+        >
+          Go back
+        </span>
+        <CustomBookingForm />
+      </div>
+    );
+  }
+
   return (
-    <div className="p-6 bg-white rounded-lg ">
+    <div className="p-6 bg-white rounded-lg">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold">ALL BOOKINGS</h2>
         <div className="flex space-x-2">
@@ -163,7 +169,7 @@ const BookingsTable = () => {
                 <td className="p-3">{booking.amount}</td>
                 <td className="p-3 relative">
                   <button
-                    className="border px-2 py-1 rounded bg-gray-200"
+                    className="border px-2 py-1 rounded bg-blue-500 text-white"
                     onClick={() =>
                       setShowDropdown(showDropdown === booking.id ? null : booking.id)
                     }
@@ -174,16 +180,48 @@ const BookingsTable = () => {
                   {showDropdown === booking.id && (
                     <div className="absolute right-0 mt-1 bg-white border rounded shadow-lg z-10">
                       <button
-                        className="block px-4 py-2 text-sm text-blue-600 hover:bg-gray-100 w-full text-left"
-                        onClick={() => handleEdit(booking)}
-                      >
-                        Edit
-                      </button>
-                      <button
                         className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 w-full text-left"
                         onClick={() => handleDelete(booking.id)}
                       >
-                        Delete
+                        Cancel booking
+                      </button>
+                      <button
+                        className="block px-4 py-2 text-sm text-blue-600 hover:bg-gray-100 w-full text-left"
+                        onClick={() => {
+                          if (booking.email) {
+                            setReminderEmail(booking.email);
+                            setShowReminderModal(true);
+                          } else {
+                            console.error("Booking email is missing");
+                          }
+                          setShowDropdown(null);
+                        }}
+                      >
+                        Send Reminder
+                      </button>
+                      <button
+                        className="block px-4 py-2 text-sm text-green-600 hover:bg-gray-100 w-full text-left"
+                        onClick={() => handleEdit(booking)}
+                      >
+                        Mark as Paid
+                      </button>
+                      <button
+                        className="block px-4 py-2 text-sm text-green-600 hover:bg-gray-100 w-full text-left"
+                        onClick={() => alert("Payment accepted")}
+                      >
+                        Accept Payment
+                      </button>
+                      <button
+                        className="block px-4 py-2 text-sm text-yellow-600 hover:bg-gray-100 w-full text-left"
+                        onClick={() => alert("Teacher reassigned")}
+                      >
+                        Re-assign Teacher
+                      </button>
+                      <button
+                        className="block px-4 py-2 text-sm text-red-500 hover:bg-gray-100 w-full text-left"
+                        onClick={() => handleEdit(booking)}
+                      >
+                        Issue Refund
                       </button>
                     </div>
                   )}
@@ -195,14 +233,33 @@ const BookingsTable = () => {
       </div>
 
       <div className="flex justify-center items-center mt-4 space-x-2">
-        <button disabled={currentPage === 1} className="px-3 py-2 border rounded" onClick={() => setCurrentPage(currentPage - 1)}>
+        <button
+          disabled={currentPage === 1}
+          className="px-3 py-2 border rounded disabled:opacity-50"
+          onClick={() => setCurrentPage(currentPage - 1)}
+        >
           Previous
         </button>
         <span>Page {currentPage} of {totalPages}</span>
-        <button disabled={currentPage === totalPages} className="px-3 py-2 border rounded" onClick={() => setCurrentPage(currentPage + 1)}>
+        <button
+          disabled={currentPage === totalPages}
+          className="px-3 py-2 border rounded disabled:opacity-50"
+          onClick={() => setCurrentPage(currentPage + 1)}
+        >
           Next
         </button>
       </div>
+
+      {showReminderModal && reminderEmail && (
+        <SendReminderModal
+          email={reminderEmail}
+          onClose={() => {
+            setShowReminderModal(false);
+            setReminderEmail(null);
+          }}
+          onSend={handleSendReminder}
+        />
+      )}
     </div>
   );
 };

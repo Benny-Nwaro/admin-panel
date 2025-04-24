@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import PaymentDetailsModal from "./PaymentDetailsModal";
+import { Search } from "lucide-react";
 
 type Deposit = {
   id: number;
@@ -33,30 +34,73 @@ const getStatusColor = (status: string) => {
   }
 };
 
+type SortKey = keyof Deposit;
+
 const TransactionsTable: React.FC = () => {
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
   const [selectedDeposit, setSelectedDeposit] = useState<Deposit | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortKey, setSortKey] = useState<SortKey>("sender");
 
   const toggleDropdown = (id: number) => {
     setOpenDropdown(openDropdown === id ? null : id);
   };
 
-  // Function to open the modal with the selected deposit details
   const openPaymentModal = (deposit: Deposit) => {
     setSelectedDeposit(deposit);
   };
 
-  // Function to close the modal
   const closePaymentModal = () => {
     setSelectedDeposit(null);
   };
 
+  const filteredDeposits = useMemo(() => {
+    return deposits
+      .filter((d) =>
+        [d.sender, d.receiver, d.method, d.status].some((field) =>
+          field.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      )
+  }, [searchQuery, sortKey]);
+
   return (
     <div className="overflow-x-auto border rounded-lg w-full">
+     {/* Search and Sort Controls */}
+      <div className="flex justify-end items-center gap-4 p-4 flex-wrap">
+      <div className="relative w-full sm:w-72">
+        <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+          <Search className="h-5 w-5 text-gray-400" />
+        </span>
+        <input
+          type="text"
+          placeholder="Search transactions..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="pl-10 pr-4 py-2 border border-gray-400 rounded-full w-full outline-blue-500"
+        />
+      </div>
+
+        <div className="flex items-center gap-2">
+          <select
+            value={sortKey}
+            onChange={(e) => setSortKey(e.target.value as SortKey)}
+            className="border border-gray-300 rounded-md px-3 py-2 outline-blue-500"
+          >
+            <option value="sender">Sender</option>
+            <option value="receiver">Receiver</option>
+            <option value="method">Method</option>
+            <option value="status">Status</option>
+            <option value="dateCreated">Date</option>
+            <option value="amount">Amount</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Table */}
       <table className="w-full border-collapse">
-        {/* Table Header */}
         <thead>
           <tr className="text-left text-gray-500 text-sm border-b bg-gray-100">
+            <th className="px-4 py-3">#</th> {/* <-- New Column */}
             <th className="px-4 py-3">Sender</th>
             <th className="px-4 py-3">Receiver</th>
             <th className="px-4 py-3">Method</th>
@@ -66,11 +110,16 @@ const TransactionsTable: React.FC = () => {
             <th className="px-4 py-3">Actions</th>
           </tr>
         </thead>
-
-        {/* Table Body */}
         <tbody>
-          {deposits.map((deposit) => (
-            <tr key={deposit.id} className="border-b hover:bg-gray-50 cursor-pointer" onClick={() => openPaymentModal(deposit)}>
+          {filteredDeposits.map((deposit, index) => (
+            <tr
+              key={deposit.id}
+              className={`border-b hover:bg-gray-50 cursor-pointer ${
+                deposit.id % 2 !== 0 ? "bg-blue-50" : "bg-white"
+              }`}
+              onClick={() => openPaymentModal(deposit)}
+            >
+              <td className="px-4 py-4 font-medium">{index + 1}</td> {/* <-- Row Number */}
               <td className="px-4 py-4">
                 <div className="font-semibold">{deposit.sender}</div>
                 <div className="text-gray-500 text-sm">{deposit.senderRole}</div>
@@ -88,18 +137,15 @@ const TransactionsTable: React.FC = () => {
               <td className="px-4 py-4">{deposit.dateCreated}</td>
               <td className="px-4 py-4 font-medium">{deposit.amount}</td>
               <td className="px-4 py-4 relative">
-                {/* Actions Button */}
                 <button
                   onClick={(e) => {
-                    e.stopPropagation(); // Prevent row click event
+                    e.stopPropagation();
                     toggleDropdown(deposit.id);
                   }}
                   className="px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-md"
                 >
                   Actions ⌄
                 </button>
-
-                {/* Dropdown Menu */}
                 {openDropdown === deposit.id && (
                   <div className="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg z-10">
                     <ul className="text-sm text-gray-700">
@@ -114,11 +160,7 @@ const TransactionsTable: React.FC = () => {
           ))}
         </tbody>
       </table>
-
-      {/* Payment Details Modal */}
-      {selectedDeposit && (
-        <PaymentDetailsModal  onClose={closePaymentModal} />
-      )}
+      {selectedDeposit && <PaymentDetailsModal onClose={closePaymentModal} />}
     </div>
   );
 };

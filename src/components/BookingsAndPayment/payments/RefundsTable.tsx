@@ -14,9 +14,9 @@ const RefundsTable: React.FC = () => {
         {["Payments", "Withdrawals", "Refunds", "Deposits"].map((tab) => (
           <button
             key={tab}
-            className={`py-2 px-4 text-gray-500 transition-all ${
+            className={`py-2 px-4 text-black transition-all ${
               activeTab === tab
-                ? "border-b-2 border-blue-600 text-blue-600 font-semibold"
+                ? "border-b-2 border-black rounded-none text-blue-600 font-semibold"
                 : "hover:text-blue-600"
             }`}
             onClick={() => setActiveTab(tab)}

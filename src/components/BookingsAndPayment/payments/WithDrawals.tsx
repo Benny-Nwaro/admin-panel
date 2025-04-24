@@ -1,113 +1,137 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+import { Search } from "lucide-react";
+
+// Corrected SortKey to match the properties of the data
+type SortKey = "sender" | "receiver" | "method" | "status" | "dateCreated" | "amount";
 
 const WithDrawals: React.FC = () => {
-  const [activeTab, setActiveTab] = useState("Withdrawals");
   const [searchQuery, setSearchQuery] = useState("");
-  const [sortOrder, setSortOrder] = useState<string | undefined>("");
+  const [sortKey, setSortKey] = useState<SortKey>("amount");
 
-  const tabs = ["Payments", "Withdrawals", "Refunds", "Deposits"];
-
-  const handleTabClick = (tab: string) => {
-    setActiveTab(tab);
-  };
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSortOrder(e.target.value);
-  };
-
-  // Example data - you can replace this with your dynamic data
   const data = [
-    { sender: "John Doe", receiver: "Jane Smith", method: "Bank Transfer", status: "Completed", dateCreated: "2025-04-05", amount: "$500" },
-    { sender: "Alice", receiver: "Bob", method: "PayPal", status: "Pending", dateCreated: "2025-04-04", amount: "$200" },
-    // More items here
+    {
+      id: 1,
+      sender: "John Doe",
+      receiver: "Jane Smith",
+      method: "Bank Transfer",
+      status: "Completed",
+      dateCreated: "2025-04-05",
+      amount: "$500",
+    },
+    {
+      id: 2,
+      sender: "Alice",
+      receiver: "Bob",
+      method: "PayPal",
+      status: "Pending",
+      dateCreated: "2025-04-04",
+      amount: "$200",
+    },
   ];
 
-  const filteredData = data.filter(item => {
-    return item.sender.toLowerCase().includes(searchQuery.toLowerCase()) ||
-           item.receiver.toLowerCase().includes(searchQuery.toLowerCase());
-  });
+  const filteredAndSortedData = useMemo(() => {
+    return data
+      .filter((item) =>
+        [item.sender, item.receiver, item.method, item.status]
+          .some((field) =>
+            field.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+      )
+      .sort((a, b) => {
+        let aVal: string | number = a[sortKey];
+        let bVal: string | number = b[sortKey];
 
-  const sortedData = filteredData.sort((a, b) => {
-    if (sortOrder === "asc") {
-      return a.amount.localeCompare(b.amount); // You can customize sorting logic
-    } else if (sortOrder === "desc") {
-      return b.amount.localeCompare(a.amount);
-    }
-    return 0;
-  });
+        // Special handling for 'dateCreated' and 'amount' properties
+        if (sortKey === "dateCreated") {
+          aVal = new Date(a.dateCreated).getTime();
+          bVal = new Date(b.dateCreated).getTime();
+        } else if (sortKey === "amount") {
+          aVal = parseFloat(a.amount.replace(/[$,]/g, ""));
+          bVal = parseFloat(b.amount.replace(/[$,]/g, ""));
+        }
+
+        if (aVal < bVal) return -1;
+        if (aVal > bVal) return 1;
+        return 0;
+      });
+  }, [data, searchQuery, sortKey]);
 
   return (
     <div className="p-6">
-      {/* Tabs */}
-      <div className="flex space-x-4 mb-4">
-        {tabs.map((tab) => (
-          <button
-            key={tab}
-            className={`px-4 py-2 rounded-lg ${activeTab === tab ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"}`}
-            onClick={() => handleTabClick(tab)}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
-
       {/* Search & Sort Controls */}
-      <div className="flex justify-end mt-4 space-x-4">
-        <select 
-          className="border rounded px-3 py-2 text-gray-600" 
-          value={sortOrder} 
-          onChange={handleSortChange}
-        >
-          <option value="">Sort</option>
-          <option value="asc">Amount Ascending</option>
-          <option value="desc">Amount Descending</option>
-        </select>
-        <input
-          type="text"
-          placeholder="Search"
-          className="border rounded px-3 py-2 text-gray-600"
-          value={searchQuery}
-          onChange={handleSearchChange}
-        />
+      <div className="flex justify-end items-center gap-4 p-4 flex-wrap">
+        {/* Search Input */}
+        <div className="relative w-full sm:w-72">
+          <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+            <Search className="h-5 w-5 text-gray-400" />
+          </span>
+          <input
+            type="text"
+            placeholder="Search refunds..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-10 pr-4 py-2 border border-gray-400 rounded-full w-full outline-blue-500"
+          />
+        </div>
+
+        {/* Sort Select & Toggle */}
+        <div className="flex items-center gap-2">
+          <select
+            value={sortKey}
+            onChange={(e) => setSortKey(e.target.value as SortKey)}
+            className="border border-gray-300 rounded-md px-3 py-2 outline-blue-500"
+          >
+            <option value="sender">Sender</option>
+            <option value="receiver">Receiver</option>
+            <option value="method">Method</option>
+            <option value="status">Status</option>
+            <option value="dateCreated">Date</option>
+            <option value="amount">Amount</option>
+          </select>
+        </div>
       </div>
 
       {/* Table */}
-      <div className="border rounded-lg mt-4">
-        <table className="w-full">
-          {/* Table Header */}
+      <div className="border rounded-lg mt-4 overflow-x-auto">
+        <table className="w-full border-collapse min-w-[800px]">
           <thead>
-            <tr className="text-left text-gray-600 border-b">
-              <th className="px-4 py-2">Sender</th>
-              <th className="px-4 py-2">Receiver</th>
-              <th className="px-4 py-2">Method</th>
-              <th className="px-4 py-2">Status</th>
-              <th className="px-4 py-2">Date Created</th>
-              <th className="px-4 py-2">Amount</th>
+            <tr className="text-left text-gray-500 text-sm border-b bg-gray-100">
+              <th className="px-4 py-3">#</th> {/* Row number header */}
+              <th className="px-4 py-3">Sender</th>
+              <th className="px-4 py-3">Receiver</th>
+              <th className="px-4 py-3">Method</th>
+              <th className="px-4 py-3">Status</th>
+              <th className="px-4 py-3">Date Created</th>
+              <th className="px-4 py-3">Amount</th>
             </tr>
           </thead>
-          {/* Table Body */}
           <tbody>
-            {sortedData.length === 0 ? (
+            {filteredAndSortedData.map((userData, index) => (
+              <tr
+                key={userData.id}
+                className={`border-b hover:bg-gray-50 cursor-pointer ${
+                  userData.id % 2 !== 0 ? "bg-blue-50" : "bg-white"
+                }`}
+              >
+                <td className="px-4 py-4 font-medium">{index + 1}</td> {/* Row number */}
+                <td className="px-4 py-4 font-semibold">{userData.sender}</td>
+                <td className="px-4 py-4 font-semibold">{userData.receiver}</td>
+                <td className="px-4 py-4 font-medium">{userData.method}</td>
+                <td className="px-4 py-4">
+                  <span className="bg-gray-500 text-white px-3 py-1 rounded-full text-sm">
+                    {userData.status}
+                  </span>
+                </td>
+                <td className="px-4 py-4">{userData.dateCreated}</td>
+                <td className="px-4 py-4 font-medium">{userData.amount}</td>
+              </tr>
+            ))}
+            {filteredAndSortedData.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-4 py-3 bg-blue-100 text-gray-700 rounded-lg">
-                  No Current {activeTab}
+                <td colSpan={8} className="text-center py-6 text-gray-500">
+                  No records found.
                 </td>
               </tr>
-            ) : (
-              sortedData.map((item, index) => (
-                <tr key={index}>
-                  <td className="px-4 py-2">{item.sender}</td>
-                  <td className="px-4 py-2">{item.receiver}</td>
-                  <td className="px-4 py-2">{item.method}</td>
-                  <td className="px-4 py-2">{item.status}</td>
-                  <td className="px-4 py-2">{item.dateCreated}</td>
-                  <td className="px-4 py-2">{item.amount}</td>
-                </tr>
-              ))
             )}
           </tbody>
         </table>
